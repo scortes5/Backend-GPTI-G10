@@ -64,3 +64,12 @@ Docs interactivas en http://localhost:8000/docs
 ```bash
 pytest
 ```
+
+## Despliegue (Render)
+
+1. En [Render](https://dashboard.render.com) > **New > Blueprint**, elegir este repo: `render.yaml`
+   crea la API y una base Postgres.
+2. Completar `FRONTEND_URL` con la URL del frontend en Streamlit Cloud (CORS y destino del QR).
+3. Opcional: `IA_PROVEEDOR=claude` y `ANTHROPIC_API_KEY` para recomendaciones reales.
+
+`DATABASE_URL` acepta `postgres://...`; se normaliza al driver `psycopg` en `app/db.py`.

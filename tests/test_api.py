@@ -66,3 +66,9 @@ def test_actualizar_lote_ignora_campos_nulos(client):
 
     assert actualizado.status_code == 200
     assert actualizado.json()["productor"] == LOTE["productor"]
+
+
+def test_qr_apunta_a_la_ficha_de_trazabilidad():
+    from app.services.lotes import url_trazabilidad
+
+    assert url_trazabilidad("abc123").endswith("/Trazabilidad?codigo=abc123")

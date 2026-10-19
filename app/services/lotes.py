@@ -2,6 +2,7 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from app.config import settings
 from app.exceptions import RecursoNoEncontrado, ReglaDeNegocioInvalida
 from app.models import Lote
 from app.schemas import LoteCreate, LoteUpdate, TrazabilidadOut
@@ -16,6 +17,11 @@ def obtener(db: Session, codigo: str) -> Lote:
     if lote is None:
         raise RecursoNoEncontrado("Lote no encontrado")
     return lote
+
+
+def url_trazabilidad(codigo: str) -> str:
+    """Página pública del frontend a la que lleva el QR del lote."""
+    return f"{settings.frontend_url}/Trazabilidad?codigo={codigo}"
 
 
 def crear(db: Session, data: LoteCreate) -> Lote:
