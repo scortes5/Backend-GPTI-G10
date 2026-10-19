@@ -7,3 +7,7 @@ class RecursoNoEncontrado(Exception):
 
 class ReglaDeNegocioInvalida(Exception):
     pass
+
+
+class ServicioExternoNoDisponible(Exception):
+    pass

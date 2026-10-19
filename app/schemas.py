@@ -66,6 +66,10 @@ class TrazabilidadOut(BaseModel):
     ventas: list[VentaOut]
 
 
+class RecomendacionOut(BaseModel):
+    texto: str
+
+
 class ResumenOut(BaseModel):
     total_lotes: int
     kilos_cosechados: float

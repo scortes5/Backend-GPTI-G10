@@ -8,6 +8,9 @@ class Settings(BaseSettings):
     frontend_url: str = "http://localhost:8501"
     instacrops_api_url: str = "https://api.instacrops.com"
     instacrops_api_key: str = ""
+    ia_proveedor: str = "simulado"
+    ia_modelo: str = "claude-opus-5-5"
+    anthropic_api_key: str = ""
 
 
 settings = Settings()
