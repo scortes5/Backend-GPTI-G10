@@ -27,3 +27,11 @@ def test_lote_inexistente(client):
 
 def test_kilos_invalidos(client):
     assert client.post("/lotes", json={**LOTE, "kilos": 0}).status_code == 422
+
+
+def test_productor_vacio(client):
+    assert client.post("/lotes", json={**LOTE, "productor": "   "}).status_code == 422
+
+
+def test_fecha_cosecha_futura(client):
+    assert client.post("/lotes", json={**LOTE, "fecha_cosecha": "2999-01-01"}).status_code == 422
