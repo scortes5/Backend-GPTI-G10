@@ -64,3 +64,12 @@ class TrazabilidadOut(BaseModel):
     kilos_disponibles: float
     ingresos: float
     ventas: list[VentaOut]
+
+
+class ResumenOut(BaseModel):
+    total_lotes: int
+    kilos_cosechados: float
+    kilos_vendidos: float
+    kilos_disponibles: float
+    ingresos: float
+    kilos_por_cultivo: dict[str, float]
