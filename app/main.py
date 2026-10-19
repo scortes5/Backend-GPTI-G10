@@ -1,10 +1,12 @@
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from app.config import settings
 from app.db import Base, engine
+from app.exceptions import RecursoNoEncontrado
 from app.routers import instacrops, lotes
 
 
@@ -22,6 +24,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.exception_handler(RecursoNoEncontrado)
+def recurso_no_encontrado(_: Request, exc: RecursoNoEncontrado):
+    return JSONResponse(status_code=404, content={"detail": str(exc)})
+
 
 app.include_router(lotes.router)
 app.include_router(instacrops.router)
