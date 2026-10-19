@@ -47,3 +47,16 @@ def test_eliminar_lote_elimina_sus_ventas(client):
     client.post(f"/lotes/{codigo}/ventas", json=VENTA)
 
     assert client.delete(f"/lotes/{codigo}").status_code == 204
+
+
+def test_trazabilidad_resume_ventas_del_lote(client):
+    codigo = crear_lote(client)
+    client.post(f"/lotes/{codigo}/ventas", json=VENTA)
+
+    traza = client.get(f"/lotes/{codigo}/trazabilidad").json()
+
+    assert traza["lote"]["codigo"] == codigo
+    assert traza["kilos_vendidos"] == 40
+    assert traza["kilos_disponibles"] == 60
+    assert traza["ingresos"] == 40 * 2500
+    assert len(traza["ventas"]) == 1

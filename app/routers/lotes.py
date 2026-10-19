@@ -3,7 +3,7 @@ from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 
 from app.db import get_db
-from app.schemas import LoteCreate, LoteOut, LoteUpdate
+from app.schemas import LoteCreate, LoteOut, LoteUpdate, TrazabilidadOut
 from app.services import lotes as lotes_service
 from app.services import qr as qr_service
 
@@ -23,6 +23,11 @@ def crear(data: LoteCreate, db: Session = Depends(get_db)):
 @router.get("/{codigo}", response_model=LoteOut)
 def obtener(codigo: str, db: Session = Depends(get_db)):
     return lotes_service.obtener(db, codigo)
+
+
+@router.get("/{codigo}/trazabilidad", response_model=TrazabilidadOut)
+def trazabilidad(codigo: str, db: Session = Depends(get_db)):
+    return lotes_service.trazabilidad(db, codigo)
 
 
 @router.patch("/{codigo}", response_model=LoteOut)

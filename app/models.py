@@ -30,6 +30,10 @@ class Lote(Base):
     def kilos_disponibles(self) -> float:
         return self.kilos - self.kilos_vendidos
 
+    @property
+    def ingresos(self) -> float:
+        return sum(venta.total for venta in self.ventas)
+
 
 class Venta(Base):
     __tablename__ = "ventas"
@@ -43,3 +47,7 @@ class Venta(Base):
     creado: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
 
     lote: Mapped[Lote] = relationship(back_populates="ventas")
+
+    @property
+    def total(self) -> float:
+        return self.kilos * self.precio_por_kilo

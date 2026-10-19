@@ -54,3 +54,13 @@ class VentaOut(VentaCreate):
 
     id: int
     creado: datetime
+
+
+class TrazabilidadOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    lote: LoteOut
+    kilos_vendidos: float
+    kilos_disponibles: float
+    ingresos: float
+    ventas: list[VentaOut]

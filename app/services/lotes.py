@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 from app.exceptions import RecursoNoEncontrado, ReglaDeNegocioInvalida
 from app.models import Lote
-from app.schemas import LoteCreate, LoteUpdate
+from app.schemas import LoteCreate, LoteUpdate, TrazabilidadOut
 
 
 def listar(db: Session) -> list[Lote]:
@@ -41,3 +41,14 @@ def actualizar(db: Session, codigo: str, cambios: LoteUpdate) -> Lote:
 def eliminar(db: Session, codigo: str) -> None:
     db.delete(obtener(db, codigo))
     db.commit()
+
+
+def trazabilidad(db: Session, codigo: str) -> TrazabilidadOut:
+    lote = obtener(db, codigo)
+    return TrazabilidadOut(
+        lote=lote,
+        kilos_vendidos=lote.kilos_vendidos,
+        kilos_disponibles=lote.kilos_disponibles,
+        ingresos=lote.ingresos,
+        ventas=lote.ventas,
+    )
