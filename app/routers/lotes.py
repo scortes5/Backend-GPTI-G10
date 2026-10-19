@@ -44,4 +44,4 @@ def eliminar(codigo: str, db: Session = Depends(get_db)):
 @router.get("/{codigo}/qr")
 def qr(codigo: str, db: Session = Depends(get_db)):
     lote = lotes_service.obtener(db, codigo)
-    return StreamingResponse(qr_service.generar_png(lote.codigo), media_type="image/png")
+    return StreamingResponse(qr_service.generar_png(lotes_service.url_trazabilidad(lote.codigo)), media_type="image/png")
