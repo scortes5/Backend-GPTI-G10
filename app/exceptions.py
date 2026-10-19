@@ -3,3 +3,7 @@
 
 class RecursoNoEncontrado(Exception):
     pass
+
+
+class ReglaDeNegocioInvalida(Exception):
+    pass

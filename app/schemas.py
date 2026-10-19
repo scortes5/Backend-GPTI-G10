@@ -4,12 +4,13 @@ from typing import Annotated
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints, field_validator
 
 Productor = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=120)]
+Comprador = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=120)]
 Cultivo = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=80)]
 
 
 def validar_fecha_no_futura(fecha: date | None) -> date | None:
     if fecha is not None and fecha > date.today():
-        raise ValueError("La fecha de cosecha no puede ser futura")
+        raise ValueError("La fecha no puede ser futura")
     return fecha
 
 
@@ -36,4 +37,20 @@ class LoteOut(LoteCreate):
 
     id: int
     codigo: str
+    creado: datetime
+
+
+class VentaCreate(BaseModel):
+    comprador: Comprador
+    kilos: float = Field(gt=0)
+    precio_por_kilo: float = Field(gt=0)
+    fecha: date
+
+    _fecha_no_futura = field_validator("fecha")(validar_fecha_no_futura)
+
+
+class VentaOut(VentaCreate):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
     creado: datetime

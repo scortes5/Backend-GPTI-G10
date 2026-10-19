@@ -2,7 +2,7 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.exceptions import RecursoNoEncontrado
+from app.exceptions import RecursoNoEncontrado, ReglaDeNegocioInvalida
 from app.models import Lote
 from app.schemas import LoteCreate, LoteUpdate
 
@@ -30,6 +30,9 @@ def actualizar(db: Session, codigo: str, cambios: LoteUpdate) -> Lote:
     lote = obtener(db, codigo)
     for campo, valor in cambios.model_dump(exclude_none=True).items():
         setattr(lote, campo, valor)
+    if lote.kilos_disponibles < 0:
+        db.rollback()
+        raise ReglaDeNegocioInvalida("Los kilos del lote no pueden ser menores a los ya vendidos")
     db.commit()
     db.refresh(lote)
     return lote
