@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 from app.exceptions import RecursoNoEncontrado
 from app.models import Lote
-from app.schemas import LoteCreate
+from app.schemas import LoteCreate, LoteUpdate
 
 
 def listar(db: Session) -> list[Lote]:
@@ -24,3 +24,17 @@ def crear(db: Session, data: LoteCreate) -> Lote:
     db.commit()
     db.refresh(lote)
     return lote
+
+
+def actualizar(db: Session, codigo: str, cambios: LoteUpdate) -> Lote:
+    lote = obtener(db, codigo)
+    for campo, valor in cambios.model_dump(exclude_none=True).items():
+        setattr(lote, campo, valor)
+    db.commit()
+    db.refresh(lote)
+    return lote
+
+
+def eliminar(db: Session, codigo: str) -> None:
+    db.delete(obtener(db, codigo))
+    db.commit()
