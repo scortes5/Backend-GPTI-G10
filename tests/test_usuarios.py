@@ -52,7 +52,7 @@ def test_correo_duplicado(db):
 
 def test_crea_admin_inicial_solo_si_no_hay_usuarios(db, monkeypatch):
     monkeypatch.setattr(usuarios_service.settings, "admin_email", "admin@coop.cl")
-    monkeypatch.setattr(usuarios_service.settings, "admin_clave", "admin12345")
+    monkeypatch.setattr(usuarios_service.settings, "admin_clave", "una-clave-larga-segura")
 
     usuarios_service.asegurar_admin_inicial(db)
     usuarios_service.asegurar_admin_inicial(db)
@@ -74,3 +74,12 @@ def test_limitador_olvida_fallos_fuera_de_la_ventana(monkeypatch):
 
     ahora[0] = 61.0
     assert not limitador.bloqueado("a@coop.cl")
+
+
+def test_no_crea_admin_inicial_con_clave_corta(db, monkeypatch):
+    monkeypatch.setattr(usuarios_service.settings, "admin_email", "admin@coop.cl")
+    monkeypatch.setattr(usuarios_service.settings, "admin_clave", "corta")
+
+    usuarios_service.asegurar_admin_inicial(db)
+
+    assert usuarios_service.obtener_por_email(db, "admin@coop.cl") is None

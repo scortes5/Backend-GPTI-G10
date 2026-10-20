@@ -147,7 +147,8 @@ Salvo los marcados como públicos, los endpoints exigen `Authorization: Bearer <
 - **Administrador** (directiva de la cooperativa): ve y gestiona todos los lotes, elimina lotes, gestiona usuarios y usa Instacrops.
 - **Productor** (socio): registra lotes a su nombre y solo ve, edita y vende sus propios lotes; el dashboard muestra solo sus cifras. Lo que no le corresponde responde **403**.
 
-El primer administrador se crea al iniciar la API con `ADMIN_EMAIL` y `ADMIN_CLAVE` si la base no tiene usuarios.
+El primer administrador se crea al iniciar la API con `ADMIN_EMAIL` y `ADMIN_CLAVE` (mínimo 12
+caracteres, solo en tu `.env`) si la base no tiene usuarios.
 
 Las reglas de negocio que no se cumplen responden **409** (p. ej. vender más kilos de los disponibles).
 

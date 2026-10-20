@@ -1,4 +1,6 @@
 """Casos de uso de usuarios."""
+import logging
+
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
@@ -8,6 +10,9 @@ from app.models import Rol, Usuario
 from app.schemas import UsuarioUpdate
 from app.services import claves
 from app.services.intentos import limitador_login
+
+CLAVE_ADMIN_MINIMA = 12
+logger = logging.getLogger("agrotracker.usuarios")
 
 
 def crear(db: Session, nombre: str, email: str, clave: str, rol: Rol) -> Usuario:
@@ -59,5 +64,8 @@ def asegurar_admin_inicial(db: Session) -> None:
     """Crea el primer administrador desde ADMIN_EMAIL/ADMIN_CLAVE si la base no tiene usuarios."""
     hay_usuarios = db.scalar(select(func.count(Usuario.id))) > 0
     if hay_usuarios or not (settings.admin_email and settings.admin_clave):
+        return
+    if len(settings.admin_clave) < CLAVE_ADMIN_MINIMA:
+        logger.warning("ADMIN_CLAVE tiene menos de %d caracteres: no se crea el administrador", CLAVE_ADMIN_MINIMA)
         return
     crear(db, settings.admin_nombre, settings.admin_email, settings.admin_clave, Rol.ADMIN)
