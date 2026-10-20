@@ -14,8 +14,10 @@ from app.services import usuarios as usuarios_service
 @pytest.fixture(autouse=True)
 def limpiar_intentos_de_login():
     from app.services.intentos import limitador_login
+    from app.services.recuperacion import limitador_solicitudes
 
     limitador_login._fallos.clear()
+    limitador_solicitudes._fallos.clear()
 
 
 @pytest.fixture

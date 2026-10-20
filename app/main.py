@@ -8,6 +8,7 @@ from app.config import settings
 from app.db import Base, SessionLocal, engine
 from app.exceptions import (
     AccesoDenegado,
+    CodigoInvalido,
     CredencialesInvalidas,
     DemasiadosIntentos,
     RecursoNoEncontrado,
@@ -54,6 +55,11 @@ def servicio_externo_no_disponible(_: Request, exc: ServicioExternoNoDisponible)
 @app.exception_handler(CredencialesInvalidas)
 def credenciales_invalidas(_: Request, exc: CredencialesInvalidas):
     return JSONResponse(status_code=401, content={"detail": str(exc)}, headers={"WWW-Authenticate": "Bearer"})
+
+
+@app.exception_handler(CodigoInvalido)
+def codigo_invalido(_: Request, exc: CodigoInvalido):
+    return JSONResponse(status_code=400, content={"detail": str(exc)})
 
 
 @app.exception_handler(DemasiadosIntentos)

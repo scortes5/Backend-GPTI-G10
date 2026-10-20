@@ -23,3 +23,7 @@ class AccesoDenegado(Exception):
 
 class DemasiadosIntentos(Exception):
     pass
+
+
+class CodigoInvalido(Exception):
+    pass

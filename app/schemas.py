@@ -136,3 +136,17 @@ class SesionOut(BaseModel):
     access_token: str
     token_type: str = "bearer"
     usuario: UsuarioOut
+
+
+class SolicitudRecuperacion(BaseModel):
+    email: EmailStr
+
+
+class Restablecimiento(BaseModel):
+    email: EmailStr
+    codigo: str = Field(pattern=r"^\d{6}$")
+    clave_nueva: str = Field(min_length=8, max_length=128)
+
+
+class Mensaje(BaseModel):
+    detail: str

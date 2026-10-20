@@ -129,6 +129,8 @@ tests/
 | POST | `/auth/login` | Inicia sesión y entrega un token (público) |
 | GET | `/auth/yo` | Usuario de la sesión |
 | POST | `/auth/logout` | Cierra la sesión: el token queda revocado |
+| POST | `/auth/recuperar` | Envía por correo un código de 6 dígitos (público, misma respuesta exista o no el correo) |
+| POST | `/auth/restablecer` | Cambia la contraseña con el código (público) |
 | GET | `/publico/lotes/{codigo}` | Ficha de origen del lote, sin ventas (público, destino del QR) |
 | GET/POST | `/lotes` | Listar / registrar lotes |
 | GET/PATCH/DELETE | `/lotes/{codigo}` | Ver, editar o eliminar un lote |
@@ -185,7 +187,8 @@ pytest
 
 ## Correo
 
-`CORREO_PROVEEDOR=simulado` (por defecto) no envía nada: deja el correo en el log de la API.
+`CORREO_PROVEEDOR=simulado` (por defecto) no envía nada: deja el correo completo en el log de la API,
+incluidos los códigos de recuperación de contraseña. Sirve para desarrollo; **en producción usar `smtp`**.
 Con `CORREO_PROVEEDOR=smtp` se usa cualquier servidor SMTP (`SMTP_HOST`, `SMTP_PUERTO`,
 `SMTP_USUARIO`, `SMTP_CLAVE`); con Gmail se necesita una contraseña de aplicación.
 

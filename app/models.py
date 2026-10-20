@@ -2,7 +2,7 @@ import enum
 import uuid
 from datetime import date, datetime
 
-from sqlalchemy import Boolean, Date, DateTime, Enum, Float, ForeignKey, String
+from sqlalchemy import Boolean, Date, DateTime, Enum, Float, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db import Base
@@ -29,6 +29,19 @@ class Usuario(Base):
     @property
     def es_admin(self) -> bool:
         return self.rol == Rol.ADMIN
+
+
+class CodigoRecuperacion(Base):
+    """Código de un solo uso enviado por correo para restablecer la contraseña."""
+
+    __tablename__ = "codigos_recuperacion"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    usuario_id: Mapped[int] = mapped_column(ForeignKey("usuarios.id"))
+    codigo_hash: Mapped[str] = mapped_column(String(255))
+    expira: Mapped[datetime] = mapped_column(DateTime)
+    intentos: Mapped[int] = mapped_column(Integer, default=0)
+    usado: Mapped[bool] = mapped_column(Boolean, default=False)
 
 
 class TokenRevocado(Base):
