@@ -11,6 +11,12 @@ class Settings(BaseSettings):
     ia_proveedor: str = "simulado"
     ia_modelo: str = "claude-opus-5-5"
     anthropic_api_key: str = ""
+    correo_proveedor: str = "simulado"
+    correo_remitente: str = "AgroTracker <no-reply@agrotracker.cl>"
+    smtp_host: str = "smtp.gmail.com"
+    smtp_puerto: int = 587
+    smtp_usuario: str = ""
+    smtp_clave: str = ""
 
 
 settings = Settings()
