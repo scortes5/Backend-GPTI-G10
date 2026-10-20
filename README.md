@@ -136,7 +136,9 @@ tests/
 | GET | `/lotes/{codigo}/trazabilidad` | Lote + ventas + kilos e ingresos |
 | GET | `/lotes/{codigo}/recomendacion` | Recomendación agronómica con IA |
 | POST | `/lotes/{codigo}/reporte` | Envía por correo el reporte de trazabilidad (CSV de ventas adjunto) |
-| GET | `/dashboard/resumen` | Indicadores generales |
+| GET | `/dashboard/resumen` | Indicadores (de la cooperativa o del productor) |
+| GET/POST | `/usuarios` | Listar / crear usuarios (solo admin) |
+| PATCH | `/usuarios/{id}` | Cambiar rol o activar/desactivar (solo admin) |
 
 Salvo los marcados como públicos, los endpoints exigen `Authorization: Bearer <token>` (401 sin sesión).
 

@@ -116,6 +116,18 @@ class UsuarioOut(BaseModel):
     activo: bool
 
 
+class UsuarioCreate(BaseModel):
+    nombre: Productor
+    email: EmailStr
+    clave: str = Field(min_length=8)
+    rol: Rol = Rol.PRODUCTOR
+
+
+class UsuarioUpdate(BaseModel):
+    rol: Rol | None = None
+    activo: bool | None = None
+
+
 class SesionOut(BaseModel):
     access_token: str
     token_type: str = "bearer"
