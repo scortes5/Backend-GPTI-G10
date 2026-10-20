@@ -1,10 +1,34 @@
+import enum
 import uuid
 from datetime import date, datetime
 
-from sqlalchemy import Date, DateTime, Float, ForeignKey, String
+from sqlalchemy import Boolean, Date, DateTime, Enum, Float, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db import Base
+
+
+class Rol(str, enum.Enum):
+    """Clases de usuario del documento de requerimientos."""
+
+    ADMIN = "admin"  # directiva de la cooperativa: gestiona usuarios y ve todo
+    PRODUCTOR = "productor"  # socio productor: gestiona solo sus lotes
+
+
+class Usuario(Base):
+    __tablename__ = "usuarios"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    nombre: Mapped[str] = mapped_column(String(120))
+    email: Mapped[str] = mapped_column(String(254), unique=True)
+    clave_hash: Mapped[str] = mapped_column(String(255))
+    rol: Mapped[Rol] = mapped_column(Enum(Rol, native_enum=False, length=20))
+    activo: Mapped[bool] = mapped_column(Boolean, default=True)
+    creado: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
+
+    @property
+    def es_admin(self) -> bool:
+        return self.rol == Rol.ADMIN
 
 
 class Lote(Base):

@@ -5,14 +5,23 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.config import settings
-from app.db import Base, engine
-from app.exceptions import RecursoNoEncontrado, ReglaDeNegocioInvalida, ServicioExternoNoDisponible
+from app.db import Base, SessionLocal, engine
+from app.exceptions import (
+    AccesoDenegado,
+    CredencialesInvalidas,
+    RecursoNoEncontrado,
+    ReglaDeNegocioInvalida,
+    ServicioExternoNoDisponible,
+)
 from app.routers import dashboard, instacrops, lotes, recomendaciones, reportes, ventas
+from app.services import usuarios as usuarios_service
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     Base.metadata.create_all(engine)
+    with SessionLocal() as db:
+        usuarios_service.asegurar_admin_inicial(db)
     yield
 
 
@@ -39,6 +48,16 @@ def regla_de_negocio_invalida(_: Request, exc: ReglaDeNegocioInvalida):
 @app.exception_handler(ServicioExternoNoDisponible)
 def servicio_externo_no_disponible(_: Request, exc: ServicioExternoNoDisponible):
     return JSONResponse(status_code=503, content={"detail": str(exc)})
+
+
+@app.exception_handler(CredencialesInvalidas)
+def credenciales_invalidas(_: Request, exc: CredencialesInvalidas):
+    return JSONResponse(status_code=401, content={"detail": str(exc)}, headers={"WWW-Authenticate": "Bearer"})
+
+
+@app.exception_handler(AccesoDenegado)
+def acceso_denegado(_: Request, exc: AccesoDenegado):
+    return JSONResponse(status_code=403, content={"detail": str(exc)})
 
 
 app.include_router(lotes.router)
