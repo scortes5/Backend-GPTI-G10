@@ -5,6 +5,106 @@ API (FastAPI) del sistema de trazabilidad y gestión de cosecha para la Cooperat
 - **Fase 1:** registro de lotes/cosechas, código QR por lote, historial.
 - **Fase 2:** integración Instacrops, alertas climáticas, recomendaciones IA.
 
+## Arquitectura
+
+> Propuesta de arquitectura objetivo en AWS. Aún no está implementada; sirve de base para el
+> documento de arquitectura y para estimar costos en AWS Pricing Calculator.
+
+### Despliegue en AWS
+
+```mermaid
+flowchart LR
+    subgraph Usuarios
+        ADM["Administrador<br/>(directiva)"]
+        PRO["Productor<br/>(socio)"]
+        AUD["Comprador / auditor<br/>(escanea el QR)"]
+    end
+
+    R53["Route 53<br/>dominio .cl"]
+
+    subgraph AWS["AWS · región sa-east-1"]
+        ACM["Certificate Manager<br/>(HTTPS)"]
+        ALB["Application Load Balancer"]
+
+        subgraph VPC["VPC"]
+            subgraph ECS["ECS Fargate"]
+                FE["Frontend<br/>Streamlit"]
+                BE["Backend<br/>FastAPI"]
+            end
+            RDS[("RDS PostgreSQL<br/>respaldos automáticos")]
+        end
+
+        ECR["ECR<br/>imágenes Docker"]
+        SM["Secrets Manager<br/>SECRET_KEY, claves API, BD"]
+        CW["CloudWatch<br/>logs y alarmas"]
+    end
+
+    subgraph Externos["Servicios externos"]
+        GEM["Google Gemini API<br/>recomendaciones IA"]
+        BRE["Brevo<br/>SMTP de correo"]
+        INS["Instacrops API<br/>clima y datos agronómicos"]
+    end
+
+    ADM & PRO & AUD --> R53 --> ALB
+    ACM -.-> ALB
+    ALB -- "app.dominio" --> FE
+    ALB -- "api.dominio" --> BE
+    FE -- "REST + JWT" --> BE
+    BE --> RDS
+    ECR -.-> ECS
+    SM -.-> BE
+    BE -.-> CW
+    FE -.-> CW
+    BE -- "ProveedorIA" --> GEM
+    BE -- "ServicioCorreo" --> BRE
+    BE --> INS
+```
+
+- **ALB + ACM**: un solo punto de entrada con HTTPS; enruta por subdominio al frontend o a la API.
+- **ECS Fargate**: frontend y backend corren como contenedores sin administrar servidores; las
+  imágenes se publican en ECR.
+- **RDS PostgreSQL**: en subred privada, solo accesible desde el backend (`DATABASE_URL`).
+- **Secrets Manager**: las variables sensibles del `.env` se inyectan a los contenedores.
+- **Servicios externos** (presupuesto 2.3): Gemini para la IA y Brevo para correo. Ambos se
+  usan detrás de un puerto (patrón Adapter), así cambiar de proveedor no toca los casos de uso.
+- Para ajustarse a la estimación mensual del presupuesto conviene evitar un NAT Gateway:
+  tareas Fargate en subred pública con security groups que solo aceptan tráfico del ALB.
+
+### Capas del backend
+
+```mermaid
+flowchart TB
+    R["routers/<br/>HTTP: validación, auth y códigos de estado"]
+    A["auth.py<br/>sesión JWT y permisos por rol"]
+    S["services/<br/>casos de uso y reglas de negocio"]
+    M["models.py<br/>SQLAlchemy"]
+    DB[("PostgreSQL / SQLite")]
+
+    subgraph Puertos["Puertos (patrón Adapter)"]
+        PIA["ProveedorIA"]
+        PCO["ServicioCorreo"]
+    end
+
+    subgraph Adapters
+        GEM["GeminiAdapter<br/>(por implementar)"]
+        CLA["ClaudeAdapter"]
+        SIA["ProveedorSimulado"]
+        SMTP["SmtpAdapter<br/>(Brevo)"]
+        SCO["CorreoSimulado"]
+    end
+
+    R --> A
+    R --> S
+    S --> M --> DB
+    S --> PIA
+    S --> PCO
+    PIA -.-> GEM & CLA & SIA
+    PCO -.-> SMTP & SCO
+```
+
+Los routers no contienen lógica; los servicios no conocen HTTP ni el proveedor concreto de IA o
+correo. Los errores de dominio (`app/exceptions.py`) se traducen a HTTP en `main.py`.
+
 ## Estructura
 
 ```
