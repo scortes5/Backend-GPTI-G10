@@ -27,6 +27,8 @@ def usuario_actual(token: tokens.DatosToken = Depends(token_actual), db: Session
     usuario = db.get(Usuario, token.usuario_id)
     if usuario is None or not usuario.activo:
         raise CredencialesInvalidas("Sesión inválida o expirada")
+    if usuario.sesiones_desde and token.emitido < usuario.sesiones_desde:
+        raise CredencialesInvalidas("Tu contraseña cambió. Vuelve a iniciar sesión")
     return usuario
 
 

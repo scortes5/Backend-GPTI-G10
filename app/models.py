@@ -25,6 +25,8 @@ class Usuario(Base):
     rol: Mapped[Rol] = mapped_column(Enum(Rol, native_enum=False, length=20))
     activo: Mapped[bool] = mapped_column(Boolean, default=True)
     creado: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
+    # Tokens emitidos antes de este momento (UTC) ya no valen: se actualiza al cambiar la clave.
+    sesiones_desde: Mapped[datetime | None] = mapped_column(DateTime)
 
     @property
     def es_admin(self) -> bool:

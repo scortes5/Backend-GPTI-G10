@@ -17,7 +17,8 @@ _CLAVE = settings.secret_key or secrets.token_urlsafe(32)
 class DatosToken:
     usuario_id: int
     jti: str  # identificador único del token, para poder revocarlo al cerrar sesión
-    expira: datetime  # UTC sin zona horaria, como se guarda en la base
+    emitido: datetime  # UTC sin zona horaria, como se guarda en la base
+    expira: datetime
 
 
 def emitir(usuario_id: int) -> str:
@@ -33,11 +34,16 @@ def emitir(usuario_id: int) -> str:
 
 def leer(token: str) -> DatosToken:
     try:
-        datos = jwt.decode(token, _CLAVE, algorithms=[_ALGORITMO], options={"require": ["exp", "sub", "jti"]})
+        datos = jwt.decode(token, _CLAVE, algorithms=[_ALGORITMO], options={"require": ["exp", "iat", "sub", "jti"]})
         return DatosToken(
             usuario_id=int(datos["sub"]),
             jti=datos["jti"],
-            expira=datetime.fromtimestamp(datos["exp"], timezone.utc).replace(tzinfo=None),
+            emitido=_utc_sin_zona(datos["iat"]),
+            expira=_utc_sin_zona(datos["exp"]),
         )
     except (jwt.PyJWTError, KeyError, ValueError) as error:
         raise CredencialesInvalidas("Sesión inválida o expirada") from error
+
+
+def _utc_sin_zona(marca: int) -> datetime:
+    return datetime.fromtimestamp(marca, timezone.utc).replace(tzinfo=None)

@@ -64,6 +64,7 @@ def restablecer(db: Session, email: str, codigo: str, clave_nueva: str) -> None:
         raise CodigoInvalido("Código inválido o vencido")
 
     usuario.clave_hash = claves.hashear(clave_nueva)
+    usuario.sesiones_desde = _ahora_utc().replace(microsecond=0)
     vigente.usado = True
     db.commit()
     limitador_login.limpiar(usuario.email)

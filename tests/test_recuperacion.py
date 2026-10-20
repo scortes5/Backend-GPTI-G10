@@ -1,4 +1,5 @@
 import re
+import time
 
 import pytest
 
@@ -119,3 +120,14 @@ def test_restablecer_desbloquea_el_login(anonimo, productor, correo):
 def test_formato_de_codigo_y_clave(anonimo):
     assert restablecer(anonimo, "12ab56").status_code == 422
     assert restablecer(anonimo, "123456", clave="corta").status_code == 422
+
+
+def test_restablecer_cierra_las_sesiones_abiertas(anonimo, productor, correo):
+    assert productor.get("/auth/yo").status_code == 200
+    time.sleep(1.1)  # iat tiene resolución de segundos: evita que ambos momentos coincidan
+    pedir_codigo(anonimo)
+    restablecer(anonimo, correo.ultimo_codigo())
+
+    assert productor.get("/auth/yo").status_code == 401
+    nueva = login(anonimo, "nueva-clave-segura").json()["access_token"]
+    assert anonimo.get("/auth/yo", headers={"Authorization": f"Bearer {nueva}"}).status_code == 200
