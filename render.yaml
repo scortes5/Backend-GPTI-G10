@@ -18,6 +18,12 @@ services:
         value: simulado
       - key: ANTHROPIC_API_KEY
         sync: false
+      - key: CORREO_PROVEEDOR
+        value: simulado
+      - key: SMTP_USUARIO
+        sync: false
+      - key: SMTP_CLAVE
+        sync: false
 
 databases:
   - name: agrotracker-db

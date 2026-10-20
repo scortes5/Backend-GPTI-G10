@@ -18,6 +18,7 @@ app/
   routers/           # endpoints por módulo (solo HTTP)
   services/          # casos de uso y clientes externos
     ia/              # patrón Adapter: puerto ProveedorIA + adapters Claude/simulado
+    correo/          # patrón Adapter: puerto ServicioCorreo + adapters SMTP/simulado
 tests/
 ```
 
@@ -31,6 +32,7 @@ tests/
 | GET/POST | `/lotes/{codigo}/ventas` | Ventas del lote |
 | GET | `/lotes/{codigo}/trazabilidad` | Lote + ventas + kilos e ingresos |
 | GET | `/lotes/{codigo}/recomendacion` | Recomendación agronómica con IA |
+| POST | `/lotes/{codigo}/reporte` | Envía por correo el reporte de trazabilidad (CSV de ventas adjunto) |
 | GET | `/dashboard/resumen` | Indicadores generales |
 
 Las reglas de negocio que no se cumplen responden **409** (p. ej. vender más kilos de los disponibles).
@@ -64,6 +66,12 @@ Docs interactivas en http://localhost:8000/docs
 ```bash
 pytest
 ```
+
+## Correo
+
+`CORREO_PROVEEDOR=simulado` (por defecto) no envía nada: deja el correo en el log de la API.
+Con `CORREO_PROVEEDOR=smtp` se usa cualquier servidor SMTP (`SMTP_HOST`, `SMTP_PUERTO`,
+`SMTP_USUARIO`, `SMTP_CLAVE`); con Gmail se necesita una contraseña de aplicación.
 
 ## Despliegue (Render)
 

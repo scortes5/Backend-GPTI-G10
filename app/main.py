@@ -7,7 +7,7 @@ from fastapi.responses import JSONResponse
 from app.config import settings
 from app.db import Base, engine
 from app.exceptions import RecursoNoEncontrado, ReglaDeNegocioInvalida, ServicioExternoNoDisponible
-from app.routers import dashboard, instacrops, lotes, recomendaciones, ventas
+from app.routers import dashboard, instacrops, lotes, recomendaciones, reportes, ventas
 
 
 @asynccontextmanager
@@ -44,6 +44,7 @@ def servicio_externo_no_disponible(_: Request, exc: ServicioExternoNoDisponible)
 app.include_router(lotes.router)
 app.include_router(ventas.router)
 app.include_router(recomendaciones.router)
+app.include_router(reportes.router)
 app.include_router(dashboard.router)
 app.include_router(instacrops.router)
 

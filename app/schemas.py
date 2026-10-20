@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from typing import Annotated
 
-from pydantic import BaseModel, ConfigDict, Field, StringConstraints, field_validator
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, StringConstraints, field_validator
 
 Productor = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=120)]
 Comprador = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=120)]
@@ -68,6 +68,14 @@ class TrazabilidadOut(BaseModel):
 
 class RecomendacionOut(BaseModel):
     texto: str
+
+
+class SolicitudReporte(BaseModel):
+    destinatario: EmailStr
+
+
+class ReporteEnviadoOut(BaseModel):
+    enviado_a: EmailStr
 
 
 class ResumenOut(BaseModel):
