@@ -3,6 +3,8 @@ from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, StringConstraints, field_validator
 
+from app.models import Rol
+
 Productor = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=120)]
 Comprador = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=120)]
 Cultivo = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=80)]
@@ -85,3 +87,24 @@ class ResumenOut(BaseModel):
     kilos_disponibles: float
     ingresos: float
     kilos_por_cultivo: dict[str, float]
+
+
+class Credenciales(BaseModel):
+    email: EmailStr
+    clave: str
+
+
+class UsuarioOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    nombre: str
+    email: EmailStr
+    rol: Rol
+    activo: bool
+
+
+class SesionOut(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    usuario: UsuarioOut

@@ -13,7 +13,7 @@ from app.exceptions import (
     ReglaDeNegocioInvalida,
     ServicioExternoNoDisponible,
 )
-from app.routers import dashboard, instacrops, lotes, recomendaciones, reportes, ventas
+from app.routers import auth, dashboard, instacrops, lotes, recomendaciones, reportes, ventas
 from app.services import usuarios as usuarios_service
 
 
@@ -60,6 +60,7 @@ def acceso_denegado(_: Request, exc: AccesoDenegado):
     return JSONResponse(status_code=403, content={"detail": str(exc)})
 
 
+app.include_router(auth.router)
 app.include_router(lotes.router)
 app.include_router(ventas.router)
 app.include_router(recomendaciones.router)
