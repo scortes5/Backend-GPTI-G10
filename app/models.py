@@ -1,10 +1,58 @@
+import enum
 import uuid
 from datetime import date, datetime
 
-from sqlalchemy import Date, DateTime, Float, ForeignKey, String
+from sqlalchemy import Boolean, Date, DateTime, Enum, Float, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db import Base
+
+
+class Rol(str, enum.Enum):
+    """Clases de usuario del documento de requerimientos."""
+
+    ADMIN = "admin"  # directiva de la cooperativa: gestiona usuarios y ve todo
+    PRODUCTOR = "productor"  # socio productor: gestiona solo sus lotes
+
+
+class Usuario(Base):
+    __tablename__ = "usuarios"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    nombre: Mapped[str] = mapped_column(String(120))
+    email: Mapped[str] = mapped_column(String(254), unique=True)
+    clave_hash: Mapped[str] = mapped_column(String(255))
+    rol: Mapped[Rol] = mapped_column(Enum(Rol, native_enum=False, length=20))
+    activo: Mapped[bool] = mapped_column(Boolean, default=True)
+    creado: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
+    # Tokens emitidos antes de este momento (UTC) ya no valen: se actualiza al cambiar la clave.
+    sesiones_desde: Mapped[datetime | None] = mapped_column(DateTime)
+
+    @property
+    def es_admin(self) -> bool:
+        return self.rol == Rol.ADMIN
+
+
+class CodigoRecuperacion(Base):
+    """Código de un solo uso enviado por correo para restablecer la contraseña."""
+
+    __tablename__ = "codigos_recuperacion"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    usuario_id: Mapped[int] = mapped_column(ForeignKey("usuarios.id"))
+    codigo_hash: Mapped[str] = mapped_column(String(255))
+    expira: Mapped[datetime] = mapped_column(DateTime)
+    intentos: Mapped[int] = mapped_column(Integer, default=0)
+    usado: Mapped[bool] = mapped_column(Boolean, default=False)
+
+
+class TokenRevocado(Base):
+    """Tokens de sesiones cerradas. Se borran cuando ya habrían expirado de todas formas."""
+
+    __tablename__ = "tokens_revocados"
+
+    jti: Mapped[str] = mapped_column(String(64), primary_key=True)
+    expira: Mapped[datetime] = mapped_column(DateTime)
 
 
 class Lote(Base):
@@ -17,6 +65,7 @@ class Lote(Base):
     kilos: Mapped[float] = mapped_column(Float)
     fecha_cosecha: Mapped[date] = mapped_column(Date)
     creado: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
+    usuario_id: Mapped[int | None] = mapped_column(ForeignKey("usuarios.id"))
 
     ventas: Mapped[list["Venta"]] = relationship(
         back_populates="lote", cascade="all, delete-orphan", order_by="Venta.fecha"

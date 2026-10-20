@@ -11,3 +11,19 @@ class ReglaDeNegocioInvalida(Exception):
 
 class ServicioExternoNoDisponible(Exception):
     pass
+
+
+class CredencialesInvalidas(Exception):
+    pass
+
+
+class AccesoDenegado(Exception):
+    pass
+
+
+class DemasiadosIntentos(Exception):
+    pass
+
+
+class CodigoInvalido(Exception):
+    pass

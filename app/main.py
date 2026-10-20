@@ -5,14 +5,25 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.config import settings
-from app.db import Base, engine
-from app.exceptions import RecursoNoEncontrado, ReglaDeNegocioInvalida, ServicioExternoNoDisponible
-from app.routers import dashboard, instacrops, lotes, recomendaciones, ventas
+from app.db import Base, SessionLocal, engine
+from app.exceptions import (
+    AccesoDenegado,
+    CodigoInvalido,
+    CredencialesInvalidas,
+    DemasiadosIntentos,
+    RecursoNoEncontrado,
+    ReglaDeNegocioInvalida,
+    ServicioExternoNoDisponible,
+)
+from app.routers import auth, dashboard, instacrops, lotes, publico, recomendaciones, reportes, usuarios, ventas
+from app.services import usuarios as usuarios_service
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     Base.metadata.create_all(engine)
+    with SessionLocal() as db:
+        usuarios_service.asegurar_admin_inicial(db)
     yield
 
 
@@ -41,11 +52,35 @@ def servicio_externo_no_disponible(_: Request, exc: ServicioExternoNoDisponible)
     return JSONResponse(status_code=503, content={"detail": str(exc)})
 
 
+@app.exception_handler(CredencialesInvalidas)
+def credenciales_invalidas(_: Request, exc: CredencialesInvalidas):
+    return JSONResponse(status_code=401, content={"detail": str(exc)}, headers={"WWW-Authenticate": "Bearer"})
+
+
+@app.exception_handler(CodigoInvalido)
+def codigo_invalido(_: Request, exc: CodigoInvalido):
+    return JSONResponse(status_code=400, content={"detail": str(exc)})
+
+
+@app.exception_handler(DemasiadosIntentos)
+def demasiados_intentos(_: Request, exc: DemasiadosIntentos):
+    return JSONResponse(status_code=429, content={"detail": str(exc)})
+
+
+@app.exception_handler(AccesoDenegado)
+def acceso_denegado(_: Request, exc: AccesoDenegado):
+    return JSONResponse(status_code=403, content={"detail": str(exc)})
+
+
+app.include_router(auth.router)
 app.include_router(lotes.router)
 app.include_router(ventas.router)
 app.include_router(recomendaciones.router)
+app.include_router(reportes.router)
 app.include_router(dashboard.router)
 app.include_router(instacrops.router)
+app.include_router(publico.router)
+app.include_router(usuarios.router)
 
 
 @app.get("/health")

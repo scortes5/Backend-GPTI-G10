@@ -1,8 +1,10 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
+
+from app.auth import solo_admin
 
 from app.services import instacrops
 
-router = APIRouter(prefix="/instacrops", tags=["instacrops"])
+router = APIRouter(prefix="/instacrops", tags=["instacrops"], dependencies=[Depends(solo_admin)])
 
 
 @router.get("/{path:path}")

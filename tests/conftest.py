@@ -6,10 +6,22 @@ from sqlalchemy.pool import StaticPool
 
 from app.db import Base, get_db
 from app.main import app
+from app.models import Rol
+from app.services import tokens
+from app.services import usuarios as usuarios_service
+
+
+@pytest.fixture(autouse=True)
+def limpiar_intentos_de_login():
+    from app.services.intentos import limitador_login
+    from app.services.recuperacion import limitador_solicitudes
+
+    limitador_login._fallos.clear()
+    limitador_solicitudes._fallos.clear()
 
 
 @pytest.fixture
-def client():
+def db_session():
     engine = create_engine(
         "sqlite://", connect_args={"check_same_thread": False}, poolclass=StaticPool
     )
@@ -24,5 +36,33 @@ def client():
             db.close()
 
     app.dependency_overrides[get_db] = override_get_db
-    yield TestClient(app)
+    with TestSession() as db:
+        yield db
     app.dependency_overrides.clear()
+
+
+@pytest.fixture
+def crear_cliente(db_session):
+    """Crea un usuario con el rol indicado y un TestClient con su sesión iniciada."""
+
+    def _crear(rol: Rol = Rol.ADMIN, nombre: str = "Directiva", email: str = "admin@coop.cl") -> TestClient:
+        usuario = usuarios_service.crear(db_session, nombre, email, "clave-segura", rol)
+        return TestClient(app, headers={"Authorization": f"Bearer {tokens.emitir(usuario.id)}"})
+
+    return _crear
+
+
+@pytest.fixture
+def client(crear_cliente):
+    """Cliente con sesión de administrador."""
+    return crear_cliente()
+
+
+@pytest.fixture
+def productor(crear_cliente):
+    return crear_cliente(Rol.PRODUCTOR, "Ana Huenchul", "ana@coop.cl")
+
+
+@pytest.fixture
+def anonimo(db_session):
+    return TestClient(app)

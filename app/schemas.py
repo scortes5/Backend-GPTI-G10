@@ -1,11 +1,17 @@
 from datetime import date, datetime
 from typing import Annotated
 
-from pydantic import BaseModel, ConfigDict, Field, StringConstraints, field_validator
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, StringConstraints, field_validator
 
-Productor = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=120)]
-Comprador = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=120)]
-Cultivo = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=80)]
+from app.models import Rol
+
+# Una línea de texto sin caracteres de control (saltos de línea, tabs, etc.). Estos campos
+# terminan en asuntos de correo, CSV y prompts, donde un salto de línea rompe o inyecta contenido.
+SIN_CONTROL = r"^[^\x00-\x1f\x7f]*$"
+
+Productor = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=120, pattern=SIN_CONTROL)]
+Comprador = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=120, pattern=SIN_CONTROL)]
+Cultivo = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=80, pattern=SIN_CONTROL)]
 
 
 def validar_fecha_no_futura(fecha: date | None) -> date | None:
@@ -40,6 +46,18 @@ class LoteOut(LoteCreate):
     creado: datetime
 
 
+class LotePublicoOut(BaseModel):
+    """Lo que ve cualquiera que escanee el QR: origen del lote, sin ventas ni precios."""
+
+    model_config = ConfigDict(from_attributes=True)
+
+    codigo: str
+    productor: str
+    cultivo: str
+    kilos: float
+    fecha_cosecha: date
+
+
 class VentaCreate(BaseModel):
     comprador: Comprador
     kilos: float = Field(gt=0)
@@ -70,6 +88,14 @@ class RecomendacionOut(BaseModel):
     texto: str
 
 
+class SolicitudReporte(BaseModel):
+    destinatario: EmailStr
+
+
+class ReporteEnviadoOut(BaseModel):
+    enviado_a: EmailStr
+
+
 class ResumenOut(BaseModel):
     total_lotes: int
     kilos_cosechados: float
@@ -77,3 +103,50 @@ class ResumenOut(BaseModel):
     kilos_disponibles: float
     ingresos: float
     kilos_por_cultivo: dict[str, float]
+
+
+class Credenciales(BaseModel):
+    email: EmailStr
+    clave: str = Field(max_length=128)
+
+
+class UsuarioOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    nombre: str
+    email: EmailStr
+    rol: Rol
+    activo: bool
+
+
+class UsuarioCreate(BaseModel):
+    nombre: Productor
+    email: EmailStr
+    clave: str = Field(min_length=8, max_length=128)
+    rol: Rol = Rol.PRODUCTOR
+
+
+class UsuarioUpdate(BaseModel):
+    rol: Rol | None = None
+    activo: bool | None = None
+
+
+class SesionOut(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    usuario: UsuarioOut
+
+
+class SolicitudRecuperacion(BaseModel):
+    email: EmailStr
+
+
+class Restablecimiento(BaseModel):
+    email: EmailStr
+    codigo: str = Field(pattern=r"^\d{6}$")
+    clave_nueva: str = Field(min_length=8, max_length=128)
+
+
+class Mensaje(BaseModel):
+    detail: str

@@ -1,7 +1,7 @@
 """Recomendaciones agronómicas por lote, independientes del proveedor de IA."""
 from sqlalchemy.orm import Session
 
-from app.models import Lote
+from app.models import Lote, Usuario
 from app.services import lotes as lotes_service
 from app.services.ia import ProveedorIA
 
@@ -11,8 +11,8 @@ INSTRUCCIONES = (
 )
 
 
-def recomendar(db: Session, codigo_lote: str, proveedor: ProveedorIA) -> str:
-    lote = lotes_service.obtener(db, codigo_lote)
+def recomendar(db: Session, codigo_lote: str, usuario: Usuario, proveedor: ProveedorIA) -> str:
+    lote = lotes_service.obtener(db, codigo_lote, usuario)
     return proveedor.generar(INSTRUCCIONES, describir_lote(lote))
 
 
