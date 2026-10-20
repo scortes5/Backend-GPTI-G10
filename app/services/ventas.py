@@ -2,17 +2,17 @@
 from sqlalchemy.orm import Session
 
 from app.exceptions import ReglaDeNegocioInvalida
-from app.models import Lote, Venta
+from app.models import Lote, Usuario, Venta
 from app.schemas import VentaCreate
 from app.services import lotes as lotes_service
 
 
-def listar(db: Session, codigo_lote: str) -> list[Venta]:
-    return lotes_service.obtener(db, codigo_lote).ventas
+def listar(db: Session, codigo_lote: str, usuario: Usuario) -> list[Venta]:
+    return lotes_service.obtener(db, codigo_lote, usuario).ventas
 
 
-def registrar(db: Session, codigo_lote: str, data: VentaCreate) -> Venta:
-    lote = lotes_service.obtener(db, codigo_lote)
+def registrar(db: Session, codigo_lote: str, data: VentaCreate, usuario: Usuario) -> Venta:
+    lote = lotes_service.obtener(db, codigo_lote, usuario)
     _validar_venta(lote, data)
     venta = Venta(**data.model_dump(), lote=lote)
     db.add(venta)

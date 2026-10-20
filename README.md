@@ -26,6 +26,9 @@ tests/
 
 | Método | Ruta | Descripción |
 |---|---|---|
+| POST | `/auth/login` | Inicia sesión y entrega un token (público) |
+| GET | `/auth/yo` | Usuario de la sesión |
+| GET | `/publico/lotes/{codigo}` | Ficha de origen del lote, sin ventas (público, destino del QR) |
 | GET/POST | `/lotes` | Listar / registrar lotes |
 | GET/PATCH/DELETE | `/lotes/{codigo}` | Ver, editar o eliminar un lote |
 | GET | `/lotes/{codigo}/qr` | Código QR del lote |
@@ -34,6 +37,15 @@ tests/
 | GET | `/lotes/{codigo}/recomendacion` | Recomendación agronómica con IA |
 | POST | `/lotes/{codigo}/reporte` | Envía por correo el reporte de trazabilidad (CSV de ventas adjunto) |
 | GET | `/dashboard/resumen` | Indicadores generales |
+
+Salvo los marcados como públicos, los endpoints exigen `Authorization: Bearer <token>` (401 sin sesión).
+
+**Roles** (sección 5 del documento de requerimientos):
+
+- **Administrador** (directiva de la cooperativa): ve y gestiona todos los lotes, elimina lotes, gestiona usuarios y usa Instacrops.
+- **Productor** (socio): registra lotes a su nombre y solo ve, edita y vende sus propios lotes; el dashboard muestra solo sus cifras. Lo que no le corresponde responde **403**.
+
+El primer administrador se crea al iniciar la API con `ADMIN_EMAIL` y `ADMIN_CLAVE` si la base no tiene usuarios.
 
 Las reglas de negocio que no se cumplen responden **409** (p. ej. vender más kilos de los disponibles).
 

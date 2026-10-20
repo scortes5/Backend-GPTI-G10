@@ -1,8 +1,8 @@
 LOTE = {"productor": "Juan Pérez", "cultivo": "Arándano", "kilos": 120.5, "fecha_cosecha": "2026-10-01"}
 
 
-def test_health(client):
-    assert client.get("/health").json() == {"status": "ok"}
+def test_health(anonimo):
+    assert anonimo.get("/health").json() == {"status": "ok"}
 
 
 def test_crear_y_obtener_lote(client):

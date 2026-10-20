@@ -4,6 +4,7 @@ import io
 
 from sqlalchemy.orm import Session
 
+from app.models import Usuario
 from app.schemas import TrazabilidadOut
 from app.services import lotes as lotes_service
 from app.services.correo import Adjunto, Correo, ServicioCorreo
@@ -11,8 +12,10 @@ from app.services.correo import Adjunto, Correo, ServicioCorreo
 COLUMNAS_VENTAS = ["fecha", "comprador", "kilos", "precio_por_kilo"]
 
 
-def enviar_reporte_lote(db: Session, codigo: str, destinatario: str, servicio: ServicioCorreo) -> None:
-    traza = lotes_service.trazabilidad(db, codigo)
+def enviar_reporte_lote(
+    db: Session, codigo: str, destinatario: str, usuario: Usuario, servicio: ServicioCorreo
+) -> None:
+    traza = lotes_service.trazabilidad(db, codigo, usuario)
     servicio.enviar(armar_reporte(traza, destinatario))
 
 

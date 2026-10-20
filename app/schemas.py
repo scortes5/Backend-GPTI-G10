@@ -42,6 +42,18 @@ class LoteOut(LoteCreate):
     creado: datetime
 
 
+class LotePublicoOut(BaseModel):
+    """Lo que ve cualquiera que escanee el QR: origen del lote, sin ventas ni precios."""
+
+    model_config = ConfigDict(from_attributes=True)
+
+    codigo: str
+    productor: str
+    cultivo: str
+    kilos: float
+    fecha_cosecha: date
+
+
 class VentaCreate(BaseModel):
     comprador: Comprador
     kilos: float = Field(gt=0)

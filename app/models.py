@@ -41,6 +41,7 @@ class Lote(Base):
     kilos: Mapped[float] = mapped_column(Float)
     fecha_cosecha: Mapped[date] = mapped_column(Date)
     creado: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
+    usuario_id: Mapped[int | None] = mapped_column(ForeignKey("usuarios.id"))
 
     ventas: Mapped[list["Venta"]] = relationship(
         back_populates="lote", cascade="all, delete-orphan", order_by="Venta.fecha"
