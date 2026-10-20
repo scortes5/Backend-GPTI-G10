@@ -5,9 +5,13 @@ from pydantic import BaseModel, ConfigDict, EmailStr, Field, StringConstraints, 
 
 from app.models import Rol
 
-Productor = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=120)]
-Comprador = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=120)]
-Cultivo = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=80)]
+# Una línea de texto sin caracteres de control (saltos de línea, tabs, etc.). Estos campos
+# terminan en asuntos de correo, CSV y prompts, donde un salto de línea rompe o inyecta contenido.
+SIN_CONTROL = r"^[^\x00-\x1f\x7f]*$"
+
+Productor = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=120, pattern=SIN_CONTROL)]
+Comprador = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=120, pattern=SIN_CONTROL)]
+Cultivo = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=80, pattern=SIN_CONTROL)]
 
 
 def validar_fecha_no_futura(fecha: date | None) -> date | None:
