@@ -85,11 +85,7 @@ pytest
 Con `CORREO_PROVEEDOR=smtp` se usa cualquier servidor SMTP (`SMTP_HOST`, `SMTP_PUERTO`,
 `SMTP_USUARIO`, `SMTP_CLAVE`); con Gmail se necesita una contraseña de aplicación.
 
-## Despliegue (Render)
+## Base de datos
 
-1. En [Render](https://dashboard.render.com) > **New > Blueprint**, elegir este repo: `render.yaml`
-   crea la API y una base Postgres.
-2. Completar `FRONTEND_URL` con la URL del frontend en Streamlit Cloud (CORS y destino del QR).
-3. Opcional: `IA_PROVEEDOR=claude` y `ANTHROPIC_API_KEY` para recomendaciones reales.
-
-`DATABASE_URL` acepta `postgres://...`; se normaliza al driver `psycopg` en `app/db.py`.
+Local se usa SQLite. Para Postgres basta `DATABASE_URL=postgresql://usuario:clave@host/db`
+(también acepta `postgres://`); se normaliza al driver `psycopg` en `app/db.py`.

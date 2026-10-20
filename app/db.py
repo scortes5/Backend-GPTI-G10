@@ -5,7 +5,7 @@ from app.config import settings
 
 
 def normalizar_url(url: str) -> str:
-    """Render/Heroku entregan postgres://; SQLAlchemy necesita el driver psycopg explícito."""
+    """Acepta postgres:// o postgresql://; SQLAlchemy necesita el driver psycopg explícito."""
     for prefijo in ("postgres://", "postgresql://"):
         if url.startswith(prefijo):
             return "postgresql+psycopg://" + url.removeprefix(prefijo)
