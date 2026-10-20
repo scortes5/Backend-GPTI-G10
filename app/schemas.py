@@ -103,7 +103,7 @@ class ResumenOut(BaseModel):
 
 class Credenciales(BaseModel):
     email: EmailStr
-    clave: str
+    clave: str = Field(max_length=128)
 
 
 class UsuarioOut(BaseModel):
@@ -119,7 +119,7 @@ class UsuarioOut(BaseModel):
 class UsuarioCreate(BaseModel):
     nombre: Productor
     email: EmailStr
-    clave: str = Field(min_length=8)
+    clave: str = Field(min_length=8, max_length=128)
     rol: Rol = Rol.PRODUCTOR
 
 

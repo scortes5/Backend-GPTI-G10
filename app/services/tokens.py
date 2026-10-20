@@ -19,6 +19,7 @@ def emitir(usuario_id: int) -> str:
 
 def leer_usuario_id(token: str) -> int:
     try:
-        return int(jwt.decode(token, _CLAVE, algorithms=[_ALGORITMO])["sub"])
+        datos = jwt.decode(token, _CLAVE, algorithms=[_ALGORITMO], options={"require": ["exp", "sub"]})
+        return int(datos["sub"])
     except (jwt.PyJWTError, KeyError, ValueError) as error:
         raise CredencialesInvalidas("Sesión inválida o expirada") from error

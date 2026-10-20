@@ -23,3 +23,8 @@ def verificar(clave: str, clave_hash: str) -> bool:
 
 def _derivar(clave: str, sal: bytes) -> bytes:
     return hashlib.scrypt(clave.encode(), salt=sal, n=_N, r=_R, p=_P)
+
+
+# Hash de una clave aleatoria: se verifica contra él cuando el correo no existe, para que la
+# respuesta tarde lo mismo y no revele qué correos están registrados.
+HASH_SENUELO = hashear(secrets.token_urlsafe(16))

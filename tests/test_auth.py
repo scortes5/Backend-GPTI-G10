@@ -57,3 +57,31 @@ def test_ficha_publica_sin_sesion_no_expone_ventas(client, anonimo):
     assert ficha.json()["cultivo"] == "Arándano"
     assert "ventas" not in ficha.json()
     assert anonimo.get(f"/lotes/{codigo}/qr").status_code == 200
+
+
+def test_login_tarda_lo_mismo_exista_o_no_el_correo(anonimo, productor):
+    import time
+
+    def medir(email: str) -> float:
+        inicio = time.perf_counter()
+        anonimo.post("/auth/login", json={"email": email, "clave": "incorrecta"})
+        return time.perf_counter() - inicio
+
+    existe, no_existe = medir("ana@coop.cl"), medir("nadie@coop.cl")
+    assert no_existe > existe / 3
+
+
+def test_token_sin_expiracion_se_rechaza(anonimo):
+    import jwt
+
+    from app.services import tokens
+
+    sin_exp = jwt.encode({"sub": "1"}, tokens._CLAVE, algorithm="HS256")
+    assert anonimo.get("/auth/yo", headers={"Authorization": f"Bearer {sin_exp}"}).status_code == 401
+
+
+def test_token_con_algoritmo_none_se_rechaza(anonimo):
+    import jwt
+
+    sin_firma = jwt.encode({"sub": "1", "exp": 9999999999}, None, algorithm="none")
+    assert anonimo.get("/auth/yo", headers={"Authorization": f"Bearer {sin_firma}"}).status_code == 401

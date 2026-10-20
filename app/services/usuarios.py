@@ -43,7 +43,8 @@ def obtener_por_email(db: Session, email: str) -> Usuario | None:
 
 def autenticar(db: Session, email: str, clave: str) -> Usuario:
     usuario = obtener_por_email(db, email)
-    if usuario is None or not usuario.activo or not claves.verificar(clave, usuario.clave_hash):
+    clave_valida = claves.verificar(clave, usuario.clave_hash if usuario else claves.HASH_SENUELO)
+    if usuario is None or not usuario.activo or not clave_valida:
         raise CredencialesInvalidas("Correo o contraseña incorrectos")
     return usuario
 
