@@ -59,3 +59,18 @@ def test_crea_admin_inicial_solo_si_no_hay_usuarios(db, monkeypatch):
 
     admin = usuarios_service.obtener_por_email(db, "admin@coop.cl")
     assert admin.es_admin
+
+
+def test_limitador_olvida_fallos_fuera_de_la_ventana(monkeypatch):
+    from app.services import intentos
+
+    limitador = intentos.LimitadorIntentos(max_fallos=2, ventana_segundos=60)
+    ahora = [0.0]
+    monkeypatch.setattr(intentos.time, "monotonic", lambda: ahora[0])
+
+    limitador.registrar_fallo("a@coop.cl")
+    limitador.registrar_fallo("a@coop.cl")
+    assert limitador.bloqueado("a@coop.cl")
+
+    ahora[0] = 61.0
+    assert not limitador.bloqueado("a@coop.cl")

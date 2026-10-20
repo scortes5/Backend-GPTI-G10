@@ -85,3 +85,21 @@ def test_token_con_algoritmo_none_se_rechaza(anonimo):
 
     sin_firma = jwt.encode({"sub": "1", "exp": 9999999999}, None, algorithm="none")
     assert anonimo.get("/auth/yo", headers={"Authorization": f"Bearer {sin_firma}"}).status_code == 401
+
+
+def test_bloquea_el_correo_tras_cinco_intentos_fallidos(anonimo, productor):
+    for _ in range(5):
+        anonimo.post("/auth/login", json={"email": "ana@coop.cl", "clave": "incorrecta"})
+
+    correcta = anonimo.post("/auth/login", json={"email": "ana@coop.cl", "clave": "clave-segura"})
+
+    assert correcta.status_code == 429
+
+
+def test_login_exitoso_reinicia_el_contador(anonimo, productor):
+    for _ in range(4):
+        anonimo.post("/auth/login", json={"email": "ana@coop.cl", "clave": "incorrecta"})
+    assert anonimo.post("/auth/login", json={"email": "ana@coop.cl", "clave": "clave-segura"}).status_code == 200
+
+    anonimo.post("/auth/login", json={"email": "ana@coop.cl", "clave": "incorrecta"})
+    assert anonimo.post("/auth/login", json={"email": "ana@coop.cl", "clave": "clave-segura"}).status_code == 200

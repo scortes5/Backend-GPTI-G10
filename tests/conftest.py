@@ -11,6 +11,13 @@ from app.services import tokens
 from app.services import usuarios as usuarios_service
 
 
+@pytest.fixture(autouse=True)
+def limpiar_intentos_de_login():
+    from app.services.intentos import limitador_login
+
+    limitador_login._fallos.clear()
+
+
 @pytest.fixture
 def db_session():
     engine = create_engine(

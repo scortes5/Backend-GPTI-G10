@@ -19,3 +19,7 @@ class CredencialesInvalidas(Exception):
 
 class AccesoDenegado(Exception):
     pass
+
+
+class DemasiadosIntentos(Exception):
+    pass
