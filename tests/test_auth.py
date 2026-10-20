@@ -103,3 +103,24 @@ def test_login_exitoso_reinicia_el_contador(anonimo, productor):
 
     anonimo.post("/auth/login", json={"email": "ana@coop.cl", "clave": "incorrecta"})
     assert anonimo.post("/auth/login", json={"email": "ana@coop.cl", "clave": "clave-segura"}).status_code == 200
+
+
+def test_cerrar_sesion_invalida_el_token(anonimo, productor):
+    token = anonimo.post("/auth/login", json={"email": "ana@coop.cl", "clave": "clave-segura"}).json()["access_token"]
+    cabecera = {"Authorization": f"Bearer {token}"}
+
+    assert anonimo.post("/auth/logout", headers=cabecera).status_code == 204
+
+    assert anonimo.get("/auth/yo", headers=cabecera).status_code == 401
+    assert anonimo.get("/lotes", headers=cabecera).status_code == 401
+
+
+def test_cerrar_sesion_no_afecta_otras_sesiones(anonimo, productor):
+    def entrar() -> dict:
+        respuesta = anonimo.post("/auth/login", json={"email": "ana@coop.cl", "clave": "clave-segura"})
+        return {"Authorization": f"Bearer {respuesta.json()['access_token']}"}
+
+    celular, computador = entrar(), entrar()
+    anonimo.post("/auth/logout", headers=celular)
+
+    assert anonimo.get("/auth/yo", headers=computador).status_code == 200

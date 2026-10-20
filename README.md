@@ -128,6 +128,7 @@ tests/
 |---|---|---|
 | POST | `/auth/login` | Inicia sesión y entrega un token (público) |
 | GET | `/auth/yo` | Usuario de la sesión |
+| POST | `/auth/logout` | Cierra la sesión: el token queda revocado |
 | GET | `/publico/lotes/{codigo}` | Ficha de origen del lote, sin ventas (público, destino del QR) |
 | GET/POST | `/lotes` | Listar / registrar lotes |
 | GET/PATCH/DELETE | `/lotes/{codigo}` | Ver, editar o eliminar un lote |

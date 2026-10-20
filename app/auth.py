@@ -6,18 +6,25 @@ from sqlalchemy.orm import Session
 from app.db import get_db
 from app.exceptions import AccesoDenegado, CredencialesInvalidas
 from app.models import Usuario
-from app.services import tokens
+from app.services import sesiones, tokens
 
 _bearer = HTTPBearer(auto_error=False)
 
 
-def usuario_actual(
+def token_actual(
     credenciales: HTTPAuthorizationCredentials | None = Depends(_bearer),
     db: Session = Depends(get_db),
-) -> Usuario:
+) -> tokens.DatosToken:
     if credenciales is None:
         raise CredencialesInvalidas("Debes iniciar sesión")
-    usuario = db.get(Usuario, tokens.leer_usuario_id(credenciales.credentials))
+    token = tokens.leer(credenciales.credentials)
+    if sesiones.esta_revocado(db, token):
+        raise CredencialesInvalidas("Sesión cerrada. Vuelve a iniciar sesión")
+    return token
+
+
+def usuario_actual(token: tokens.DatosToken = Depends(token_actual), db: Session = Depends(get_db)) -> Usuario:
+    usuario = db.get(Usuario, token.usuario_id)
     if usuario is None or not usuario.activo:
         raise CredencialesInvalidas("Sesión inválida o expirada")
     return usuario

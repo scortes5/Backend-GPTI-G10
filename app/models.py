@@ -31,6 +31,15 @@ class Usuario(Base):
         return self.rol == Rol.ADMIN
 
 
+class TokenRevocado(Base):
+    """Tokens de sesiones cerradas. Se borran cuando ya habrían expirado de todas formas."""
+
+    __tablename__ = "tokens_revocados"
+
+    jti: Mapped[str] = mapped_column(String(64), primary_key=True)
+    expira: Mapped[datetime] = mapped_column(DateTime)
+
+
 class Lote(Base):
     __tablename__ = "lotes"
 
