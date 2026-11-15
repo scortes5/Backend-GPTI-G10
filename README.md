@@ -3,7 +3,8 @@
 API (FastAPI) del sistema de trazabilidad y gestión de cosecha para la Cooperativa Newen al Sur.
 
 - **Fase 1:** registro de lotes/cosechas, código QR por lote, historial.
-- **Fase 2:** integración Instacrops, alertas climáticas, recomendaciones IA.
+- **Fase 2:** clima del campo con la Red Agroclimática Nacional (Agromet), alertas climáticas,
+  recomendaciones IA. Integración Instacrops pendiente de contrato.
 
 ## Arquitectura
 
@@ -28,7 +29,7 @@ flowchart LR
 
         subgraph VPC["VPC"]
             subgraph ECS["ECS Fargate"]
-                FE["Frontend<br/>Streamlit"]
+                FE["Frontend<br/>Flask (PWA)"]
                 BE["Backend<br/>FastAPI"]
             end
             RDS[("RDS PostgreSQL<br/>respaldos automáticos")]
@@ -42,6 +43,7 @@ flowchart LR
     subgraph Externos["Servicios externos"]
         GEM["Google Gemini API<br/>recomendaciones IA"]
         BRE["Brevo<br/>SMTP de correo"]
+        AGR["Agromet (RAN)<br/>estaciones agroclimáticas"]
         INS["Instacrops API<br/>clima y datos agronómicos"]
     end
 
@@ -57,6 +59,7 @@ flowchart LR
     FE -.-> CW
     BE -- "ProveedorIA" --> GEM
     BE -- "ServicioCorreo" --> BRE
+    BE -- "ProveedorClima" --> AGR
     BE --> INS
 ```
 
@@ -139,6 +142,10 @@ tests/
 | GET | `/lotes/{codigo}/trazabilidad` | Lote + ventas + kilos e ingresos |
 | GET | `/lotes/{codigo}/recomendacion` | Recomendación agronómica con IA |
 | POST | `/lotes/{codigo}/reporte` | Envía por correo el reporte de trazabilidad (CSV de ventas adjunto) |
+| GET/PUT | `/campo` | Ubicación del campo propio (admin: `?usuario_id=` para ver otro) |
+| GET | `/campos` | Campos registrados (solo admin) |
+| GET | `/clima` | Clima del campo: estación Agromet más cercana, últimas 48 h y alertas |
+| GET | `/clima/recomendacion` | Qué tomar en consideración según el clima y la bodega (IA) |
 | GET | `/dashboard/resumen` | Indicadores (de la cooperativa o del productor) |
 | GET/POST | `/usuarios` | Listar / crear usuarios (solo admin) |
 | PATCH | `/usuarios/{id}` | Cambiar rol o activar/desactivar (solo admin) |
@@ -154,6 +161,27 @@ El primer administrador se crea al iniciar la API con `ADMIN_EMAIL` y `ADMIN_CLA
 caracteres, solo en tu `.env`) si la base no tiene usuarios.
 
 Las reglas de negocio que no se cumplen responden **409** (p. ej. vender más kilos de los disponibles).
+
+## Clima (Agromet)
+
+Cada usuario registra la ubicación de su campo (`PUT /campo`). `GET /clima` busca la estación más
+cercana de la **Red Agroclimática Nacional** (catastro de 417 estaciones en
+`app/data/estaciones_agromet.json`), trae sus lecturas horarias de las últimas 48 h y calcula:
+
+- **Resumen de 24 h:** mínima, máxima, lluvia, humedad media y viento máximo.
+- **Alertas por reglas** (`services/clima/analisis.py`): helada (≤ 0 °C) y riesgo de helada (≤ 3 °C),
+  calor (≥ 32 °C), lluvia (≥ 5 mm / ≥ 20 mm), viento (≥ 40 km/h), condiciones para hongos
+  (humedad ≥ 85 % con 10-25 °C), datos atrasados y estación lejana (> 30 km).
+- `GET /clima/recomendacion` entrega todo eso, más la cosecha en bodega, al `ProveedorIA`.
+
+La fuente de datos es un puerto (`ProveedorClima`) con dos adapters, elegidos con `CLIMA_PROVEEDOR`:
+
+- `simulado` (por defecto): datos plausibles para la latitud y la época, sin red.
+- `agromet`: usa `getGraphData.php` de agromet.cl, el servicio que alimenta los gráficos del
+  portal (el mismo que usa el paquete abierto agrometR), con caché de 15 minutos.
+  **Agromet no publica una API documentada y hoy su firewall bloquea clientes automáticos (HTTP
+  403)**: antes de activarlo hay que pedir acceso a la red (info@agromet.cl). Si cambian el formato,
+  basta ajustar `services/clima/agromet.py`.
 
 ## IA
 

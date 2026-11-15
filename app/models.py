@@ -100,3 +100,18 @@ class Venta(Base):
     @property
     def total(self) -> float:
         return self.kilos * self.precio_por_kilo
+
+
+class Campo(Base):
+    """Ubicación del campo de un usuario: con ella se busca la estación agroclimática más cercana."""
+
+    __tablename__ = "campos"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    usuario_id: Mapped[int] = mapped_column(ForeignKey("usuarios.id"), unique=True)
+    nombre: Mapped[str] = mapped_column(String(120))
+    latitud: Mapped[float] = mapped_column(Float)
+    longitud: Mapped[float] = mapped_column(Float)
+    actualizado: Mapped[datetime] = mapped_column(DateTime, default=datetime.now, onupdate=datetime.now)
+
+    usuario: Mapped[Usuario] = relationship()

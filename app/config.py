@@ -8,6 +8,9 @@ class Settings(BaseSettings):
     frontend_url: str = "http://localhost:8501"
     instacrops_api_url: str = "https://api.instacrops.com"
     instacrops_api_key: str = ""
+    clima_proveedor: str = "simulado"
+    agromet_url: str = "https://www.agromet.cl/ext/aux/getGraphData.php"
+    agromet_cache_minutos: int = 15
     ia_proveedor: str = "simulado"
     ia_modelo: str = "claude-opus-5-5"
     anthropic_api_key: str = ""

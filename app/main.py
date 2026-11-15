@@ -15,7 +15,7 @@ from app.exceptions import (
     ReglaDeNegocioInvalida,
     ServicioExternoNoDisponible,
 )
-from app.routers import auth, dashboard, instacrops, lotes, publico, recomendaciones, reportes, usuarios, ventas
+from app.routers import auth, clima, dashboard, instacrops, lotes, publico, recomendaciones, reportes, usuarios, ventas
 from app.services import usuarios as usuarios_service
 
 
@@ -81,6 +81,7 @@ app.include_router(dashboard.router)
 app.include_router(instacrops.router)
 app.include_router(publico.router)
 app.include_router(usuarios.router)
+app.include_router(clima.router)
 
 
 @app.get("/health")

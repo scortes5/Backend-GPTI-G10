@@ -23,3 +23,29 @@ def describir_lote(lote: Lote) -> str:
         f"vendidos {lote.kilos_vendidos:g} kg, disponibles {lote.kilos_disponibles:g} kg. "
         "¿Qué recomiendas para conservar y comercializar lo disponible?"
     )
+
+
+INSTRUCCIONES_CLIMA = (
+    "Eres un asesor agronómico para pequeños productores de una cooperativa chilena del sur. "
+    "Con el clima reciente del campo (estación de la Red Agroclimática Nacional) y lo que el productor "
+    "tiene en bodega, indica qué debe tomar en consideración hoy y los próximos días: labores, riego, "
+    "heladas, plagas y enfermedades, cosecha y conservación. Responde en español simple, en máximo 6 "
+    "viñetas cortas y accionables, empezando por lo más urgente. No inventes datos que no se entregan."
+)
+
+
+def recomendar_clima(db: Session, usuario: Usuario, clima, proveedor: ProveedorIA) -> str:
+    from app.services.clima.analisis import describir
+
+    duenio = db.get(Usuario, clima.campo.usuario_id)
+    lotes = [l for l in lotes_service.listar(db, duenio) if l.kilos_disponibles > 0]
+    consulta = describir(clima)
+    if not clima.alertas:
+        consulta += " Sin alertas climáticas."
+    if lotes:
+        consulta += " En bodega: " + "; ".join(
+            f"{l.cultivo} {l.kilos_disponibles:g} kg (cosechado el {l.fecha_cosecha:%d-%m-%Y})" for l in lotes[:10]
+        ) + "."
+    else:
+        consulta += " No tiene cosecha en bodega."
+    return proveedor.generar(INSTRUCCIONES_CLIMA, consulta + " ¿Qué debo tomar en consideración?")

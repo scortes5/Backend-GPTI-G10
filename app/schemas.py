@@ -150,3 +150,70 @@ class Restablecimiento(BaseModel):
 
 class Mensaje(BaseModel):
     detail: str
+
+
+# ---------- Campo y clima ----------
+
+# Chile continental e insular cercana: la Red Agroclimática Nacional solo cubre el país.
+Latitud = Annotated[float, Field(ge=-56, le=-17)]
+Longitud = Annotated[float, Field(ge=-76, le=-66)]
+NombreCampo = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=120, pattern=SIN_CONTROL)]
+
+
+class CampoIn(BaseModel):
+    nombre: NombreCampo
+    latitud: Latitud
+    longitud: Longitud
+
+
+class CampoOut(CampoIn):
+    model_config = ConfigDict(from_attributes=True)
+
+    usuario_id: int
+    productor: str
+    actualizado: datetime
+
+
+class EstacionOut(BaseModel):
+    id: int
+    nombre: str
+    institucion: str
+    comuna: str
+    region: str
+    latitud: float
+    longitud: float
+    distancia_km: float
+
+
+class MedicionOut(BaseModel):
+    fecha_hora: datetime
+    temperatura: float | None = None
+    humedad: float | None = None
+    precipitacion: float | None = None
+    viento: float | None = None
+
+
+class ResumenClimaOut(BaseModel):
+    """Últimas 24 horas."""
+
+    temperatura_min: float | None
+    temperatura_max: float | None
+    precipitacion: float
+    humedad_media: float | None
+    viento_max: float | None
+
+
+class AlertaOut(BaseModel):
+    nivel: str  # alta | media | info
+    titulo: str
+    detalle: str
+
+
+class ClimaOut(BaseModel):
+    campo: CampoOut
+    estacion: EstacionOut
+    fuente: str  # agromet | simulado
+    actual: MedicionOut | None
+    resumen_24h: ResumenClimaOut
+    serie: list[MedicionOut]
+    alertas: list[AlertaOut]
