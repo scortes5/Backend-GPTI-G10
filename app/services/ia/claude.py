@@ -1,6 +1,7 @@
 import anthropic
 
 from app.exceptions import ServicioExternoNoDisponible
+from app.services.ia.contexto import Contexto
 
 
 class ClaudeAdapter:
@@ -10,7 +11,7 @@ class ClaudeAdapter:
         self._cliente = anthropic.Anthropic(api_key=api_key)
         self._modelo = modelo
 
-    def generar(self, instrucciones: str, consulta: str) -> str:
+    def generar(self, instrucciones: str, consulta: str, contexto: Contexto | None = None) -> str:
         try:
             respuesta = self._cliente.beta.messages.create(
                 model=self._modelo,

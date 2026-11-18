@@ -94,9 +94,8 @@ def interpretar(xml: str) -> list[Medicion]:
 
 
 class AgrometAdapter:
-    nombre = "agromet"
-
-    def __init__(self, url: str, cache_minutos: int = 15, timeout: float = 20):
+    def __init__(self, url: str, cache_minutos: int = 15, timeout: float = 20, nombre: str = "agromet"):
+        self.nombre = nombre
         self.url = url
         self.cache_segundos = cache_minutos * 60
         self.timeout = timeout

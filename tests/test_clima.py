@@ -57,7 +57,7 @@ class IAEspia:
     def __init__(self):
         self.consultas = []
 
-    def generar(self, instrucciones, consulta):
+    def generar(self, instrucciones, consulta, contexto=None):
         self.consultas.append(consulta)
         return "- Cubrir los almácigos"
 

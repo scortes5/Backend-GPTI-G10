@@ -8,18 +8,23 @@ from statistics import mean
 
 from sqlalchemy.orm import Session
 
-from app.models import Usuario
-from app.schemas import AlertaOut, ClimaOut, EstacionOut, MedicionOut, ResumenClimaOut
+from app.exceptions import ServicioExternoNoDisponible
+from app.models import Campo, Usuario
+from app.schemas import AlertaOut, ClimaOut, EstacionOut, LecturaSensorOut, MedicionOut, ResumenClimaOut, SensoresOut
 from app.services import campos as campos_service
 from app.services.clima import estaciones
 from app.services.clima.proveedor import Medicion, ProveedorClima
+from app.services.sensores import ProveedorSensores
 
 HORAS_SERIE = 48
 ESTACION_LEJANA_KM = 30
+HORAS_LECTURA_RECIENTE = 3
+SUELO_SECO = 30  # % de la capacidad de campo
+SUELO_SATURADO = 90
 
 
 def clima_del_campo(db: Session, usuario: Usuario, proveedor: ProveedorClima, usuario_id: int | None = None,
-                    ahora: datetime | None = None) -> ClimaOut:
+                    ahora: datetime | None = None, sensores: ProveedorSensores | None = None) -> ClimaOut:
     campo = campos_service.obtener(db, usuario, usuario_id)
     estacion, distancia = estaciones.mas_cercana(campo.latitud, campo.longitud)
     ahora = (ahora or datetime.now()).replace(minute=0, second=0, microsecond=0)
@@ -28,6 +33,8 @@ def clima_del_campo(db: Session, usuario: Usuario, proveedor: ProveedorClima, us
     ultimas_24 = [m for m in serie if m.fecha_hora > ahora - timedelta(hours=24)]
     resumen = resumir(ultimas_24)
     actual = serie[-1] if serie else None
+    datos_sensores, aviso_sensores = _sensores_del_campo(campo, sensores, ahora)
+    lista_alertas = alertas(resumen, actual, distancia, ahora) + alertas_sensores(datos_sensores)
     return ClimaOut(
         campo=campos_service.a_salida(campo),
         estacion=EstacionOut(**estacion.__dict__, distancia_km=round(distancia, 1)),
@@ -35,8 +42,27 @@ def clima_del_campo(db: Session, usuario: Usuario, proveedor: ProveedorClima, us
         actual=_salida(actual) if actual else None,
         resumen_24h=resumen,
         serie=[_salida(m) for m in serie],
-        alertas=alertas(resumen, actual, distancia, ahora),
+        alertas=lista_alertas,
+        sensores=datos_sensores,
+        aviso_sensores=aviso_sensores,
     )
+
+
+def _sensores_del_campo(campo: Campo, proveedor: ProveedorSensores | None, ahora: datetime) -> tuple[SensoresOut | None, str | None]:
+    """Los sensores complementan el clima: si fallan, el resto de la pantalla sigue funcionando."""
+    if proveedor is None:
+        return None, None
+    try:
+        datos = proveedor.lecturas(campo.latitud, campo.longitud)
+    except ServicioExternoNoDisponible as e:
+        return None, str(e)
+    ultima = datos.lecturas[-1] if datos.lecturas else None
+    return SensoresOut(
+        fuente=proveedor.nombre,
+        dispositivo=datos.dispositivo,
+        actual=LecturaSensorOut(**ultima.__dict__) if ultima else None,
+        reciente=bool(ultima) and ahora - ultima.fecha_hora <= timedelta(hours=HORAS_LECTURA_RECIENTE),
+    ), None
 
 
 def _salida(m: Medicion) -> MedicionOut:
@@ -96,6 +122,24 @@ def alertas(resumen: ResumenClimaOut, actual: Medicion | None, distancia_km: flo
     return lista
 
 
+def alertas_sensores(sensores: SensoresOut | None) -> list[AlertaOut]:
+    if sensores is None:
+        return []
+    if not sensores.reciente:
+        return [AlertaOut(nivel="info", titulo="Sensores sin datos recientes",
+                          detalle="Los sensores del campo no han enviado lecturas en las últimas horas.")]
+    humedad = sensores.actual.humedad_suelo
+    if humedad is None:
+        return []
+    if humedad <= SUELO_SECO:
+        return [AlertaOut(nivel="media", titulo="Suelo seco",
+                          detalle=f"La humedad del suelo está en {_n(humedad)} %. Revisa si necesitas regar.")]
+    if humedad >= SUELO_SATURADO:
+        return [AlertaOut(nivel="media", titulo="Suelo saturado",
+                          detalle=f"La humedad del suelo está en {_n(humedad)} %. No riegues y evita entrar con maquinaria.")]
+    return []
+
+
 def describir(clima: ClimaOut) -> str:
     """Texto para la IA (y para los registros): ubicación, condiciones y alertas."""
     r, a = clima.resumen_24h, clima.actual
@@ -109,6 +153,9 @@ def describir(clima: ClimaOut) -> str:
         f"Últimas 24 h: mínima {r.temperatura_min} °C, máxima {r.temperatura_max} °C, lluvia {r.precipitacion} mm, "
         f"humedad media {r.humedad_media} %, viento máximo {r.viento_max} km/h."
     )
+    s = clima.sensores
+    if s and s.reciente and s.actual:
+        partes.append(f"Sensores del campo: humedad de suelo {s.actual.humedad_suelo} %, temperatura de suelo {s.actual.temperatura_suelo} °C.")
     if clima.alertas:
         partes.append("Alertas: " + "; ".join(f"{x.titulo} ({x.detalle})" for x in clima.alertas))
     return " ".join(partes)
