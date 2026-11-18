@@ -8,7 +8,8 @@ API (FastAPI) del sistema de trazabilidad y gestión de cosecha para la Cooperat
 
 ## Arquitectura
 
-> Propuesta de arquitectura objetivo en AWS. Aún no está implementada; sirve de base para el
+> Propuesta de arquitectura objetivo en AWS. Para el piloto ya existe un despliegue con Docker en
+> un solo servidor (ver **Despliegue con Docker**). Esta arquitectura sirve de base para el
 > documento de arquitectura y para estimar costos en AWS Pricing Calculator.
 
 ### Despliegue en AWS
@@ -123,6 +124,8 @@ app/
     ia/              # patrón Adapter: puerto ProveedorIA + adapters Claude/simulado
     correo/          # patrón Adapter: puerto ServicioCorreo + adapters SMTP/simulado
 tests/
+Dockerfile         # imagen de la API
+despliegue/        # docker-compose (PostgreSQL + API + frontend + Caddy HTTPS)
 ```
 
 ## Endpoints
@@ -188,6 +191,62 @@ La fuente de datos es un puerto (`ProveedorClima`) con dos adapters, elegidos co
 `IA_PROVEEDOR=simulado` (por defecto) no usa red ni API key. Con `IA_PROVEEDOR=claude` y
 `ANTHROPIC_API_KEY` se usa Claude. Para agregar otro proveedor basta un nuevo adapter con el
 método `generar(instrucciones, consulta)` y registrarlo en `services/ia/__init__.py`.
+
+## Despliegue con Docker (piloto)
+
+`despliegue/` levanta todo el sistema en un solo servidor con Docker Compose:
+
+```mermaid
+flowchart LR
+    U["Navegador / PWA"] -- "HTTPS 443" --> C["Caddy<br/>certificado automático"]
+    C --> F["frontend<br/>Flask + gunicorn"]
+    F -- "red interna" --> B["backend<br/>FastAPI"]
+    B --> D[("PostgreSQL 16<br/>volumen datos_db")]
+```
+
+- **Caddy** obtiene y renueva solo el certificado HTTPS (Let's Encrypt) y redirige HTTP a HTTPS.
+  HTTPS es obligatorio: sin él no funcionan en el teléfono la PWA, la cámara del escáner ni la
+  ubicación del campo.
+- Solo Caddy publica puertos (80 y 443). La API y la base quedan en la red interna de Docker.
+- Los datos viven en el volumen `datos_db`; `docker compose down` no los borra (`down -v` sí).
+
+### Poner en marcha un servidor
+
+Sirve cualquier servidor Linux con Docker (por ejemplo una instancia EC2 en `sa-east-1`, que es
+el paso previo a la arquitectura objetivo con ECS y RDS descrita arriba).
+
+1. Apuntar el dominio (registro DNS `A`) a la IP pública del servidor y abrir los puertos 80 y 443.
+2. Clonar los dos repositorios uno al lado del otro:
+   ```bash
+   git clone https://github.com/scortes5/Backend-GPTI-G10.git
+   git clone https://github.com/scortes5/Frontend-GPTI-G10.git
+   ```
+3. Configurar y levantar:
+   ```bash
+   cd Backend-GPTI-G10/despliegue
+   cp .env.example .env     # DOMINIO, claves (ver comentarios), ADMIN_EMAIL y ADMIN_CLAVE
+   docker compose up -d --build
+   ```
+4. Abrir `https://<DOMINIO>` e iniciar sesión con `ADMIN_EMAIL` y `ADMIN_CLAVE`.
+
+**Importante:** los QR llevan la dirección `https://<DOMINIO>/Trazabilidad?codigo=...`. Define el
+dominio definitivo antes de imprimir etiquetas.
+
+Para probar en el computador basta `DOMINIO=localhost`: Caddy usa un certificado local que el
+navegador marca como no confiable (se puede aceptar para la prueba).
+
+### Operación
+
+```bash
+docker compose ps                         # estado y chequeos de salud
+docker compose logs -f backend frontend   # registros
+git pull && docker compose up -d --build  # actualizar a la última versión
+docker compose exec -T db pg_dump -U agrotracker agrotracker > respaldo-$(date +%F).sql   # respaldo
+docker compose exec -T db psql -U agrotracker agrotracker < respaldo.sql                  # restaurar
+```
+
+Las tablas se crean solas al iniciar la API. Cambios de columnas en tablas existentes requieren
+una migración (pendiente: Alembic).
 
 ## Setup
 
