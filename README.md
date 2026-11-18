@@ -3,11 +3,13 @@
 API (FastAPI) del sistema de trazabilidad y gestión de cosecha para la Cooperativa Newen al Sur.
 
 - **Fase 1:** registro de lotes/cosechas, código QR por lote, historial.
-- **Fase 2:** integración Instacrops, alertas climáticas, recomendaciones IA.
+- **Fase 2:** clima del campo con la Red Agroclimática Nacional (Agromet), alertas climáticas,
+  recomendaciones IA. Integración Instacrops pendiente de contrato.
 
 ## Arquitectura
 
-> Propuesta de arquitectura objetivo en AWS. Aún no está implementada; sirve de base para el
+> Propuesta de arquitectura objetivo en AWS. Para el piloto ya existe un despliegue con Docker en
+> un solo servidor (ver **Despliegue con Docker**). Esta arquitectura sirve de base para el
 > documento de arquitectura y para estimar costos en AWS Pricing Calculator.
 
 ### Despliegue en AWS
@@ -28,7 +30,7 @@ flowchart LR
 
         subgraph VPC["VPC"]
             subgraph ECS["ECS Fargate"]
-                FE["Frontend<br/>Streamlit"]
+                FE["Frontend<br/>Flask (PWA)"]
                 BE["Backend<br/>FastAPI"]
             end
             RDS[("RDS PostgreSQL<br/>respaldos automáticos")]
@@ -42,6 +44,7 @@ flowchart LR
     subgraph Externos["Servicios externos"]
         GEM["Google Gemini API<br/>recomendaciones IA"]
         BRE["Brevo<br/>SMTP de correo"]
+        AGR["Agromet (RAN)<br/>estaciones agroclimáticas"]
         INS["Instacrops API<br/>clima y datos agronómicos"]
     end
 
@@ -57,6 +60,7 @@ flowchart LR
     FE -.-> CW
     BE -- "ProveedorIA" --> GEM
     BE -- "ServicioCorreo" --> BRE
+    BE -- "ProveedorClima" --> AGR
     BE --> INS
 ```
 
@@ -120,6 +124,8 @@ app/
     ia/              # patrón Adapter: puerto ProveedorIA + adapters Claude/simulado
     correo/          # patrón Adapter: puerto ServicioCorreo + adapters SMTP/simulado
 tests/
+Dockerfile         # imagen de la API
+despliegue/        # docker-compose (PostgreSQL + API + frontend + Caddy HTTPS)
 ```
 
 ## Endpoints
@@ -139,6 +145,10 @@ tests/
 | GET | `/lotes/{codigo}/trazabilidad` | Lote + ventas + kilos e ingresos |
 | GET | `/lotes/{codigo}/recomendacion` | Recomendación agronómica con IA |
 | POST | `/lotes/{codigo}/reporte` | Envía por correo el reporte de trazabilidad (CSV de ventas adjunto) |
+| GET/PUT | `/campo` | Ubicación del campo propio (admin: `?usuario_id=` para ver otro) |
+| GET | `/campos` | Campos registrados (solo admin) |
+| GET | `/clima` | Clima del campo: estación Agromet más cercana, últimas 48 h y alertas |
+| GET | `/clima/recomendacion` | Qué tomar en consideración según el clima y la bodega (IA) |
 | GET | `/dashboard/resumen` | Indicadores (de la cooperativa o del productor) |
 | GET/POST | `/usuarios` | Listar / crear usuarios (solo admin) |
 | PATCH | `/usuarios/{id}` | Cambiar rol o activar/desactivar (solo admin) |
@@ -155,11 +165,88 @@ caracteres, solo en tu `.env`) si la base no tiene usuarios.
 
 Las reglas de negocio que no se cumplen responden **409** (p. ej. vender más kilos de los disponibles).
 
+## Clima (Agromet)
+
+Cada usuario registra la ubicación de su campo (`PUT /campo`). `GET /clima` busca la estación más
+cercana de la **Red Agroclimática Nacional** (catastro de 417 estaciones en
+`app/data/estaciones_agromet.json`), trae sus lecturas horarias de las últimas 48 h y calcula:
+
+- **Resumen de 24 h:** mínima, máxima, lluvia, humedad media y viento máximo.
+- **Alertas por reglas** (`services/clima/analisis.py`): helada (≤ 0 °C) y riesgo de helada (≤ 3 °C),
+  calor (≥ 32 °C), lluvia (≥ 5 mm / ≥ 20 mm), viento (≥ 40 km/h), condiciones para hongos
+  (humedad ≥ 85 % con 10-25 °C), datos atrasados y estación lejana (> 30 km).
+- `GET /clima/recomendacion` entrega todo eso, más la cosecha en bodega, al `ProveedorIA`.
+
+La fuente de datos es un puerto (`ProveedorClima`) con dos adapters, elegidos con `CLIMA_PROVEEDOR`:
+
+- `simulado` (por defecto): datos plausibles para la latitud y la época, sin red.
+- `agromet`: usa `getGraphData.php` de agromet.cl, el servicio que alimenta los gráficos del
+  portal (el mismo que usa el paquete abierto agrometR), con caché de 15 minutos.
+  **Agromet no publica una API documentada y hoy su firewall bloquea clientes automáticos (HTTP
+  403)**: antes de activarlo hay que pedir acceso a la red (info@agromet.cl). Si cambian el formato,
+  basta ajustar `services/clima/agromet.py`.
+
 ## IA
 
 `IA_PROVEEDOR=simulado` (por defecto) no usa red ni API key. Con `IA_PROVEEDOR=claude` y
 `ANTHROPIC_API_KEY` se usa Claude. Para agregar otro proveedor basta un nuevo adapter con el
 método `generar(instrucciones, consulta)` y registrarlo en `services/ia/__init__.py`.
+
+## Despliegue con Docker (piloto)
+
+`despliegue/` levanta todo el sistema en un solo servidor con Docker Compose:
+
+```mermaid
+flowchart LR
+    U["Navegador / PWA"] -- "HTTPS 443" --> C["Caddy<br/>certificado automático"]
+    C --> F["frontend<br/>Flask + gunicorn"]
+    F -- "red interna" --> B["backend<br/>FastAPI"]
+    B --> D[("PostgreSQL 16<br/>volumen datos_db")]
+```
+
+- **Caddy** obtiene y renueva solo el certificado HTTPS (Let's Encrypt) y redirige HTTP a HTTPS.
+  HTTPS es obligatorio: sin él no funcionan en el teléfono la PWA, la cámara del escáner ni la
+  ubicación del campo.
+- Solo Caddy publica puertos (80 y 443). La API y la base quedan en la red interna de Docker.
+- Los datos viven en el volumen `datos_db`; `docker compose down` no los borra (`down -v` sí).
+
+### Poner en marcha un servidor
+
+Sirve cualquier servidor Linux con Docker (por ejemplo una instancia EC2 en `sa-east-1`, que es
+el paso previo a la arquitectura objetivo con ECS y RDS descrita arriba).
+
+1. Apuntar el dominio (registro DNS `A`) a la IP pública del servidor y abrir los puertos 80 y 443.
+2. Clonar los dos repositorios uno al lado del otro:
+   ```bash
+   git clone https://github.com/scortes5/Backend-GPTI-G10.git
+   git clone https://github.com/scortes5/Frontend-GPTI-G10.git
+   ```
+3. Configurar y levantar:
+   ```bash
+   cd Backend-GPTI-G10/despliegue
+   cp .env.example .env     # DOMINIO, claves (ver comentarios), ADMIN_EMAIL y ADMIN_CLAVE
+   docker compose up -d --build
+   ```
+4. Abrir `https://<DOMINIO>` e iniciar sesión con `ADMIN_EMAIL` y `ADMIN_CLAVE`.
+
+**Importante:** los QR llevan la dirección `https://<DOMINIO>/Trazabilidad?codigo=...`. Define el
+dominio definitivo antes de imprimir etiquetas.
+
+Para probar en el computador basta `DOMINIO=localhost`: Caddy usa un certificado local que el
+navegador marca como no confiable (se puede aceptar para la prueba).
+
+### Operación
+
+```bash
+docker compose ps                         # estado y chequeos de salud
+docker compose logs -f backend frontend   # registros
+git pull && docker compose up -d --build  # actualizar a la última versión
+docker compose exec -T db pg_dump -U agrotracker agrotracker > respaldo-$(date +%F).sql   # respaldo
+docker compose exec -T db psql -U agrotracker agrotracker < respaldo.sql                  # restaurar
+```
+
+Las tablas se crean solas al iniciar la API. Cambios de columnas en tablas existentes requieren
+una migración (pendiente: Alembic).
 
 ## Setup
 
