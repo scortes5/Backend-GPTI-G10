@@ -34,8 +34,10 @@ def test_envia_reporte_del_lote_con_csv_de_ventas(client, espia):
     assert correo.destinatario == "auditor@ejemplo.cl"
     assert codigo in correo.asunto
     assert "Kilos disponibles: 60" in correo.cuerpo
-    csv = correo.adjuntos[0].contenido.decode()
-    assert csv.splitlines() == ["fecha,comprador,kilos,precio_por_kilo", "2026-10-05,Exportadora Sur,40.0,2500.0"]
+    csv = correo.adjuntos[1].contenido.decode()
+    assert csv.splitlines() == ["fecha,comprador,kilos,precio_por_kilo,estado", "2026-10-05,Exportadora Sur,40.0,2500.0,vigente"]
+    assert correo.adjuntos[0].nombre.endswith(".pdf")
+    assert correo.adjuntos[0].contenido.startswith(b"%PDF")
 
 
 def test_rechaza_correo_invalido(client, espia):
