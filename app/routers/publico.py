@@ -10,5 +10,5 @@ router = APIRouter(prefix="/publico", tags=["público"])
 
 @router.get("/lotes/{codigo}", response_model=LotePublicoOut)
 def lote_publico(codigo: str, db: Session = Depends(get_db)):
-    """Ficha de origen que se abre al escanear el QR, sin iniciar sesión."""
-    return lotes_service.obtener_publico(db, codigo)
+    """Ficha de origen que se abre al escanear el QR, sin iniciar sesión: entregas y estado, sin precios."""
+    return lotes_service.publico(db, codigo)

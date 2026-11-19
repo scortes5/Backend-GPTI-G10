@@ -34,7 +34,9 @@ def test_login_con_sql_no_entra(anonimo, client, email):
 
 def test_productor_con_sql_no_ve_lotes_ajenos(client, productor):
     client.post("/lotes", json=LOTE)
-    assert productor.get("/lotes", params={"usuario_id": "1 OR 1=1"}).json() == []
+    respuesta = productor.get("/lotes", params={"usuario_id": "1 OR 1=1"})
+    assert respuesta.status_code == 422  # usuario_id debe ser un número
+    assert productor.get("/lotes", params={"usuario_id": 1}).json() == []  # y un productor no filtra por otros
 
 
 @pytest.mark.parametrize("campo", ["productor", "cultivo"])
