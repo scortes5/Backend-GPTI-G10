@@ -4,7 +4,7 @@ API (FastAPI) del sistema de trazabilidad y gestión de cosecha para la Cooperat
 
 - **Fase 1:** registro de lotes/cosechas, código QR por lote, historial.
 - **Fase 2:** clima del campo con la Red Agroclimática Nacional (Agromet), alertas climáticas,
-  recomendaciones IA. Integración Instacrops pendiente de contrato.
+  sensores de suelo, recomendaciones IA. Instacrops aún sin contrato: se prueba con `simuladores/`.
 
 ## Arquitectura
 
@@ -90,7 +90,7 @@ flowchart TB
     end
 
     subgraph Adapters
-        GEM["GeminiAdapter<br/>(por implementar)"]
+        GEM["GeminiAdapter"]
         CLA["ClaudeAdapter"]
         SIA["ProveedorSimulado"]
         SMTP["SmtpAdapter<br/>(Brevo)"]
@@ -119,12 +119,14 @@ app/
   models.py          # tablas
   schemas.py         # modelos de entrada/salida (Pydantic)
   exceptions.py      # errores de dominio (se mapean a HTTP en main.py)
+  migraciones.py     # agrega columnas nuevas a bases existentes al iniciar
   routers/           # endpoints por módulo (solo HTTP)
   services/          # casos de uso y clientes externos
-    ia/              # patrón Adapter: puerto ProveedorIA + adapters Claude/simulado
+    ia/              # patrón Adapter: puerto ProveedorIA + adapters Gemini/Claude/simulado
     correo/          # patrón Adapter: puerto ServicioCorreo + adapters SMTP/simulado
 tests/
 Dockerfile         # imagen de la API
+simuladores/       # APIs simuladas de Agromet e Instacrops (solo demo)
 despliegue/        # docker-compose (PostgreSQL + API + frontend + Caddy HTTPS)
 ```
 
@@ -137,33 +139,70 @@ despliegue/        # docker-compose (PostgreSQL + API + frontend + Caddy HTTPS)
 | POST | `/auth/logout` | Cierra la sesión: el token queda revocado |
 | POST | `/auth/recuperar` | Envía por correo un código de 6 dígitos (público, misma respuesta exista o no el correo) |
 | POST | `/auth/restablecer` | Cambia la contraseña con el código (público) |
-| GET | `/publico/lotes/{codigo}` | Ficha de origen del lote, sin ventas (público, destino del QR) |
-| GET/POST | `/lotes` | Listar / registrar lotes |
-| GET/PATCH/DELETE | `/lotes/{codigo}` | Ver, editar o eliminar un lote |
+| GET | `/publico/lotes/{codigo}` | Ficha de origen: entregas y estado, sin ventas ni precios (público, destino del QR) |
+| GET/POST | `/lotes` | Listar (filtros `desde`, `hasta`, `estado`, `cultivo`, `usuario_id`) / registrar con su primera entrega |
+| GET/PATCH | `/lotes/{codigo}` | Ver / editar (exige `motivo`, queda en el historial) |
+| POST | `/lotes/{codigo}/anular` | Anula el lote con un motivo (no hay borrado físico) |
+| POST | `/lotes/{codigo}/entregas` | Agrega una entrega de cosecha (kilos, fecha, calidad) |
+| POST | `/lotes/{codigo}/entregas/{id}/anular` | Anula una entrega con un motivo |
 | GET | `/lotes/{codigo}/qr` | Código QR del lote |
 | GET/POST | `/lotes/{codigo}/ventas` | Ventas del lote |
-| GET | `/lotes/{codigo}/trazabilidad` | Lote + ventas + kilos e ingresos |
-| GET | `/lotes/{codigo}/recomendacion` | Recomendación agronómica con IA |
-| POST | `/lotes/{codigo}/reporte` | Envía por correo el reporte de trazabilidad (CSV de ventas adjunto) |
+| POST | `/lotes/{codigo}/ventas/{id}/anular` | Anula una venta con un motivo (sus kilos vuelven a estar disponibles) |
+| GET | `/lotes/{codigo}/trazabilidad` | Lote + entregas + ventas + historial de cambios |
+| GET | `/lotes/{codigo}/reporte.pdf` · `.csv` | Reporte del lote para descargar |
+| GET | `/lotes/{codigo}/recomendacion` | Recomendación con IA: se guarda con los datos usados |
+| GET | `/lotes/{codigo}/recomendaciones` · `/recomendaciones` | Historial de recomendaciones |
+| POST | `/lotes/{codigo}/reporte` | Envía por correo el reporte (PDF y CSV adjuntos) |
 | GET/PUT | `/campo` | Ubicación del campo propio (admin: `?usuario_id=` para ver otro) |
 | GET | `/campos` | Campos registrados (solo admin) |
 | GET | `/clima` | Clima del campo: estación Agromet más cercana, últimas 48 h y alertas |
 | GET | `/clima/recomendacion` | Qué tomar en consideración según el clima y la bodega (IA) |
-| GET | `/dashboard/resumen` | Indicadores (de la cooperativa o del productor) |
-| GET/POST | `/usuarios` | Listar / crear usuarios (solo admin) |
-| PATCH | `/usuarios/{id}` | Cambiar rol o activar/desactivar (solo admin) |
+| GET | `/dashboard/resumen` | Indicadores con filtros `desde`, `hasta`, `cultivo` y `usuario_id` (socio, solo admin): kilos, entregas, ventas, ingresos, recomendaciones y demora de la cola |
+| GET/POST | `/usuarios` | Listar / crear usuarios con RUT validado; las credenciales se envían por correo (solo admin) |
+| PATCH | `/usuarios/{id}` | Editar nombre, correo, RUT, rol o acceso (solo admin) |
 
 Salvo los marcados como públicos, los endpoints exigen `Authorization: Bearer <token>` (401 sin sesión).
 
 **Roles** (sección 5 del documento de requerimientos):
 
-- **Administrador** (directiva de la cooperativa): ve y gestiona todos los lotes, elimina lotes, gestiona usuarios y usa Instacrops.
+- **Administrador** (directiva de la cooperativa): ve y gestiona todos los lotes (los anula, no los borra), filtra por socio y gestiona usuarios.
 - **Productor** (socio): registra lotes a su nombre y solo ve, edita y vende sus propios lotes; el dashboard muestra solo sus cifras. Lo que no le corresponde responde **403**.
 
 El primer administrador se crea al iniciar la API con `ADMIN_EMAIL` y `ADMIN_CLAVE` (mínimo 12
 caracteres, solo en tu `.env`) si la base no tiene usuarios.
 
 Las reglas de negocio que no se cumplen responden **409** (p. ej. vender más kilos de los disponibles).
+
+## Entregas, anulaciones e historial
+
+- Un lote tiene **predio**, **superficie** y una o más **entregas** (fecha, kilos y calidad:
+  extra, primera, segunda o descarte). Los kilos del lote son la suma de sus entregas vigentes.
+- **Nada se borra.** Lotes, entregas y ventas se **anulan** con un motivo: siguen en el historial
+  y en los reportes, pero no cuentan en los saldos ni en el dashboard. No se puede anular una
+  entrega si quedarían menos kilos que los vendidos, ni un lote con ventas vigentes.
+- Cada creación, edición y anulación queda en la tabla `cambios` con **usuario, fecha, detalle**
+  (`campo: antes → después`) y **motivo**. Editar un lote exige motivo.
+- Al iniciar, `migraciones.py` agrega las columnas nuevas a una base existente y convierte los
+  kilos de cada lote antiguo en su primera entrega.
+
+## Cola sin conexión (solicitud de cambio N°2)
+
+El frontend manda en cada registro guardado en el teléfono `X-Evento-Id` (identificador único),
+`X-Evento-Creado` (cuándo se guardó) y `X-Cola: 1` si esperó sin señal. El backend:
+
+- **No duplica**: si un `X-Evento-Id` ya llegó, devuelve el registro existente (un reintento tras
+  un corte no crea otro lote ni descuenta dos veces una venta).
+- **Mide la demora** entre que se guarda y que llega (`eventos_cola`). El dashboard muestra el
+  promedio, cuántos esperaron señal y la demora máxima.
+
+## Recomendaciones con IA
+
+- Proveedores: `simulado` (por defecto, reglas fijas), `gemini` (API REST de Google Gemini,
+  `GEMINI_API_KEY`) o `claude`.
+- Cada recomendación se guarda con los **datos que se le entregaron** (cultivo, kilos, días desde
+  la cosecha, clima, sensores…), que se muestran junto a la sugerencia.
+- `IA_LIMITE_DIARIO` limita las consultas por usuario al día (429 al superarlo) e
+  `IA_HABILITADA=0` las desactiva (503), sin tocar el resto del sistema.
 
 ## Clima (Agromet)
 
@@ -175,6 +214,8 @@ cercana de la **Red Agroclimática Nacional** (catastro de 417 estaciones en
 - **Alertas por reglas** (`services/clima/analisis.py`): helada (≤ 0 °C) y riesgo de helada (≤ 3 °C),
   calor (≥ 32 °C), lluvia (≥ 5 mm / ≥ 20 mm), viento (≥ 40 km/h), condiciones para hongos
   (humedad ≥ 85 % con 10-25 °C), datos atrasados y estación lejana (> 30 km).
+- **Sensores de suelo** (opcional): humedad y temperatura, con alertas de suelo seco (≤ 30 %) y
+  saturado (≥ 90 %). Si fallan, el clima se sigue mostrando.
 - `GET /clima/recomendacion` entrega todo eso, más la cosecha en bodega, al `ProveedorIA`.
 
 La fuente de datos es un puerto (`ProveedorClima`) con dos adapters, elegidos con `CLIMA_PROVEEDOR`:
@@ -186,11 +227,52 @@ La fuente de datos es un puerto (`ProveedorClima`) con dos adapters, elegidos co
   403)**: antes de activarlo hay que pedir acceso a la red (info@agromet.cl). Si cambian el formato,
   basta ajustar `services/clima/agromet.py`.
 
+## APIs simuladas (demo sin servicios externos)
+
+`simuladores/` es un servicio aparte que imita Agromet e Instacrops por HTTP, así se ejecutan los
+adapters reales. Pasar a las APIs verdaderas es cambiar la configuración.
+
+- **Agromet:** mismo XML que lee el adapter. El formato sigue al paquete agrometR; no se ha podido
+  comparar con una respuesta actual porque el acceso está bloqueado.
+- **Instacrops:** no tenemos su especificación. **El contrato es una propuesta nuestra**
+  (`services/sensores/instacrops.py`) y habrá que ajustarlo cuando exista el real.
+- Con `APIS_SIMULADAS=1` la app avisa que los datos son de ejemplo.
+
+| Escenario | Qué muestra |
+|---|---|
+| `normal` | Clima templado y suelo con humedad adecuada |
+| `helada` | Mínimas bajo 0 °C |
+| `lluvia` | Lluvia intensa, alta humedad y suelo saturado |
+| `sequia` | Calor, aire seco y suelo seco |
+| `sin_agromet` | Agromet caído: la pantalla muestra el campo y el error |
+| `sin_instacrops` | Sensores caídos: el clima sigue funcionando |
+
+Con Docker (desde `despliegue/`):
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.simuladores.yml up -d --build
+docker compose -f docker-compose.yml -f docker-compose.simuladores.yml exec simuladores python -m simuladores.escenario helada
+```
+
+Sin Docker: `uvicorn simuladores.main:app --port 9000`, y en `.env`:
+
+```bash
+APIS_SIMULADAS=1
+CLIMA_PROVEEDOR=agromet
+AGROMET_URL=http://127.0.0.1:9000/agromet/getGraphData.php
+AGROMET_CACHE_MINUTOS=0
+SENSORES_PROVEEDOR=instacrops
+INSTACROPS_API_URL=http://127.0.0.1:9000/instacrops
+INSTACROPS_API_KEY=demo
+INSTACROPS_CACHE_MINUTOS=0
+```
+
 ## IA
 
-`IA_PROVEEDOR=simulado` (por defecto) no usa red ni API key. Con `IA_PROVEEDOR=claude` y
+`IA_PROVEEDOR=simulado` (por defecto) no usa red ni API key: aplica reglas fijas sobre clima, suelo,
+cultivo y días en bodega, y su respuesta siempre se identifica como simulada. Con `IA_PROVEEDOR=claude` y
 `ANTHROPIC_API_KEY` se usa Claude. Para agregar otro proveedor basta un nuevo adapter con el
-método `generar(instrucciones, consulta)` y registrarlo en `services/ia/__init__.py`.
+método `generar(instrucciones, consulta, contexto=None)` y registrarlo en `services/ia/__init__.py`.
 
 ## Despliegue con Docker (piloto)
 
