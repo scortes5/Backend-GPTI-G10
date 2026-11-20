@@ -12,13 +12,13 @@ class ProveedorEspia:
     def __init__(self):
         self.consultas: list[str] = []
 
-    def generar(self, instrucciones: str, consulta: str) -> str:
+    def generar(self, instrucciones: str, consulta: str, contexto=None) -> str:
         self.consultas.append(consulta)
         return "Vender pronto"
 
 
 class ProveedorCaido:
-    def generar(self, instrucciones: str, consulta: str) -> str:
+    def generar(self, instrucciones: str, consulta: str, contexto=None) -> str:
         raise ServicioExternoNoDisponible("El servicio de IA no está disponible")
 
 
@@ -38,7 +38,7 @@ def test_recomendacion_usa_el_proveedor_inyectado(client, usar_proveedor):
 
     respuesta = client.get(f"/lotes/{codigo}/recomendacion")
 
-    assert respuesta.json() == {"texto": "Vender pronto"}
+    assert respuesta.json()["texto"] == "Vender pronto"
     assert "Arándano" in espia.consultas[0]
     assert "disponibles 100 kg" in espia.consultas[0]
 
