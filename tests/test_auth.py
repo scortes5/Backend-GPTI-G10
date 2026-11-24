@@ -43,9 +43,9 @@ def test_productor_solo_ve_sus_lotes(client, productor):
     assert productor.get("/dashboard/resumen").json()["total_lotes"] == 1
 
 
-def test_solo_admin_elimina_lotes(productor):
-    codigo = productor.post("/lotes", json=LOTE).json()["codigo"]
-    assert productor.delete(f"/lotes/{codigo}").status_code == 403
+def test_productor_no_anula_lotes_ajenos(client, productor):
+    codigo = client.post("/lotes", json=LOTE).json()["codigo"]
+    assert productor.post(f"/lotes/{codigo}/anular", json={"motivo": "No es mío"}).status_code == 403
 
 
 def test_ficha_publica_sin_sesion_no_expone_ventas(client, anonimo):

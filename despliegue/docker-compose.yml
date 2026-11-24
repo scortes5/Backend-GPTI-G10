@@ -1,0 +1,101 @@
+# AgroTracker completo: PostgreSQL + API + frontend + Caddy (HTTPS automático).
+#
+#   cd despliegue
+#   cp .env.example .env      # completar
+#   docker compose up -d --build
+#
+# Demo con APIs simuladas de Agromet e Instacrops: ver docker-compose.simuladores.yml
+#
+# Supone los dos repositorios clonados uno al lado del otro:
+#   Backend-GPTI-G10/   (este)
+#   Frontend-GPTI-G10/  (o indicar otra ruta con FRONTEND_DIR)
+#
+# Solo Caddy expone puertos (80 y 443). La API y la base quedan en la red interna:
+# el frontend llama a la API desde el servidor.
+
+name: agrotracker
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: agrotracker
+      POSTGRES_USER: agrotracker
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Define POSTGRES_PASSWORD en despliegue/.env}
+    volumes:
+      - datos_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agrotracker -d agrotracker"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ..
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      TZ: ${TZ:-America/Santiago}  # las lecturas y las horas en pantalla son hora de Chile
+      DATABASE_URL: postgresql://agrotracker:${POSTGRES_PASSWORD}@db:5432/agrotracker
+      SECRET_KEY: ${SECRET_KEY:?Define SECRET_KEY en despliegue/.env}
+      TOKEN_MINUTOS: ${TOKEN_MINUTOS:-480}
+      ADMIN_NOMBRE: ${ADMIN_NOMBRE:-Directiva Newen al Sur}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:?Define ADMIN_EMAIL en despliegue/.env}
+      ADMIN_CLAVE: ${ADMIN_CLAVE:?Define ADMIN_CLAVE en despliegue/.env}
+      # Destino de los QR: la dirección pública del frontend.
+      FRONTEND_URL: https://${DOMINIO:?Define DOMINIO en despliegue/.env}
+      CLIMA_PROVEEDOR: ${CLIMA_PROVEEDOR:-simulado}
+      AGROMET_URL: ${AGROMET_URL:-https://www.agromet.cl/ext/aux/getGraphData.php}
+      SENSORES_PROVEEDOR: ${SENSORES_PROVEEDOR:-ninguno}
+      IA_PROVEEDOR: ${IA_PROVEEDOR:-simulado}
+      IA_HABILITADA: ${IA_HABILITADA:-1}
+      IA_LIMITE_DIARIO: ${IA_LIMITE_DIARIO:-20}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODELO: ${GEMINI_MODELO:-gemini-2.5-flash}
+      IA_MODELO: ${IA_MODELO:-claude-opus-5-5}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      CORREO_PROVEEDOR: ${CORREO_PROVEEDOR:-simulado}
+      CORREO_REMITENTE: ${CORREO_REMITENTE:-AgroTracker <no-reply@agrotracker.cl>}
+      SMTP_HOST: ${SMTP_HOST:-smtp-relay.brevo.com}
+      SMTP_PUERTO: ${SMTP_PUERTO:-587}
+      SMTP_USUARIO: ${SMTP_USUARIO:-}
+      SMTP_CLAVE: ${SMTP_CLAVE:-}
+      INSTACROPS_API_URL: ${INSTACROPS_API_URL:-https://api.instacrops.com}
+      INSTACROPS_API_KEY: ${INSTACROPS_API_KEY:-}
+
+  frontend:
+    build: ${FRONTEND_DIR:-../../Frontend-GPTI-G10}
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      BACKEND_URL: http://backend:8000
+      TZ: ${TZ:-America/Santiago}
+      FLASK_SECRET_KEY: ${FLASK_SECRET_KEY:?Define FLASK_SECRET_KEY en despliegue/.env}
+      COOKIE_SEGURA: "1"
+      INACTIVIDAD_MINUTOS: ${INACTIVIDAD_MINUTOS:-30}
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - frontend
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMINIO: ${DOMINIO}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_datos:/data
+      - caddy_config:/config
+
+volumes:
+  datos_db:
+  caddy_datos:
+  caddy_config:

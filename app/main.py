@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.config import settings
-from app.db import Base, SessionLocal, engine
+from app.db import SessionLocal, engine
 from app.exceptions import (
     AccesoDenegado,
     CodigoInvalido,
@@ -15,13 +15,14 @@ from app.exceptions import (
     ReglaDeNegocioInvalida,
     ServicioExternoNoDisponible,
 )
-from app.routers import auth, dashboard, instacrops, lotes, publico, recomendaciones, reportes, usuarios, ventas
+from app.routers import auth, clima, dashboard, lotes, publico, recomendaciones, reportes, usuarios, ventas
+from app.migraciones import migrar
 from app.services import usuarios as usuarios_service
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    Base.metadata.create_all(engine)
+    migrar(engine)
     with SessionLocal() as db:
         usuarios_service.asegurar_admin_inicial(db)
     yield
@@ -78,9 +79,9 @@ app.include_router(ventas.router)
 app.include_router(recomendaciones.router)
 app.include_router(reportes.router)
 app.include_router(dashboard.router)
-app.include_router(instacrops.router)
 app.include_router(publico.router)
 app.include_router(usuarios.router)
+app.include_router(clima.router)
 
 
 @app.get("/health")

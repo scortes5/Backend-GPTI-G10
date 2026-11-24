@@ -40,29 +40,29 @@ def test_fecha_cosecha_futura(client):
 def test_actualizar_lote_solo_cambia_campos_enviados(client):
     codigo = client.post("/lotes", json=LOTE).json()["codigo"]
 
-    actualizado = client.patch(f"/lotes/{codigo}", json={"kilos": 200})
+    actualizado = client.patch(f"/lotes/{codigo}", json={"predio": "El Roble", "motivo": "Faltaba el predio"})
 
     assert actualizado.status_code == 200
-    assert actualizado.json()["kilos"] == 200
+    assert actualizado.json()["predio"] == "El Roble"
     assert actualizado.json()["cultivo"] == LOTE["cultivo"]
 
 
-def test_actualizar_lote_con_kilos_invalidos(client):
+def test_editar_lote_exige_motivo(client):
     codigo = client.post("/lotes", json=LOTE).json()["codigo"]
-    assert client.patch(f"/lotes/{codigo}", json={"kilos": -1}).status_code == 422
+    assert client.patch(f"/lotes/{codigo}", json={"cultivo": "Frutilla"}).status_code == 422
 
 
-def test_eliminar_lote(client):
+def test_no_se_elimina_el_lote(client):
     codigo = client.post("/lotes", json=LOTE).json()["codigo"]
 
-    assert client.delete(f"/lotes/{codigo}").status_code == 204
-    assert client.get(f"/lotes/{codigo}").status_code == 404
+    assert client.delete(f"/lotes/{codigo}").status_code == 405
+    assert client.get(f"/lotes/{codigo}").status_code == 200
 
 
 def test_actualizar_lote_ignora_campos_nulos(client):
     codigo = client.post("/lotes", json=LOTE).json()["codigo"]
 
-    actualizado = client.patch(f"/lotes/{codigo}", json={"productor": None, "fecha_cosecha": None})
+    actualizado = client.patch(f"/lotes/{codigo}", json={"productor": None, "fecha_cosecha": None, "motivo": "Prueba"})
 
     assert actualizado.status_code == 200
     assert actualizado.json()["productor"] == LOTE["productor"]

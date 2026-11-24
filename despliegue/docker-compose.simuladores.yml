@@ -1,0 +1,31 @@
+# Demo sin servicios externos: agrega las APIs simuladas y conecta a ellas los adapters reales.
+# No usar en producción.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.simuladores.yml up -d --build
+#
+# El servicio "simuladores" no publica puertos: solo lo ve la red interna de Docker.
+
+services:
+  simuladores:
+    build:
+      context: ..
+      dockerfile: simuladores/Dockerfile
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ:-America/Santiago}
+      ESCENARIO: ${ESCENARIO:-normal}
+      INSTACROPS_TOKEN: demo
+
+  backend:
+    depends_on:
+      simuladores:
+        condition: service_healthy
+    environment:
+      APIS_SIMULADAS: "1"  # la app avisa que los datos son de ejemplo
+      CLIMA_PROVEEDOR: agromet
+      AGROMET_URL: http://simuladores:9000/agromet/getGraphData.php
+      AGROMET_CACHE_MINUTOS: "0"  # para ver al tiro el cambio de escenario
+      SENSORES_PROVEEDOR: instacrops
+      INSTACROPS_API_URL: http://simuladores:9000/instacrops
+      INSTACROPS_API_KEY: demo
+      INSTACROPS_CACHE_MINUTOS: "0"

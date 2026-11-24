@@ -1,0 +1,3755 @@
+[
+{
+"id": 1,
+"institucion": "FDF",
+"nombre": "Azapa1",
+"comuna": "Arica",
+"region": "Arica y Parinacota",
+"latitud": -18.509639,
+"longitud": -70.248056
+},
+{
+"id": 2,
+"institucion": "FDF",
+"nombre": "Azapa2",
+"comuna": "Arica",
+"region": "Arica y Parinacota",
+"latitud": -18.520444,
+"longitud": -70.232667
+},
+{
+"id": 3,
+"institucion": "FDF",
+"nombre": "Tranque Lautaro",
+"comuna": "Tierra Amarilla",
+"region": "Atacama",
+"latitud": -27.975583,
+"longitud": -70.0
+},
+{
+"id": 4,
+"institucion": "FDF",
+"nombre": "Jotabeche",
+"comuna": "Tierra Amarilla",
+"region": "Atacama",
+"latitud": -27.588611,
+"longitud": -70.244722
+},
+{
+"id": 5,
+"institucion": "FDF",
+"nombre": "Hornitos",
+"comuna": "Tierra Amarilla",
+"region": "Atacama",
+"latitud": -27.728889,
+"longitud": -70.196667
+},
+{
+"id": 6,
+"institucion": "FDF",
+"nombre": "Copiapo",
+"comuna": "Copiapó",
+"region": "Atacama",
+"latitud": -27.345833,
+"longitud": -70.407778
+},
+{
+"id": 7,
+"institucion": "FDF",
+"nombre": "Bodega",
+"comuna": "Copiapó",
+"region": "Atacama",
+"latitud": -27.343611,
+"longitud": -70.372778
+},
+{
+"id": 8,
+"institucion": "FDF",
+"nombre": "Vallenar",
+"comuna": "Freirina",
+"region": "Atacama",
+"latitud": -28.526306,
+"longitud": -70.943083
+},
+{
+"id": 9,
+"institucion": "FDF",
+"nombre": "Alto del Carmen",
+"comuna": "Alto del Carmen",
+"region": "Atacama",
+"latitud": -28.768167,
+"longitud": -70.449222
+},
+{
+"id": 10,
+"institucion": "FDF",
+"nombre": "El Palqui",
+"comuna": "Monte Patria",
+"region": "Coquimbo",
+"latitud": -30.746389,
+"longitud": -70.936944
+},
+{
+"id": 11,
+"institucion": "FDF",
+"nombre": "Vicuña",
+"comuna": "Vicuña",
+"region": "Coquimbo",
+"latitud": -30.038333,
+"longitud": -70.696667
+},
+{
+"id": 12,
+"institucion": "FDF",
+"nombre": "Paihuano",
+"comuna": "Paiguano",
+"region": "Coquimbo",
+"latitud": -30.046944,
+"longitud": -70.510833
+},
+{
+"id": 13,
+"institucion": "FDF",
+"nombre": "Recoleta",
+"comuna": "Ovalle",
+"region": "Coquimbo",
+"latitud": -30.490917,
+"longitud": -71.165778
+},
+{
+"id": 14,
+"institucion": "FDF",
+"nombre": "San Julián",
+"comuna": "Ovalle",
+"region": "Coquimbo",
+"latitud": -30.655278,
+"longitud": -71.318889
+},
+{
+"id": 15,
+"institucion": "FDF",
+"nombre": "Monte Patria",
+"comuna": "Monte Patria",
+"region": "Coquimbo",
+"latitud": -30.682222,
+"longitud": -70.939444
+},
+{
+"id": 16,
+"institucion": "FDF",
+"nombre": "Combarbalá",
+"comuna": "Combarbalá",
+"region": "Coquimbo",
+"latitud": -31.188333,
+"longitud": -70.998889
+},
+{
+"id": 17,
+"institucion": "FDF",
+"nombre": "Punitaqui",
+"comuna": "Punitaqui",
+"region": "Coquimbo",
+"latitud": -30.78,
+"longitud": -71.256111
+},
+{
+"id": 18,
+"institucion": "FDF",
+"nombre": "Illapel",
+"comuna": "Illapel",
+"region": "Coquimbo",
+"latitud": -31.731056,
+"longitud": -71.205556
+},
+{
+"id": 19,
+"institucion": "FDF",
+"nombre": "Salamanca",
+"comuna": "Salamanca",
+"region": "Coquimbo",
+"latitud": -31.787389,
+"longitud": -70.959611
+},
+{
+"id": 20,
+"institucion": "FDF",
+"nombre": "Cabildo",
+"comuna": "Cabildo",
+"region": "Valparaíso",
+"latitud": -32.362194,
+"longitud": -70.819722
+},
+{
+"id": 21,
+"institucion": "FDF",
+"nombre": "Petorca",
+"comuna": "Cabildo",
+"region": "Valparaíso",
+"latitud": -32.396667,
+"longitud": -71.029444
+},
+{
+"id": 22,
+"institucion": "FDF",
+"nombre": "SAN ESTEBAN",
+"comuna": "San Esteban",
+"region": "Valparaíso",
+"latitud": -32.750444,
+"longitud": -70.557583
+},
+{
+"id": 24,
+"institucion": "FDF",
+"nombre": "Calle Larga",
+"comuna": "Calle Larga",
+"region": "Valparaíso",
+"latitud": -32.870556,
+"longitud": -70.646111
+},
+{
+"id": 25,
+"institucion": "FDF",
+"nombre": "Rinconada",
+"comuna": "Rinconada",
+"region": "Valparaíso",
+"latitud": -32.837056,
+"longitud": -70.692528
+},
+{
+"id": 26,
+"institucion": "FDF",
+"nombre": "San Felipe",
+"comuna": "San Felipe",
+"region": "Valparaíso",
+"latitud": -32.755333,
+"longitud": -70.706917
+},
+{
+"id": 27,
+"institucion": "FDF",
+"nombre": "Putaendo",
+"comuna": "Putaendo",
+"region": "Valparaíso",
+"latitud": -32.593694,
+"longitud": -70.726111
+},
+{
+"id": 28,
+"institucion": "FDF",
+"nombre": "Santa María",
+"comuna": "Santa María",
+"region": "Valparaíso",
+"latitud": -32.749167,
+"longitud": -70.660278
+},
+{
+"id": 29,
+"institucion": "FDF",
+"nombre": "Panquehue",
+"comuna": "Panquehue",
+"region": "Valparaíso",
+"latitud": -32.756639,
+"longitud": -70.808833
+},
+{
+"id": 30,
+"institucion": "FDF",
+"nombre": "Llayllay",
+"comuna": "Llaillay",
+"region": "Valparaíso",
+"latitud": -32.903333,
+"longitud": -70.950556
+},
+{
+"id": 31,
+"institucion": "FDF",
+"nombre": "Catemu",
+"comuna": "Catemu",
+"region": "Valparaíso",
+"latitud": -32.757778,
+"longitud": -70.942778
+},
+{
+"id": 32,
+"institucion": "FDF",
+"nombre": "Quillota",
+"comuna": "Quillota",
+"region": "Valparaíso",
+"latitud": -32.892389,
+"longitud": -71.206722
+},
+{
+"id": 33,
+"institucion": "FDF",
+"nombre": "La Cruz",
+"comuna": "La Cruz",
+"region": "Valparaíso",
+"latitud": -32.8,
+"longitud": -71.2
+},
+{
+"id": 34,
+"institucion": "FDF",
+"nombre": "Nogales",
+"comuna": "Nogales",
+"region": "Valparaíso",
+"latitud": -32.736389,
+"longitud": -71.199167
+},
+{
+"id": 35,
+"institucion": "FDF",
+"nombre": "Hijuelas",
+"comuna": "Hijuelas",
+"region": "Valparaíso",
+"latitud": -32.847944,
+"longitud": -71.067083
+},
+{
+"id": 36,
+"institucion": "FDF",
+"nombre": "Limache",
+"comuna": "Limache",
+"region": "Valparaíso",
+"latitud": -32.994444,
+"longitud": -71.260667
+},
+{
+"id": 37,
+"institucion": "FDF",
+"nombre": "Olmué",
+"comuna": "Olmué",
+"region": "Valparaíso",
+"latitud": -33.021944,
+"longitud": -71.186389
+},
+{
+"id": 38,
+"institucion": "FDF",
+"nombre": "Casablanca",
+"comuna": "Casablanca",
+"region": "Valparaíso",
+"latitud": -33.320833,
+"longitud": -71.437222
+},
+{
+"id": 39,
+"institucion": "FDF",
+"nombre": "San Diego",
+"comuna": "Melipilla",
+"region": "Metropolitana",
+"latitud": -33.703028,
+"longitud": -71.371861
+},
+{
+"id": 40,
+"institucion": "FDF",
+"nombre": "HUECHÚN EX Lampa",
+"comuna": "Tiltil",
+"region": "Metropolitana",
+"latitud": -33.077222,
+"longitud": -70.752778
+},
+{
+"id": 41,
+"institucion": "FDF",
+"nombre": "Til til",
+"comuna": "Tiltil",
+"region": "Metropolitana",
+"latitud": -33.121333,
+"longitud": -70.834778
+},
+{
+"id": 42,
+"institucion": "FDF",
+"nombre": "Pirque",
+"comuna": "Pirque",
+"region": "Metropolitana",
+"latitud": -33.673889,
+"longitud": -70.586944
+},
+{
+"id": 43,
+"institucion": "FDF",
+"nombre": "Buin",
+"comuna": "Buin",
+"region": "Metropolitana",
+"latitud": -33.707361,
+"longitud": -70.701556
+},
+{
+"id": 44,
+"institucion": "FDF",
+"nombre": "Melipilla",
+"comuna": "El Monte",
+"region": "Metropolitana",
+"latitud": -33.65,
+"longitud": -71.1
+},
+{
+"id": 45,
+"institucion": "FDF",
+"nombre": "TALAGANTE",
+"comuna": "Talagante",
+"region": "Metropolitana",
+"latitud": -33.67325,
+"longitud": -70.921139
+},
+{
+"id": 46,
+"institucion": "FDF",
+"nombre": "LO HERRERA",
+"comuna": "San Bernardo",
+"region": "Metropolitana",
+"latitud": -33.662889,
+"longitud": -70.765917
+},
+{
+"id": 47,
+"institucion": "FDF",
+"nombre": "HUELQUEN",
+"comuna": "Paine",
+"region": "Metropolitana",
+"latitud": -33.862083,
+"longitud": -70.639194
+},
+{
+"id": 48,
+"institucion": "FDF",
+"nombre": "COLINA",
+"comuna": "Colina",
+"region": "Metropolitana",
+"latitud": -33.218778,
+"longitud": -70.715833
+},
+{
+"id": 49,
+"institucion": "FDF",
+"nombre": "Calera de Tango",
+"comuna": "Calera de Tango",
+"region": "Metropolitana",
+"latitud": -33.630556,
+"longitud": -70.799167
+},
+{
+"id": 50,
+"institucion": "FDF",
+"nombre": "Chocalan",
+"comuna": "Melipilla",
+"region": "Metropolitana",
+"latitud": -33.725556,
+"longitud": -71.209722
+},
+{
+"id": 51,
+"institucion": "FDF",
+"nombre": "Mallarauco",
+"comuna": "Melipilla",
+"region": "Metropolitana",
+"latitud": -33.586667,
+"longitud": -70.996111
+},
+{
+"id": 52,
+"institucion": "FDF",
+"nombre": "Curacaví",
+"comuna": "Curacaví",
+"region": "Metropolitana",
+"latitud": -33.438611,
+"longitud": -71.025556
+},
+{
+"id": 53,
+"institucion": "FDF",
+"nombre": "Alhué",
+"comuna": "Alhué",
+"region": "Metropolitana",
+"latitud": -34.065,
+"longitud": -71.253889
+},
+{
+"id": 54,
+"institucion": "FDF",
+"nombre": "San Pedro",
+"comuna": "San Pedro",
+"region": "Metropolitana",
+"latitud": -33.891389,
+"longitud": -71.394167
+},
+{
+"id": 55,
+"institucion": "FDF",
+"nombre": "Isla de Maipo",
+"comuna": "Isla de Maipo",
+"region": "Metropolitana",
+"latitud": -33.763889,
+"longitud": -70.886667
+},
+{
+"id": 56,
+"institucion": "FDF",
+"nombre": "El Monte",
+"comuna": "El Monte",
+"region": "Metropolitana",
+"latitud": -33.691944,
+"longitud": -71.100833
+},
+{
+"id": 57,
+"institucion": "FDF",
+"nombre": "QUINTA TILCOCO",
+"comuna": "Quinta de Tilcoco",
+"region": "O'Higgins",
+"latitud": -34.362,
+"longitud": -70.935278
+},
+{
+"id": 58,
+"institucion": "FDF",
+"nombre": "SAN FERNANDO",
+"comuna": "San Fernando",
+"region": "O'Higgins",
+"latitud": -34.577833,
+"longitud": -70.975528
+},
+{
+"id": 59,
+"institucion": "FDF",
+"nombre": "STA. BRISILA",
+"comuna": "Las Cabras",
+"region": "O'Higgins",
+"latitud": -34.298081,
+"longitud": -71.3238
+},
+{
+"id": 60,
+"institucion": "FDF",
+"nombre": "Chimbarongo",
+"comuna": "Chimbarongo",
+"region": "O'Higgins",
+"latitud": -34.670833,
+"longitud": -71.031667
+},
+{
+"id": 61,
+"institucion": "FDF",
+"nombre": "Codegua Norte Ex Rancagua",
+"comuna": "Codegua",
+"region": "O'Higgins",
+"latitud": -34.108889,
+"longitud": -70.639583
+},
+{
+"id": 62,
+"institucion": "FDF",
+"nombre": "Graneros Norte",
+"comuna": "Graneros",
+"region": "O'Higgins",
+"latitud": -34.061944,
+"longitud": -70.705
+},
+{
+"id": 63,
+"institucion": "FDF",
+"nombre": "Mostazal",
+"comuna": "Mostazal",
+"region": "O'Higgins",
+"latitud": -34.001667,
+"longitud": -70.701667
+},
+{
+"id": 64,
+"institucion": "FDF",
+"nombre": "Codegua",
+"comuna": "Codegua",
+"region": "O'Higgins",
+"latitud": -34.110278,
+"longitud": -70.653611
+},
+{
+"id": 65,
+"institucion": "FDF",
+"nombre": "Punta Cortes",
+"comuna": "Rancagua",
+"region": "O'Higgins",
+"latitud": -34.16975,
+"longitud": -70.791278
+},
+{
+"id": 66,
+"institucion": "FDF",
+"nombre": "Olivar Alto",
+"comuna": "Olivar",
+"region": "O'Higgins",
+"latitud": -34.203056,
+"longitud": -70.824167
+},
+{
+"id": 67,
+"institucion": "FDF",
+"nombre": "Los Maquis",
+"comuna": "Malloa",
+"region": "O'Higgins",
+"latitud": -34.499722,
+"longitud": -70.839722
+},
+{
+"id": 68,
+"institucion": "FDF",
+"nombre": "San Vicente TT",
+"comuna": "San Vicente",
+"region": "O'Higgins",
+"latitud": -34.457778,
+"longitud": -71.050556
+},
+{
+"id": 69,
+"institucion": "FDF",
+"nombre": "Coltauco",
+"comuna": "Coltauco",
+"region": "O'Higgins",
+"latitud": -34.237778,
+"longitud": -71.005
+},
+{
+"id": 70,
+"institucion": "FDF",
+"nombre": "Rapel",
+"comuna": "Las Cabras",
+"region": "O'Higgins",
+"latitud": -34.216667,
+"longitud": -71.3
+},
+{
+"id": 71,
+"institucion": "FDF",
+"nombre": "Peumo Norte Ex Las Cabras",
+"comuna": "Peumo",
+"region": "O'Higgins",
+"latitud": -34.326944,
+"longitud": -71.258889
+},
+{
+"id": 72,
+"institucion": "FDF",
+"nombre": "El Carmen",
+"comuna": "San Fernando",
+"region": "O'Higgins",
+"latitud": -34.608056,
+"longitud": -70.975
+},
+{
+"id": 74,
+"institucion": "FDF",
+"nombre": "Chépica",
+"comuna": "Chépica",
+"region": "O'Higgins",
+"latitud": -34.738611,
+"longitud": -71.258056
+},
+{
+"id": 75,
+"institucion": "FDF",
+"nombre": "Nancagua 2",
+"comuna": "Nancagua",
+"region": "O'Higgins",
+"latitud": -34.660833,
+"longitud": -71.283611
+},
+{
+"id": 76,
+"institucion": "FDF",
+"nombre": "Santa Cruz",
+"comuna": "Santa Cruz",
+"region": "O'Higgins",
+"latitud": -34.690833,
+"longitud": -71.4
+},
+{
+"id": 77,
+"institucion": "FDF",
+"nombre": "Lolol",
+"comuna": "Lolol",
+"region": "O'Higgins",
+"latitud": -34.713611,
+"longitud": -71.629722
+},
+{
+"id": 78,
+"institucion": "FDF",
+"nombre": "La Estrella Sur Ex Pumanque",
+"comuna": "La Estrella",
+"region": "O'Higgins",
+"latitud": -34.213333,
+"longitud": -71.716111
+},
+{
+"id": 79,
+"institucion": "FDF",
+"nombre": "Palmilla",
+"comuna": "Palmilla",
+"region": "O'Higgins",
+"latitud": -34.546667,
+"longitud": -71.395
+},
+{
+"id": 80,
+"institucion": "FDF",
+"nombre": "La Estrella Norte",
+"comuna": "La Estrella",
+"region": "O'Higgins",
+"latitud": -34.213333,
+"longitud": -71.716111
+},
+{
+"id": 81,
+"institucion": "FDF",
+"nombre": "Marchigue",
+"comuna": "Marchihue",
+"region": "O'Higgins",
+"latitud": -34.405556,
+"longitud": -71.607222
+},
+{
+"id": 82,
+"institucion": "FDF",
+"nombre": "Requinoa",
+"comuna": "Requínoa",
+"region": "O'Higgins",
+"latitud": -34.321667,
+"longitud": -70.833694
+},
+{
+"id": 83,
+"institucion": "FDF",
+"nombre": "Tres Esquinas",
+"comuna": "Molina",
+"region": "Maule",
+"latitud": -35.144722,
+"longitud": -71.216111
+},
+{
+"id": 84,
+"institucion": "FDF",
+"nombre": "YERBAS BUENAS 2",
+"comuna": "Yerbas Buenas",
+"region": "Maule",
+"latitud": -35.690472,
+"longitud": -71.553944
+},
+{
+"id": 86,
+"institucion": "FDF",
+"nombre": "Morza Norte Ex Peteroa",
+"comuna": "Teno",
+"region": "Maule",
+"latitud": -34.835,
+"longitud": -71.024167
+},
+{
+"id": 88,
+"institucion": "FDF",
+"nombre": "Morza",
+"comuna": "Teno",
+"region": "Maule",
+"latitud": -34.851667,
+"longitud": -71.020278
+},
+{
+"id": 89,
+"institucion": "FDF",
+"nombre": "Teno",
+"comuna": "Teno",
+"region": "Maule",
+"latitud": -34.878889,
+"longitud": -71.165278
+},
+{
+"id": 90,
+"institucion": "FDF",
+"nombre": "Sagrada Familia",
+"comuna": "Sagrada Familia",
+"region": "Maule",
+"latitud": -34.996944,
+"longitud": -71.374167
+},
+{
+"id": 91,
+"institucion": "FDF",
+"nombre": "Rauco",
+"comuna": "Rauco",
+"region": "Maule",
+"latitud": -34.925,
+"longitud": -71.283056
+},
+{
+"id": 92,
+"institucion": "FDF",
+"nombre": "Lontue",
+"comuna": "Molina",
+"region": "Maule",
+"latitud": -35.049722,
+"longitud": -71.248056
+},
+{
+"id": 93,
+"institucion": "FDF",
+"nombre": "Maule",
+"comuna": "San Javier",
+"region": "Maule",
+"latitud": -35.576667,
+"longitud": -71.678889
+},
+{
+"id": 94,
+"institucion": "FDF",
+"nombre": "San Rafael",
+"comuna": "San Rafael",
+"region": "Maule",
+"latitud": -35.303611,
+"longitud": -71.475833
+},
+{
+"id": 95,
+"institucion": "FDF",
+"nombre": "Pencahue",
+"comuna": "Pencahue",
+"region": "Maule",
+"latitud": -35.455833,
+"longitud": -71.772222
+},
+{
+"id": 97,
+"institucion": "FDF",
+"nombre": "Yerbas Buenas",
+"comuna": "Yerbas Buenas",
+"region": "Maule",
+"latitud": -35.743889,
+"longitud": -71.573056
+},
+{
+"id": 98,
+"institucion": "FDF",
+"nombre": "Colbún",
+"comuna": "Colbún",
+"region": "Maule",
+"latitud": -35.662222,
+"longitud": -71.453611
+},
+{
+"id": 99,
+"institucion": "FDF",
+"nombre": "Linares 2",
+"comuna": "Longaví",
+"region": "Maule",
+"latitud": -35.932194,
+"longitud": -71.566833
+},
+{
+"id": 100,
+"institucion": "FDF",
+"nombre": "Longaví Norte",
+"comuna": "Longaví",
+"region": "Maule",
+"latitud": -36.053611,
+"longitud": -71.683333
+},
+{
+"id": 101,
+"institucion": "FDF",
+"nombre": "Longaví Sur",
+"comuna": "Longaví",
+"region": "Maule",
+"latitud": -35.953056,
+"longitud": -71.608056
+},
+{
+"id": 102,
+"institucion": "FDF",
+"nombre": "Parral",
+"comuna": "Parral",
+"region": "Maule",
+"latitud": -36.213333,
+"longitud": -71.7375
+},
+{
+"id": 103,
+"institucion": "FDF",
+"nombre": "Parral Norte",
+"comuna": "Retiro",
+"region": "Maule",
+"latitud": -36.230278,
+"longitud": -71.732222
+},
+{
+"id": 104,
+"institucion": "FDF",
+"nombre": "Villa Alegre",
+"comuna": "San Javier",
+"region": "Maule",
+"latitud": -35.696111,
+"longitud": -71.682222
+},
+{
+"id": 105,
+"institucion": "FDF",
+"nombre": "San Javier",
+"comuna": "San Javier",
+"region": "Maule",
+"latitud": -35.629722,
+"longitud": -71.603889
+},
+{
+"id": 106,
+"institucion": "FDF",
+"nombre": "Ñiquén",
+"comuna": "San Ignacio",
+"region": "Biobío",
+"latitud": -36.293611,
+"longitud": -71.893611
+},
+{
+"id": 107,
+"institucion": "FDF",
+"nombre": "Coihueco",
+"comuna": "Coihueco",
+"region": "Biobío",
+"latitud": -36.557222,
+"longitud": -71.817222
+},
+{
+"id": 108,
+"institucion": "FDF",
+"nombre": "Pinto",
+"comuna": "Pinto",
+"region": "Biobío",
+"latitud": -36.713333,
+"longitud": -71.875556
+},
+{
+"id": 109,
+"institucion": "FDF",
+"nombre": "Trehualemu Ex - San Ignacio Sur",
+"comuna": "El Carmen",
+"region": "Biobío",
+"latitud": -36.920833,
+"longitud": -71.893333
+},
+{
+"id": 110,
+"institucion": "FDF",
+"nombre": "San Ignacio",
+"comuna": "San Ignacio",
+"region": "Biobío",
+"latitud": -36.843611,
+"longitud": -72.124722
+},
+{
+"id": 111,
+"institucion": "FDF",
+"nombre": "Los Coligues Ex - Chillan Viejo",
+"comuna": "San Fabián",
+"region": "Biobío",
+"latitud": -36.629167,
+"longitud": -72.233333
+},
+{
+"id": 112,
+"institucion": "FDF",
+"nombre": "Bulnes",
+"comuna": "Bulnes",
+"region": "Biobío",
+"latitud": -36.735556,
+"longitud": -72.366944
+},
+{
+"id": 113,
+"institucion": "FDF",
+"nombre": "Quillón",
+"comuna": "Quillón",
+"region": "Biobío",
+"latitud": -36.745,
+"longitud": -72.504722
+},
+{
+"id": 114,
+"institucion": "FDF",
+"nombre": "San Nicolás",
+"comuna": "San Nicolás",
+"region": "Biobío",
+"latitud": -36.517778,
+"longitud": -72.094444
+},
+{
+"id": 115,
+"institucion": "FDF",
+"nombre": "Renaico",
+"comuna": "Renaico",
+"region": "Araucanía",
+"latitud": -37.726111,
+"longitud": -72.604722
+},
+{
+"id": 116,
+"institucion": "FDF",
+"nombre": "Mulchén",
+"comuna": "Mulchén",
+"region": "Biobío",
+"latitud": -37.703611,
+"longitud": -72.216944
+},
+{
+"id": 117,
+"institucion": "FDF",
+"nombre": "Negrete",
+"comuna": "Mulchén",
+"region": "Biobío",
+"latitud": -37.595278,
+"longitud": -72.466667
+},
+{
+"id": 118,
+"institucion": "FDF",
+"nombre": "Los Angeles",
+"comuna": "Los Ángeles",
+"region": "Biobío",
+"latitud": -37.447222,
+"longitud": -72.517222
+},
+{
+"id": 119,
+"institucion": "FDF",
+"nombre": "Las Viñas",
+"comuna": "Los Ángeles",
+"region": "Biobío",
+"latitud": -37.501389,
+"longitud": -72.300556
+},
+{
+"id": 120,
+"institucion": "FDF",
+"nombre": "Tierras Nobles",
+"comuna": "Los Ángeles",
+"region": "Biobío",
+"latitud": -37.441944,
+"longitud": -72.617778
+},
+{
+"id": 121,
+"institucion": "FDF",
+"nombre": "Collipulli",
+"comuna": "Collipulli",
+"region": "Araucanía",
+"latitud": -38.001111,
+"longitud": -72.245556
+},
+{
+"id": 122,
+"institucion": "FDF",
+"nombre": "Galvarino",
+"comuna": "Traiguén",
+"region": "Araucanía",
+"latitud": -38.359167,
+"longitud": -72.709722
+},
+{
+"id": 123,
+"institucion": "FDF",
+"nombre": "Traiguén",
+"comuna": "Traiguén",
+"region": "Araucanía",
+"latitud": -38.357222,
+"longitud": -72.5475
+},
+{
+"id": 124,
+"institucion": "FDF",
+"nombre": "Cunco",
+"comuna": "Cunco",
+"region": "Araucanía",
+"latitud": -39.006667,
+"longitud": -72.251389
+},
+{
+"id": 125,
+"institucion": "FDF",
+"nombre": "Pocoyan",
+"comuna": "Teodoro Schmidt",
+"region": "Araucanía",
+"latitud": -38.9925,
+"longitud": -73.098889
+},
+{
+"id": 126,
+"institucion": "FDF",
+"nombre": "Nueva Imperial",
+"comuna": "Nueva Imperial",
+"region": "Araucanía",
+"latitud": -38.761389,
+"longitud": -72.8775
+},
+{
+"id": 127,
+"institucion": "FDF",
+"nombre": "Freire",
+"comuna": "Freire",
+"region": "Araucanía",
+"latitud": -38.971389,
+"longitud": -72.784167
+},
+{
+"id": 128,
+"institucion": "FDF",
+"nombre": "Loncoche",
+"comuna": "Pucón",
+"region": "Araucanía",
+"latitud": -39.393333,
+"longitud": -72.636667
+},
+{
+"id": 129,
+"institucion": "FDF",
+"nombre": "Gorbea",
+"comuna": "Gorbea",
+"region": "Araucanía",
+"latitud": -39.103056,
+"longitud": -72.615278
+},
+{
+"id": 130,
+"institucion": "FDF",
+"nombre": "Pucon",
+"comuna": "Loncoche",
+"region": "Araucanía",
+"latitud": -39.355833,
+"longitud": -71.781389
+},
+{
+"id": 131,
+"institucion": "FDF",
+"nombre": "Mariquina",
+"comuna": "Mariquina",
+"region": "Los Ríos",
+"latitud": -39.620833,
+"longitud": -73.073333
+},
+{
+"id": 132,
+"institucion": "FDF",
+"nombre": "MAFIL",
+"comuna": "Máfil",
+"region": "Los Ríos",
+"latitud": -39.631389,
+"longitud": -72.948333
+},
+{
+"id": 133,
+"institucion": "FDF",
+"nombre": "Paillaco",
+"comuna": "Paillaco",
+"region": "Los Ríos",
+"latitud": -40.096389,
+"longitud": -72.926667
+},
+{
+"id": 135,
+"institucion": "FDF",
+"nombre": "Río Bueno",
+"comuna": "La Unión",
+"region": "Los Ríos",
+"latitud": -40.322778,
+"longitud": -72.979444
+},
+{
+"id": 136,
+"institucion": "FDF",
+"nombre": "La Union",
+"comuna": "La Unión",
+"region": "Los Ríos",
+"latitud": -40.316667,
+"longitud": -73.024167
+},
+{
+"id": 137,
+"institucion": "FDF",
+"nombre": "Osorno",
+"comuna": "Osorno",
+"region": "Los Lagos",
+"latitud": -40.533333,
+"longitud": -73.0725
+},
+{
+"id": 138,
+"institucion": "FDF",
+"nombre": "Purranque",
+"comuna": "Purranque",
+"region": "Los Lagos",
+"latitud": -40.879444,
+"longitud": -73.0525
+},
+{
+"id": 140,
+"institucion": "FDF",
+"nombre": "Río Negro",
+"comuna": "Río Negro",
+"region": "Los Lagos",
+"latitud": -40.764722,
+"longitud": -73.151944
+},
+{
+"id": 142,
+"institucion": "FDF",
+"nombre": "Aysén",
+"comuna": "Aysén",
+"region": "Aysén",
+"latitud": -45.431944,
+"longitud": -72.714444
+},
+{
+"id": 143,
+"institucion": "FDF",
+"nombre": "Coyhaique",
+"comuna": "Coyhaique",
+"region": "Aysén",
+"latitud": -45.739722,
+"longitud": -72.125833
+},
+{
+"id": 144,
+"institucion": "INIA",
+"nombre": "Azapa Alto",
+"comuna": "Arica",
+"region": "Arica y Parinacota",
+"latitud": -18.577454,
+"longitud": -69.947264
+},
+{
+"id": 145,
+"institucion": "INIA",
+"nombre": "Lago Chungará",
+"comuna": "Putre",
+"region": "Arica y Parinacota",
+"latitud": -18.281824,
+"longitud": -69.1385
+},
+{
+"id": 146,
+"institucion": "INIA",
+"nombre": "Colonia JF Lluta Bajo",
+"comuna": "Arica",
+"region": "Arica y Parinacota",
+"latitud": -18.41371,
+"longitud": -70.20611
+},
+{
+"id": 147,
+"institucion": "INIA",
+"nombre": "Lluta Alto",
+"comuna": "Arica",
+"region": "Arica y Parinacota",
+"latitud": -18.393556,
+"longitud": -69.963339
+},
+{
+"id": 148,
+"institucion": "INIA",
+"nombre": "Puro Chile - Lluta medio",
+"comuna": "Arica",
+"region": "Arica y Parinacota",
+"latitud": -18.452168,
+"longitud": -70.067102
+},
+{
+"id": 149,
+"institucion": "INIA",
+"nombre": "Socoroma",
+"comuna": "Putre",
+"region": "Arica y Parinacota",
+"latitud": -18.263889,
+"longitud": -69.607675
+},
+{
+"id": 150,
+"institucion": "INIA",
+"nombre": "Surire",
+"comuna": "Putre",
+"region": "Arica y Parinacota",
+"latitud": -18.794647,
+"longitud": -69.084443
+},
+{
+"id": 151,
+"institucion": "INIA",
+"nombre": "Truffa - Azapa medio",
+"comuna": "Arica",
+"region": "Arica y Parinacota",
+"latitud": -18.547728,
+"longitud": -70.124646
+},
+{
+"id": 152,
+"institucion": "INIA",
+"nombre": "Visviri",
+"comuna": "General Lagos",
+"region": "Arica y Parinacota",
+"latitud": -17.594605,
+"longitud": -69.477417
+},
+{
+"id": 153,
+"institucion": "INIA",
+"nombre": "Calama Rural",
+"comuna": "Calama",
+"region": "Antofagasta",
+"latitud": -22.47103,
+"longitud": -68.94298
+},
+{
+"id": 154,
+"institucion": "INIA",
+"nombre": "Ollague",
+"comuna": "Antofagasta",
+"region": "Antofagasta",
+"latitud": -21.2167,
+"longitud": -68.233056
+},
+{
+"id": 155,
+"institucion": "INIA",
+"nombre": "San Pedro de Atacama",
+"comuna": "San Pedro de Atacama",
+"region": "Antofagasta",
+"latitud": -22.9322,
+"longitud": -68.213458
+},
+{
+"id": 156,
+"institucion": "INIA",
+"nombre": "Socaire",
+"comuna": "San Pedro de Atacama",
+"region": "Antofagasta",
+"latitud": -23.590586,
+"longitud": -67.890063
+},
+{
+"id": 157,
+"institucion": "INIA",
+"nombre": "Toconao",
+"comuna": "San Pedro de Atacama",
+"region": "Antofagasta",
+"latitud": -23.1905,
+"longitud": -68.007169
+},
+{
+"id": 158,
+"institucion": "INIA",
+"nombre": "Algarrobo Bajo",
+"comuna": "Ovalle",
+"region": "Coquimbo",
+"latitud": -30.6331,
+"longitud": -71.45141
+},
+{
+"id": 159,
+"institucion": "INIA",
+"nombre": "CE Huasco Vallenar",
+"comuna": "Vallenar",
+"region": "Atacama",
+"latitud": -28.58113,
+"longitud": -70.79829
+},
+{
+"id": 160,
+"institucion": "INIA",
+"nombre": "Camarico",
+"comuna": "Ovalle",
+"region": "Coquimbo",
+"latitud": -30.69899,
+"longitud": -71.3217
+},
+{
+"id": 161,
+"institucion": "INIA",
+"nombre": "Monte Patria El Palqui",
+"comuna": "Monte Patria",
+"region": "Coquimbo",
+"latitud": -30.774544,
+"longitud": -70.926831
+},
+{
+"id": 162,
+"institucion": "INIA",
+"nombre": "La Platina",
+"comuna": "La Pintana",
+"region": "Metropolitana",
+"latitud": -33.56987,
+"longitud": -70.627973
+},
+{
+"id": 163,
+"institucion": "INIA",
+"nombre": "El Tambo",
+"comuna": "San Vicente",
+"region": "O'Higgins",
+"latitud": -34.470992,
+"longitud": -70.986951
+},
+{
+"id": 164,
+"institucion": "INIA",
+"nombre": "Cauquenes",
+"comuna": "Cauquenes",
+"region": "Maule",
+"latitud": -35.955973,
+"longitud": -72.289938
+},
+{
+"id": 165,
+"institucion": "INIA",
+"nombre": "Chanco",
+"comuna": "Chanco",
+"region": "Maule",
+"latitud": -35.706556,
+"longitud": -72.511167
+},
+{
+"id": 166,
+"institucion": "INIA",
+"nombre": "Coronel de Maule",
+"comuna": "Cauquenes",
+"region": "Maule",
+"latitud": -36.059092,
+"longitud": -72.477689
+},
+{
+"id": 167,
+"institucion": "INIA",
+"nombre": "Los Despachos",
+"comuna": "Cauquenes",
+"region": "Maule",
+"latitud": -36.062114,
+"longitud": -72.371439
+},
+{
+"id": 168,
+"institucion": "INIA",
+"nombre": "Santa Sofia",
+"comuna": "Cauquenes",
+"region": "Maule",
+"latitud": -35.977643,
+"longitud": -72.359864
+},
+{
+"id": 169,
+"institucion": "INIA",
+"nombre": "Sauzal",
+"comuna": "Cauquenes",
+"region": "Maule",
+"latitud": -35.714879,
+"longitud": -72.111308
+},
+{
+"id": 170,
+"institucion": "INIA",
+"nombre": "Cañete",
+"comuna": "Cañete",
+"region": "Biobío",
+"latitud": -37.892071,
+"longitud": -73.411735
+},
+{
+"id": 171,
+"institucion": "INIA",
+"nombre": "Chiguayante",
+"comuna": "Chiguayante",
+"region": "Biobío",
+"latitud": -36.91349,
+"longitud": -73.035458
+},
+{
+"id": 172,
+"institucion": "INIA",
+"nombre": "Coronel",
+"comuna": "Coronel",
+"region": "Biobío",
+"latitud": -37.004823,
+"longitud": -73.140405
+},
+{
+"id": 173,
+"institucion": "INIA",
+"nombre": "Human",
+"comuna": "Los Ángeles",
+"region": "Biobío",
+"latitud": -37.433556,
+"longitud": -72.243975
+},
+{
+"id": 174,
+"institucion": "INIA",
+"nombre": "Lebu",
+"comuna": "Lebu",
+"region": "Biobío",
+"latitud": -37.682541,
+"longitud": -73.522167
+},
+{
+"id": 175,
+"institucion": "INIA",
+"nombre": "Ninhue",
+"comuna": "Chillán",
+"region": "Biobío",
+"latitud": -36.398105,
+"longitud": -72.395203
+},
+{
+"id": 176,
+"institucion": "INIA",
+"nombre": "Nueva Aldea",
+"comuna": "Concepción",
+"region": "Biobío",
+"latitud": -36.6489,
+"longitud": -72.51349
+},
+{
+"id": 177,
+"institucion": "INIA",
+"nombre": "Portezuelo",
+"comuna": "Portezuelo",
+"region": "Biobío",
+"latitud": -36.532037,
+"longitud": -72.368268
+},
+{
+"id": 178,
+"institucion": "INIA",
+"nombre": "Punta Parra",
+"comuna": "Tomé",
+"region": "Biobío",
+"latitud": -36.672394,
+"longitud": -72.964684
+},
+{
+"id": 179,
+"institucion": "INIA",
+"nombre": "Sta Rosa",
+"comuna": "Chillán",
+"region": "Biobío",
+"latitud": -36.535195,
+"longitud": -71.916434
+},
+{
+"id": 180,
+"institucion": "INIA",
+"nombre": "Yungay",
+"comuna": "Yungay",
+"region": "Biobío",
+"latitud": -37.141385,
+"longitud": -72.011761
+},
+{
+"id": 181,
+"institucion": "INIA",
+"nombre": "Navidad",
+"comuna": "El Carmen",
+"region": "Biobío",
+"latitud": -36.907301,
+"longitud": -71.935601
+},
+{
+"id": 182,
+"institucion": "INIA",
+"nombre": "C. Llollinco",
+"comuna": "Teodoro Schmidt",
+"region": "Araucanía",
+"latitud": -38.976944,
+"longitud": -72.997778
+},
+{
+"id": 183,
+"institucion": "INIA",
+"nombre": "Carillanca",
+"comuna": "Vilcún",
+"region": "Araucanía",
+"latitud": -38.693056,
+"longitud": -72.417222
+},
+{
+"id": 184,
+"institucion": "INIA",
+"nombre": "Cuarta Faja",
+"comuna": "Gorbea",
+"region": "Araucanía",
+"latitud": -39.115556,
+"longitud": -72.605278
+},
+{
+"id": 185,
+"institucion": "INIA",
+"nombre": "Dominguez",
+"comuna": "Saavedra",
+"region": "Araucanía",
+"latitud": -38.918611,
+"longitud": -73.240278
+},
+{
+"id": 186,
+"institucion": "INIA",
+"nombre": "La Providencia",
+"comuna": "Traiguén",
+"region": "Araucanía",
+"latitud": -38.289444,
+"longitud": -72.611389
+},
+{
+"id": 188,
+"institucion": "INIA",
+"nombre": "Quiripio",
+"comuna": "Carahue",
+"region": "Araucanía",
+"latitud": -38.639722,
+"longitud": -73.244167
+},
+{
+"id": 189,
+"institucion": "INIA",
+"nombre": "El Quincho",
+"comuna": "Cunco",
+"region": "Araucanía",
+"latitud": -38.913175,
+"longitud": -72.183514
+},
+{
+"id": 190,
+"institucion": "INIA",
+"nombre": "Curacautín-San Luis",
+"comuna": "Curacautín",
+"region": "Araucanía",
+"latitud": -38.401667,
+"longitud": -71.9025
+},
+{
+"id": 191,
+"institucion": "INIA",
+"nombre": "Sta. Adela",
+"comuna": "Nueva Imperial",
+"region": "Araucanía",
+"latitud": -38.756111,
+"longitud": -72.891389
+},
+{
+"id": 192,
+"institucion": "INIA",
+"nombre": "Tranapuente",
+"comuna": "Carahue",
+"region": "Araucanía",
+"latitud": -38.690833,
+"longitud": -73.353333
+},
+{
+"id": 193,
+"institucion": "INIA",
+"nombre": "Lago Verde",
+"comuna": "Paillaco",
+"region": "Los Ríos",
+"latitud": -40.165081,
+"longitud": -72.633843
+},
+{
+"id": 194,
+"institucion": "INIA",
+"nombre": "El Cardal",
+"comuna": "Río Bueno",
+"region": "Los Ríos",
+"latitud": -40.386737,
+"longitud": -72.919058
+},
+{
+"id": 195,
+"institucion": "INIA",
+"nombre": "Butalcura",
+"comuna": "Dalcahue",
+"region": "Los Lagos",
+"latitud": -42.261762,
+"longitud": -73.650812
+},
+{
+"id": 196,
+"institucion": "INIA",
+"nombre": "Colegual",
+"comuna": "Llanquihue",
+"region": "Los Lagos",
+"latitud": -41.221843,
+"longitud": -73.259856
+},
+{
+"id": 197,
+"institucion": "INIA",
+"nombre": "Huyar Alto",
+"comuna": "Curaco de Vélez",
+"region": "Los Lagos",
+"latitud": -42.403919,
+"longitud": -73.568192
+},
+{
+"id": 198,
+"institucion": "INIA",
+"nombre": "La Pampa",
+"comuna": "Purranque",
+"region": "Los Lagos",
+"latitud": -40.860639,
+"longitud": -73.156917
+},
+{
+"id": 199,
+"institucion": "INIA",
+"nombre": "Los Canelos",
+"comuna": "Los Muermos",
+"region": "Los Lagos",
+"latitud": -41.481326,
+"longitud": -73.474378
+},
+{
+"id": 200,
+"institucion": "INIA",
+"nombre": "Octay",
+"comuna": "Puerto Octay",
+"region": "Los Lagos",
+"latitud": -40.957156,
+"longitud": -72.885495
+},
+{
+"id": 201,
+"institucion": "INIA",
+"nombre": "Polizones",
+"comuna": "Fresia",
+"region": "Los Lagos",
+"latitud": -41.115147,
+"longitud": -73.376628
+},
+{
+"id": 202,
+"institucion": "INIA",
+"nombre": "Quilanto",
+"comuna": "Frutillar",
+"region": "Los Lagos",
+"latitud": -41.030728,
+"longitud": -72.996309
+},
+{
+"id": 203,
+"institucion": "INIA",
+"nombre": "Remehue",
+"comuna": "Osorno",
+"region": "Los Lagos",
+"latitud": -40.522204,
+"longitud": -73.063655
+},
+{
+"id": 204,
+"institucion": "INIA",
+"nombre": "Tara",
+"comuna": "Chonchi",
+"region": "Los Lagos",
+"latitud": -42.703731,
+"longitud": -73.788517
+},
+{
+"id": 205,
+"institucion": "INIA",
+"nombre": "Chile Chico",
+"comuna": "Chile Chico",
+"region": "Aysén",
+"latitud": -46.543242,
+"longitud": -71.699298
+},
+{
+"id": 206,
+"institucion": "INIA",
+"nombre": "Cochrane",
+"comuna": "Cochrane",
+"region": "Aysén",
+"latitud": -47.241733,
+"longitud": -72.582203
+},
+{
+"id": 207,
+"institucion": "INIA",
+"nombre": "Tamelaike",
+"comuna": "Coihaique",
+"region": "Aysén",
+"latitud": -45.759114,
+"longitud": -72.061843
+},
+{
+"id": 208,
+"institucion": "INIA",
+"nombre": "Vista Hermosa",
+"comuna": "Coihaique",
+"region": "Aysén",
+"latitud": -45.936818,
+"longitud": -71.835342
+},
+{
+"id": 209,
+"institucion": "INIA",
+"nombre": "Puerto Natales",
+"comuna": "Natales",
+"region": "Magallanes",
+"latitud": -51.698367,
+"longitud": -72.483082
+},
+{
+"id": 210,
+"institucion": "INIA",
+"nombre": "Punta Arenas Rural",
+"comuna": "Punta Arenas",
+"region": "Magallanes",
+"latitud": -53.068313,
+"longitud": -70.873761
+},
+{
+"id": 213,
+"institucion": "METEOVID",
+"nombre": "Errazuriz",
+"comuna": "Quillota",
+"region": "Valparaíso",
+"latitud": -32.898611,
+"longitud": -71.351667
+},
+{
+"id": 214,
+"institucion": "METEOVID",
+"nombre": "Luis Felipe Edwards-Leyda",
+"comuna": "Santo Domingo",
+"region": "Valparaíso",
+"latitud": -33.73975,
+"longitud": -71.636778
+},
+{
+"id": 215,
+"institucion": "METEOVID",
+"nombre": "Casa Marín",
+"comuna": "Cartagena",
+"region": "Valparaíso",
+"latitud": -33.524444,
+"longitud": -71.545556
+},
+{
+"id": 216,
+"institucion": "METEOVID",
+"nombre": "Emiliana",
+"comuna": "Casablanca",
+"region": "Valparaíso",
+"latitud": -33.361389,
+"longitud": -71.309167
+},
+{
+"id": 217,
+"institucion": "METEOVID",
+"nombre": "Ventisquero-Tapihue",
+"comuna": "Casablanca",
+"region": "Valparaíso",
+"latitud": -33.300556,
+"longitud": -71.283333
+},
+{
+"id": 218,
+"institucion": "METEOVID",
+"nombre": "Casa Rivas (N.C.)",
+"comuna": "Curacaví",
+"region": "Metropolitana",
+"latitud": -33.506389,
+"longitud": -71.060833
+},
+{
+"id": 219,
+"institucion": "METEOVID",
+"nombre": "William Fevre",
+"comuna": "Pirque",
+"region": "Metropolitana",
+"latitud": -33.671389,
+"longitud": -70.581667
+},
+{
+"id": 220,
+"institucion": "METEOVID",
+"nombre": "Morandé - Romeral",
+"comuna": "Buin",
+"region": "Metropolitana",
+"latitud": -33.706389,
+"longitud": -70.772778
+},
+{
+"id": 221,
+"institucion": "METEOVID",
+"nombre": "Santa Rita",
+"comuna": "Buin",
+"region": "Metropolitana",
+"latitud": -33.718611,
+"longitud": -70.669167
+},
+{
+"id": 222,
+"institucion": "METEOVID",
+"nombre": "De Martino",
+"comuna": "Isla de Maipo",
+"region": "Metropolitana",
+"latitud": -33.581944,
+"longitud": -70.880556
+},
+{
+"id": 223,
+"institucion": "METEOVID",
+"nombre": "Chocalán",
+"comuna": "Melipilla",
+"region": "Metropolitana",
+"latitud": -33.760556,
+"longitud": -71.225556
+},
+{
+"id": 224,
+"institucion": "METEOVID",
+"nombre": "Pérez Cruz",
+"comuna": "Buin",
+"region": "Metropolitana",
+"latitud": -33.843056,
+"longitud": -70.619722
+},
+{
+"id": 225,
+"institucion": "METEOVID",
+"nombre": "San Pedro",
+"comuna": "Paine",
+"region": "Metropolitana",
+"latitud": -33.768889,
+"longitud": -70.929722
+},
+{
+"id": 226,
+"institucion": "METEOVID",
+"nombre": "Ventisquero",
+"comuna": "Buin",
+"region": "Metropolitana",
+"latitud": -34.0225,
+"longitud": -71.344167
+},
+{
+"id": 227,
+"institucion": "METEOVID",
+"nombre": "Anakena",
+"comuna": "Requínoa",
+"region": "O'Higgins",
+"latitud": -34.304722,
+"longitud": -70.771667
+},
+{
+"id": 228,
+"institucion": "METEOVID",
+"nombre": "La Rosa – Oeste",
+"comuna": "Peumo",
+"region": "O'Higgins",
+"latitud": -34.325,
+"longitud": -71.239444
+},
+{
+"id": 229,
+"institucion": "METEOVID",
+"nombre": "Casa Silva-Los Lingues",
+"comuna": "San Fernando",
+"region": "O'Higgins",
+"latitud": -34.502222,
+"longitud": -70.894722
+},
+{
+"id": 230,
+"institucion": "METEOVID",
+"nombre": "Ventisquero-Peralillo",
+"comuna": "Peralillo",
+"region": "O'Higgins",
+"latitud": -34.394444,
+"longitud": -71.445556
+},
+{
+"id": 231,
+"institucion": "METEOVID",
+"nombre": "Montes",
+"comuna": "Marchihue",
+"region": "O'Higgins",
+"latitud": -34.340556,
+"longitud": -71.652222
+},
+{
+"id": 232,
+"institucion": "METEOVID",
+"nombre": "Lapostolle-Apalta",
+"comuna": "Santa Cruz",
+"region": "O'Higgins",
+"latitud": -34.593611,
+"longitud": -71.302222
+},
+{
+"id": 233,
+"institucion": "METEOVID",
+"nombre": "Conosur",
+"comuna": "Chimbarongo",
+"region": "O'Higgins",
+"latitud": -34.715556,
+"longitud": -71.038611
+},
+{
+"id": 234,
+"institucion": "METEOVID",
+"nombre": "Hacienda Araucano-Lolol",
+"comuna": "Peralillo",
+"region": "O'Higgins",
+"latitud": -34.727222,
+"longitud": -71.588889
+},
+{
+"id": 236,
+"institucion": "METEOVID",
+"nombre": "Ventisquero-Apalta",
+"comuna": "Santa Cruz",
+"region": "O'Higgins",
+"latitud": -34.608056,
+"longitud": -71.246944
+},
+{
+"id": 238,
+"institucion": "METEOVID",
+"nombre": "Aresti",
+"comuna": "Molina",
+"region": "Maule",
+"latitud": -35.151389,
+"longitud": -71.298056
+},
+{
+"id": 239,
+"institucion": "METEOVID",
+"nombre": "Viñedos Puertas",
+"comuna": "Curicó",
+"region": "Maule",
+"latitud": -34.986944,
+"longitud": -71.279722
+},
+{
+"id": 240,
+"institucion": "METEOVID",
+"nombre": "Casas Patronales",
+"comuna": "San Clemente",
+"region": "Maule",
+"latitud": -35.491667,
+"longitud": -71.445556
+},
+{
+"id": 241,
+"institucion": "METEOVID",
+"nombre": "J. Bouchon",
+"comuna": "San Javier",
+"region": "Maule",
+"latitud": -35.569167,
+"longitud": -71.995278
+},
+{
+"id": 242,
+"institucion": "METEOVID",
+"nombre": "Torres",
+"comuna": "San Javier",
+"region": "Maule",
+"latitud": -35.567222,
+"longitud": -72.29
+},
+{
+"id": 244,
+"institucion": "METEOVID",
+"nombre": "Odjfell",
+"comuna": "Cauquenes",
+"region": "Maule",
+"latitud": -36.144722,
+"longitud": -72.265833
+},
+{
+"id": 245,
+"institucion": "METEOVID",
+"nombre": "Guilisasti",
+"comuna": "Mulchén",
+"region": "Biobío",
+"latitud": -37.648333,
+"longitud": -72.216111
+},
+{
+"id": 246,
+"institucion": "METEOVID",
+"nombre": "Garcés Silva",
+"comuna": "San Antonio",
+"region": "Valparaíso",
+"latitud": -33.681389,
+"longitud": -71.495833
+},
+{
+"id": 247,
+"institucion": "METEOVID",
+"nombre": "Morandé",
+"comuna": "San Bernardo",
+"region": "Metropolitana",
+"latitud": -33.581389,
+"longitud": -70.716667
+},
+{
+"id": 248,
+"institucion": "METEOVID",
+"nombre": "San Pedro-El Tránsito",
+"comuna": "Paine",
+"region": "Metropolitana",
+"latitud": -33.771111,
+"longitud": -70.685556
+},
+{
+"id": 249,
+"institucion": "METEOVID",
+"nombre": "Santa Carolina",
+"comuna": "Paine",
+"region": "Metropolitana",
+"latitud": -33.599722,
+"longitud": -70.649722
+},
+{
+"id": 250,
+"institucion": "METEOVID",
+"nombre": "San Pedro-Totihue",
+"comuna": "Totihue",
+"region": "O'Higgins",
+"latitud": -34.341111,
+"longitud": -70.727778
+},
+{
+"id": 251,
+"institucion": "METEOVID",
+"nombre": "Luis Felipe Edwards",
+"comuna": "Colchagua",
+"region": "O'Higgins",
+"latitud": -34.693056,
+"longitud": -71.156944
+},
+{
+"id": 252,
+"institucion": "METEOVID",
+"nombre": "San Pedro-Molina",
+"comuna": "Molina",
+"region": "Maule",
+"latitud": -35.103056,
+"longitud": -71.338333
+},
+{
+"id": 253,
+"institucion": "METEOVID",
+"nombre": "San Pedro-Pencahue",
+"comuna": "Pencahue",
+"region": "Maule",
+"latitud": -35.333889,
+"longitud": -71.769167
+},
+{
+"id": 254,
+"institucion": "METEOVID",
+"nombre": "El Aromo",
+"comuna": "Duao",
+"region": "Maule",
+"latitud": -35.535556,
+"longitud": -71.598333
+},
+{
+"id": 260,
+"institucion": "INIA",
+"nombre": "Hidango",
+"comuna": "Litueche",
+"region": "O'Higgins",
+"latitud": -34.1,
+"longitud": -71.8
+},
+{
+"id": 261,
+"institucion": "INIA",
+"nombre": "Caspana",
+"comuna": "Calama",
+"region": "Antofagasta",
+"latitud": -22.334515,
+"longitud": -68.213597
+},
+{
+"id": 263,
+"institucion": "INIA",
+"nombre": "Codpa",
+"comuna": "Camarones",
+"region": "Arica y Parinacota",
+"latitud": -18.833056,
+"longitud": -69.744444
+},
+{
+"id": 264,
+"institucion": "INIA",
+"nombre": "Tierra del Fuego",
+"comuna": "Primavera",
+"region": "Magallanes",
+"latitud": -52.80432,
+"longitud": -69.273691
+},
+{
+"id": 265,
+"institucion": "INIA",
+"nombre": "El Claro",
+"comuna": "Coyhaique",
+"region": "Aysén",
+"latitud": -45.9812,
+"longitud": -72.092267
+},
+{
+"id": 266,
+"institucion": "INIA",
+"nombre": "Las Lomas",
+"comuna": "Máfil",
+"region": "Los Ríos",
+"latitud": -39.700929,
+"longitud": -73.014793
+},
+{
+"id": 267,
+"institucion": "INIA",
+"nombre": "San Antonio de Naltahua",
+"comuna": "Isla de Maipo",
+"region": "Metropolitana",
+"latitud": -33.725439,
+"longitud": -71.042558
+},
+{
+"id": 268,
+"institucion": "INIA",
+"nombre": "San Pedro de Melipilla",
+"comuna": "San Pedro",
+"region": "Metropolitana",
+"latitud": -33.897935,
+"longitud": -71.452881
+},
+{
+"id": 269,
+"institucion": "INIA",
+"nombre": "Santa Carla",
+"comuna": "Panguipulli",
+"region": "Los Ríos",
+"latitud": -39.679571,
+"longitud": -72.611389
+},
+{
+"id": 270,
+"institucion": "INIA",
+"nombre": "Isla Riesco-Río Verde",
+"comuna": "Río Verde",
+"region": "Magallanes",
+"latitud": -53.030495,
+"longitud": -71.933637
+},
+{
+"id": 271,
+"institucion": "INIA",
+"nombre": "Desagüe Rupanco",
+"comuna": "Puyehue",
+"region": "Los Lagos",
+"latitud": -40.752634,
+"longitud": -72.663894
+},
+{
+"id": 272,
+"institucion": "FDF",
+"nombre": "La Higuera",
+"comuna": "La Ligua",
+"region": "Valparaíso",
+"latitud": -32.492697,
+"longitud": -71.152881
+},
+{
+"id": 273,
+"institucion": "FDF",
+"nombre": "San Lorenzo",
+"comuna": "Cabildo",
+"region": "Valparaíso",
+"latitud": -32.439417,
+"longitud": -71.002961
+},
+{
+"id": 274,
+"institucion": "FDF",
+"nombre": "Pullancón",
+"comuna": "La Ligua",
+"region": "Valparaíso",
+"latitud": -32.307083,
+"longitud": -71.23075
+},
+{
+"id": 275,
+"institucion": "FDF",
+"nombre": "Palquico",
+"comuna": "Petorca",
+"region": "Valparaíso",
+"latitud": -32.257028,
+"longitud": -71.141639
+},
+{
+"id": 276,
+"institucion": "FDF",
+"nombre": "Manuel Montt",
+"comuna": "Petorca",
+"region": "Valparaíso",
+"latitud": -32.322861,
+"longitud": -71.061056
+},
+{
+"id": 277,
+"institucion": "FDF",
+"nombre": "Las Puertas",
+"comuna": "Cabildo",
+"region": "Valparaíso",
+"latitud": -32.362194,
+"longitud": -70.819722
+},
+{
+"id": 278,
+"institucion": "FDF",
+"nombre": "Paihuén",
+"comuna": "Cabildo",
+"region": "Valparaíso",
+"latitud": -32.379278,
+"longitud": -70.841622
+},
+{
+"id": 279,
+"institucion": "FDF",
+"nombre": "Catapilco",
+"comuna": "Zapallar",
+"region": "Valparaíso",
+"latitud": -32.560333,
+"longitud": -71.311806
+},
+{
+"id": 280,
+"institucion": "FDF",
+"nombre": "El Guindo",
+"comuna": "La Ligua",
+"region": "Valparaíso",
+"latitud": -32.357167,
+"longitud": -71.345472
+},
+{
+"id": 281,
+"institucion": "INIA",
+"nombre": "Camarones",
+"comuna": "Camarones",
+"region": "Arica y Parinacota",
+"latitud": -19.0,
+"longitud": -69.9
+},
+{
+"id": 282,
+"institucion": "INIA",
+"nombre": "Putre",
+"comuna": "Putre",
+"region": "Arica y Parinacota",
+"latitud": -18.2,
+"longitud": -69.6
+},
+{
+"id": 283,
+"institucion": "INIA",
+"nombre": "Amolana Copiapo 2",
+"comuna": "Tierra Amarilla",
+"region": "Atacama",
+"latitud": -28.0,
+"longitud": -70.0
+},
+{
+"id": 284,
+"institucion": "INIA",
+"nombre": "La Cruz",
+"comuna": "La Cruz",
+"region": "Valparaíso",
+"latitud": -32.822,
+"longitud": -71.2304
+},
+{
+"id": 285,
+"institucion": "INIA",
+"nombre": "Los Tilos",
+"comuna": "Buin",
+"region": "Metropolitana",
+"latitud": -33.7,
+"longitud": -70.7
+},
+{
+"id": 286,
+"institucion": "INIA",
+"nombre": "Palermo",
+"comuna": "La Unión",
+"region": "Los Ríos",
+"latitud": -40.3,
+"longitud": -73.1
+},
+{
+"id": 287,
+"institucion": "INIA",
+"nombre": "Ensenada",
+"comuna": "Puerto Varas",
+"region": "Los Lagos",
+"latitud": -41.233333,
+"longitud": -72.516111
+},
+{
+"id": 288,
+"institucion": "INIA",
+"nombre": "Quilacahuin",
+"comuna": "San Pablo",
+"region": "Los Lagos",
+"latitud": -40.3,
+"longitud": -73.3
+},
+{
+"id": 289,
+"institucion": "INIA",
+"nombre": "Kampenaike",
+"comuna": "Laguna Blanca",
+"region": "Magallanes",
+"latitud": -52.6,
+"longitud": -70.9
+},
+{
+"id": 290,
+"institucion": "FDF",
+"nombre": "Curimón",
+"comuna": "San Felipe",
+"region": "Valparaíso",
+"latitud": -32.799972,
+"longitud": -70.700306
+},
+{
+"id": 291,
+"institucion": "FDF",
+"nombre": "Tutuquen",
+"comuna": "Curicó",
+"region": "Maule",
+"latitud": -34.961611,
+"longitud": -71.315861
+},
+{
+"id": 292,
+"institucion": "FDF",
+"nombre": "Miraflores",
+"comuna": "Linares",
+"region": "Maule",
+"latitud": -35.918056,
+"longitud": -71.613306
+},
+{
+"id": 293,
+"institucion": "FDF",
+"nombre": "Rarin",
+"comuna": "Vichuquén",
+"region": "Maule",
+"latitud": -34.765667,
+"longitud": -71.956667
+},
+{
+"id": 294,
+"institucion": "FDF",
+"nombre": "Placilla Chacarilla",
+"comuna": "Placilla",
+"region": "O'Higgins",
+"latitud": -34.641583,
+"longitud": -71.135667
+},
+{
+"id": 295,
+"institucion": "FDF",
+"nombre": "La Union Norte",
+"comuna": "La Unión",
+"region": "Los Ríos",
+"latitud": -40.288667,
+"longitud": -73.071333
+},
+{
+"id": 309,
+"institucion": "INIA",
+"nombre": "Cerro Blanco",
+"comuna": "Arica",
+"region": "Arica y Parinacota",
+"latitud": -18.575,
+"longitud": -70.07
+},
+{
+"id": 310,
+"institucion": "INIA",
+"nombre": "Chaca",
+"comuna": "Arica",
+"region": "Arica y Parinacota",
+"latitud": -18.81,
+"longitud": -70.156
+},
+{
+"id": 311,
+"institucion": "INIA",
+"nombre": "Santa Amada",
+"comuna": "Linares",
+"region": "Maule",
+"latitud": -35.761,
+"longitud": -71.48
+},
+{
+"id": 312,
+"institucion": "INIA",
+"nombre": "San Clemente",
+"comuna": "San Clemente",
+"region": "Maule",
+"latitud": -35.531,
+"longitud": -71.574
+},
+{
+"id": 313,
+"institucion": "INIA",
+"nombre": "Marimenuco",
+"comuna": "Lonquimay",
+"region": "Araucanía",
+"latitud": -38.731667,
+"longitud": -71.140833
+},
+{
+"id": 314,
+"institucion": "INIA",
+"nombre": "Centro Experimental Arroz INIA",
+"comuna": "San Carlos",
+"region": "Biobío",
+"latitud": -36.409298,
+"longitud": -72.006731
+},
+{
+"id": 315,
+"institucion": "INIA",
+"nombre": "Puala",
+"comuna": "Curarrehue",
+"region": "Araucanía",
+"latitud": -39.381944,
+"longitud": -71.5725
+},
+{
+"id": 316,
+"institucion": "INIA",
+"nombre": "Huiscapi",
+"comuna": "Villarrica",
+"region": "Araucanía",
+"latitud": -39.263333,
+"longitud": -72.398889
+},
+{
+"id": 317,
+"institucion": "INIA",
+"nombre": "Sta Inés",
+"comuna": "Lautaro",
+"region": "Araucanía",
+"latitud": -38.504722,
+"longitud": -72.343611
+},
+{
+"id": 318,
+"institucion": "INIA",
+"nombre": "Las Palmas",
+"comuna": "Victoria",
+"region": "Araucanía",
+"latitud": -38.227778,
+"longitud": -72.273333
+},
+{
+"id": 319,
+"institucion": "INIA",
+"nombre": "Surco y semilla",
+"comuna": "Collipulli",
+"region": "Araucanía",
+"latitud": -38.0325,
+"longitud": -72.285278
+},
+{
+"id": 320,
+"institucion": "INIA",
+"nombre": "Manzanares",
+"comuna": "Renaico",
+"region": "Araucanía",
+"latitud": -37.7725,
+"longitud": -72.546111
+},
+{
+"id": 321,
+"institucion": "INIA",
+"nombre": "San Fabián",
+"comuna": "Galvarino",
+"region": "Araucanía",
+"latitud": -38.446389,
+"longitud": -72.849444
+},
+{
+"id": 322,
+"institucion": "INIA",
+"nombre": "Perales",
+"comuna": "Cholchol",
+"region": "Araucanía",
+"latitud": -38.663889,
+"longitud": -72.808889
+},
+{
+"id": 323,
+"institucion": "CEAZA",
+"nombre": "Cerro Grande",
+"comuna": "La Serena",
+"region": "Coquimbo",
+"latitud": -29.93849,
+"longitud": -71.22358
+},
+{
+"id": 324,
+"institucion": "CEAZA",
+"nombre": "Ovalle",
+"comuna": "Ovalle",
+"region": "Coquimbo",
+"latitud": -30.59203,
+"longitud": -71.24797
+},
+{
+"id": 325,
+"institucion": "CEAZA",
+"nombre": "Tongoy Balsa CMET",
+"comuna": "Coquimbo",
+"region": "Coquimbo",
+"latitud": -30.27514,
+"longitud": -71.56114
+},
+{
+"id": 326,
+"institucion": "CEAZA",
+"nombre": "La Serena",
+"comuna": "La Serena",
+"region": "Coquimbo",
+"latitud": -29.91502,
+"longitud": -71.24221
+},
+{
+"id": 327,
+"institucion": "CEAZA",
+"nombre": "Coquimbo",
+"comuna": "Coquimbo",
+"region": "Coquimbo",
+"latitud": -30.0,
+"longitud": -71.4
+},
+{
+"id": 328,
+"institucion": "CEAZA",
+"nombre": "Rapel",
+"comuna": "Monte Patria",
+"region": "Coquimbo",
+"latitud": -30.7232,
+"longitud": -70.7726
+},
+{
+"id": 329,
+"institucion": "CEAZA",
+"nombre": "Huintil",
+"comuna": "Illapel",
+"region": "Coquimbo",
+"latitud": -31.57319,
+"longitud": -70.99831
+},
+{
+"id": 330,
+"institucion": "CEAZA",
+"nombre": "El Tapado",
+"comuna": "Vicuña",
+"region": "Coquimbo",
+"latitud": -30.1567,
+"longitud": -69.91421
+},
+{
+"id": 331,
+"institucion": "CEAZA",
+"nombre": "La Laguna",
+"comuna": "Vicuña",
+"region": "Coquimbo",
+"latitud": -30.20289,
+"longitud": -70.03718
+},
+{
+"id": 332,
+"institucion": "CEAZA",
+"nombre": "Hualtatas",
+"comuna": "Monte Patria",
+"region": "Coquimbo",
+"latitud": -31.70732,
+"longitud": -70.525
+},
+{
+"id": 333,
+"institucion": "CEAZA",
+"nombre": "Los Molles [Bocatoma]",
+"comuna": "Monte Patria",
+"region": "Coquimbo",
+"latitud": -30.74608,
+"longitud": -70.41922
+},
+{
+"id": 334,
+"institucion": "CEAZA",
+"nombre": "Pan de Azúcar [INIA]",
+"comuna": "Coquimbo",
+"region": "Coquimbo",
+"latitud": -30.06667,
+"longitud": -71.23333
+},
+{
+"id": 335,
+"institucion": "CEAZA",
+"nombre": "Pisco Elqui",
+"comuna": "Paiguano",
+"region": "Coquimbo",
+"latitud": -30.11667,
+"longitud": -70.48333
+},
+{
+"id": 336,
+"institucion": "CEAZA",
+"nombre": "Rivadavia",
+"comuna": "Paiguano",
+"region": "Coquimbo",
+"latitud": -29.96185,
+"longitud": -70.53888
+},
+{
+"id": 337,
+"institucion": "CEAZA",
+"nombre": "Gabriela Mistral",
+"comuna": "La Serena",
+"region": "Coquimbo",
+"latitud": -29.97852,
+"longitud": -71.08039
+},
+{
+"id": 338,
+"institucion": "CEAZA",
+"nombre": "Tascadero",
+"comuna": "Monte Patria",
+"region": "Coquimbo",
+"latitud": -31.26282,
+"longitud": -70.54
+},
+{
+"id": 339,
+"institucion": "CEAZA",
+"nombre": "Andacollo",
+"comuna": "Andacollo",
+"region": "Coquimbo",
+"latitud": -30.24971,
+"longitud": -71.06643
+},
+{
+"id": 340,
+"institucion": "CEAZA",
+"nombre": "Vicuña",
+"comuna": "Vicuña",
+"region": "Coquimbo",
+"latitud": -30.03832,
+"longitud": -70.69655
+},
+{
+"id": 341,
+"institucion": "CEAZA",
+"nombre": "Paso Aguas Negras",
+"comuna": "Vicuña",
+"region": "Coquimbo",
+"latitud": -30.19137,
+"longitud": -69.82546
+},
+{
+"id": 342,
+"institucion": "CEAZA",
+"nombre": "Canela",
+"comuna": "Canela",
+"region": "Coquimbo",
+"latitud": -31.39,
+"longitud": -71.41
+},
+{
+"id": 343,
+"institucion": "CEAZA",
+"nombre": "Hurtado",
+"comuna": "Río Hurtado",
+"region": "Coquimbo",
+"latitud": -30.30917,
+"longitud": -70.62646
+},
+{
+"id": 344,
+"institucion": "CEAZA",
+"nombre": "Illapel",
+"comuna": "Illapel",
+"region": "Coquimbo",
+"latitud": -31.64814,
+"longitud": -71.19695
+},
+{
+"id": 345,
+"institucion": "CEAZA",
+"nombre": "UCN Guayacan",
+"comuna": "Coquimbo",
+"region": "Coquimbo",
+"latitud": -29.96663,
+"longitud": -71.3528
+},
+{
+"id": 346,
+"institucion": "CEAZA",
+"nombre": "Pichasca",
+"comuna": "Río Hurtado",
+"region": "Coquimbo",
+"latitud": -30.41306,
+"longitud": -70.90275
+},
+{
+"id": 347,
+"institucion": "CEAZA",
+"nombre": "Quebrada Seca",
+"comuna": "Ovalle",
+"region": "Coquimbo",
+"latitud": -30.49613,
+"longitud": -71.49051
+},
+{
+"id": 348,
+"institucion": "CEAZA",
+"nombre": "Cachiyuyo",
+"comuna": "Vallenar",
+"region": "Atacama",
+"latitud": -29.0572,
+"longitud": -70.90517
+},
+{
+"id": 349,
+"institucion": "CEAZA",
+"nombre": "Punta de Choros",
+"comuna": "La Higuera",
+"region": "Coquimbo",
+"latitud": -29.24594,
+"longitud": -71.4687
+},
+{
+"id": 350,
+"institucion": "CEAZA",
+"nombre": "Mincha Sur",
+"comuna": "Canela",
+"region": "Coquimbo",
+"latitud": -31.59,
+"longitud": -71.42
+},
+{
+"id": 351,
+"institucion": "CEAZA",
+"nombre": "Punta Colorada",
+"comuna": "La Higuera",
+"region": "Coquimbo",
+"latitud": -29.35411,
+"longitud": -71.03286
+},
+{
+"id": 352,
+"institucion": "CEAZA",
+"nombre": "Las Cardas",
+"comuna": "Coquimbo",
+"region": "Coquimbo",
+"latitud": -30.25145,
+"longitud": -71.2569
+},
+{
+"id": 353,
+"institucion": "CEAZA",
+"nombre": "Combarbalá",
+"comuna": "Combarbalá",
+"region": "Coquimbo",
+"latitud": -31.20093,
+"longitud": -71.00057
+},
+{
+"id": 354,
+"institucion": "CEAZA",
+"nombre": "Laguna Hurtado",
+"comuna": "Río Hurtado",
+"region": "Coquimbo",
+"latitud": -30.51102,
+"longitud": -70.4467
+},
+{
+"id": 356,
+"institucion": "CEAZA",
+"nombre": "El Romeral",
+"comuna": "La Serena",
+"region": "Coquimbo",
+"latitud": -29.75497,
+"longitud": -71.25753
+},
+{
+"id": 357,
+"institucion": "CEAZA",
+"nombre": "Salamanca",
+"comuna": "Salamanca",
+"region": "Coquimbo",
+"latitud": -31.89,
+"longitud": -70.75
+},
+{
+"id": 360,
+"institucion": "CEAZA",
+"nombre": "Tilama",
+"comuna": "Los Vilos",
+"region": "Coquimbo",
+"latitud": -32.08,
+"longitud": -71.16
+},
+{
+"id": 361,
+"institucion": "CEAZA",
+"nombre": "Pichidangui",
+"comuna": "Los Vilos",
+"region": "Coquimbo",
+"latitud": -32.13142,
+"longitud": -71.53108
+},
+{
+"id": 367,
+"institucion": "METEOVID",
+"nombre": "Ventisquero - Leyda",
+"comuna": "San Antonio",
+"region": "Valparaíso",
+"latitud": -33.685483,
+"longitud": -71.549431
+},
+{
+"id": 368,
+"institucion": "INIA",
+"nombre": "Monte Flor-Tucapel",
+"comuna": "Parral",
+"region": "Maule",
+"latitud": -36.2448,
+"longitud": -71.93429
+},
+{
+"id": 369,
+"institucion": "INIA",
+"nombre": "Ponotro",
+"comuna": "Tirúa",
+"region": "Biobío",
+"latitud": -38.27529,
+"longitud": -73.498489
+},
+{
+"id": 370,
+"institucion": "INIA",
+"nombre": "La Isla",
+"comuna": "Purén",
+"region": "Araucanía",
+"latitud": -38.03,
+"longitud": -72.982
+},
+{
+"id": 371,
+"institucion": "INIA",
+"nombre": "El Membrillo",
+"comuna": "Melipeuco",
+"region": "Araucanía",
+"latitud": -38.834167,
+"longitud": -71.6825
+},
+{
+"id": 372,
+"institucion": "INIA",
+"nombre": "Cerro Castillo",
+"comuna": "Torres del Paine",
+"region": "Magallanes",
+"latitud": -51.176975,
+"longitud": -72.435811
+},
+{
+"id": 373,
+"institucion": "INIA",
+"nombre": "Rinconada-U de Chile",
+"comuna": "Maipú",
+"region": "Metropolitana",
+"latitud": -33.497093,
+"longitud": -70.845436
+},
+{
+"id": 375,
+"institucion": "INIA",
+"nombre": "Estación Experimental Austral",
+"comuna": "Valdivia",
+"region": "Los Ríos",
+"latitud": -39.787428,
+"longitud": -73.234546
+},
+{
+"id": 376,
+"institucion": "INIA",
+"nombre": "Rucatayo",
+"comuna": "Río Bueno",
+"region": "Los Ríos",
+"latitud": -40.598896,
+"longitud": -72.586541
+},
+{
+"id": 377,
+"institucion": "INIA",
+"nombre": "Caleta Vitor",
+"comuna": "Arica",
+"region": "Arica y Parinacota",
+"latitud": -18.781479,
+"longitud": -70.283902
+},
+{
+"id": 388,
+"institucion": "INIA",
+"nombre": "Puchuncavi",
+"comuna": "Puchuncaví",
+"region": "Valparaíso",
+"latitud": -32.754967,
+"longitud": -71.343432
+},
+{
+"id": 389,
+"institucion": "INIA",
+"nombre": "El Arenal",
+"comuna": "Quinta de Tilcoco",
+"region": "O'Higgins",
+"latitud": -34.35575,
+"longitud": -70.991278
+},
+{
+"id": 390,
+"institucion": "INIA",
+"nombre": "Belén",
+"comuna": "Putre",
+"region": "Arica y Parinacota",
+"latitud": -18.468208,
+"longitud": -69.523279
+},
+{
+"id": 391,
+"institucion": "INIA",
+"nombre": "Ticnamar",
+"comuna": "Arica",
+"region": "Arica y Parinacota",
+"latitud": -18.58007,
+"longitud": -69.495965
+},
+{
+"id": 392,
+"institucion": "INIA",
+"nombre": "La Junta",
+"comuna": "Aysén",
+"region": "Aysén",
+"latitud": -43.916933,
+"longitud": -72.387343
+},
+{
+"id": 393,
+"institucion": "FDF",
+"nombre": "Los Vilos - Quebrachar",
+"comuna": "Los Vilos",
+"region": "Coquimbo",
+"latitud": -31.860389,
+"longitud": -71.439583
+},
+{
+"id": 398,
+"institucion": "FDF",
+"nombre": "Puchuncavi",
+"comuna": "Puchuncaví",
+"region": "Valparaíso",
+"latitud": -32.731083,
+"longitud": -71.424139
+},
+{
+"id": 403,
+"institucion": "FDF",
+"nombre": "Campanacura",
+"comuna": "Parral",
+"region": "Maule",
+"latitud": -35.973889,
+"longitud": -72.027639
+},
+{
+"id": 408,
+"institucion": "FDF",
+"nombre": "Las Lomillas - San Clemente",
+"comuna": "San Clemente",
+"region": "Maule",
+"latitud": -35.541639,
+"longitud": -71.318222
+},
+{
+"id": 413,
+"institucion": "FDF",
+"nombre": "Vichuquen",
+"comuna": "Vichuquén",
+"region": "Maule",
+"latitud": -34.854972,
+"longitud": -72.026056
+},
+{
+"id": 418,
+"institucion": "FDF",
+"nombre": "Cobquecura",
+"comuna": "Cobquecura",
+"region": "Biobío",
+"latitud": -36.124528,
+"longitud": -72.795389
+},
+{
+"id": 423,
+"institucion": "FDF",
+"nombre": "Allipén",
+"comuna": "Freire",
+"region": "Araucanía",
+"latitud": -38.999722,
+"longitud": -72.521083
+},
+{
+"id": 428,
+"institucion": "FDF",
+"nombre": "Los Quilantos",
+"comuna": "Freire",
+"region": "Araucanía",
+"latitud": -38.908333,
+"longitud": -72.798222
+},
+{
+"id": 433,
+"institucion": "FDF",
+"nombre": "Vida Nueva",
+"comuna": "Villarrica",
+"region": "Araucanía",
+"latitud": -39.196389,
+"longitud": -72.261361
+},
+{
+"id": 438,
+"institucion": "FDF",
+"nombre": "Peldehue",
+"comuna": "Colina",
+"region": "Metropolitana",
+"latitud": -33.147111,
+"longitud": -70.660222
+},
+{
+"id": 447,
+"institucion": "INIA",
+"nombre": "Falda Verde",
+"comuna": "Chañaral",
+"region": "Atacama",
+"latitud": -26.299806,
+"longitud": -70.624111
+},
+{
+"id": 459,
+"institucion": "INIA",
+"nombre": "Estancia Zenia",
+"comuna": "Porvenir",
+"region": "Magallanes",
+"latitud": -53.319496,
+"longitud": -69.698147
+},
+{
+"id": 467,
+"institucion": "INIA",
+"nombre": "Quilimari",
+"comuna": "Los Vilos",
+"region": "Coquimbo",
+"latitud": -32.119098,
+"longitud": -71.460005
+},
+{
+"id": 471,
+"institucion": "INIA",
+"nombre": "5 de enero",
+"comuna": "San Gregorio",
+"region": "Magallanes",
+"latitud": -52.432478,
+"longitud": -70.360583
+},
+{
+"id": 479,
+"institucion": "INIA",
+"nombre": "Altos la Portada",
+"comuna": "Antofagasta",
+"region": "Antofagasta",
+"latitud": -23.504098,
+"longitud": -70.404666
+},
+{
+"id": 483,
+"institucion": "INIA",
+"nombre": "Puente Negro",
+"comuna": "Pichilemu",
+"region": "O'Higgins",
+"latitud": -34.386351,
+"longitud": -71.98571
+},
+{
+"id": 487,
+"institucion": "INIA",
+"nombre": "Camar",
+"comuna": "San Pedro de Atacama",
+"region": "Antofagasta",
+"latitud": -23.407102,
+"longitud": -67.963735
+},
+{
+"id": 491,
+"institucion": "INIA",
+"nombre": "San Jorge Los Niches",
+"comuna": "Curicó",
+"region": "Maule",
+"latitud": -35.0918,
+"longitud": -71.120579
+},
+{
+"id": 495,
+"institucion": "INIA",
+"nombre": "Lien",
+"comuna": "Curepto",
+"region": "Maule",
+"latitud": -35.099146,
+"longitud": -71.969797
+},
+{
+"id": 499,
+"institucion": "INIA",
+"nombre": "Colliguay",
+"comuna": "Quilpué",
+"region": "Valparaíso",
+"latitud": -33.168609,
+"longitud": -71.155717
+},
+{
+"id": 503,
+"institucion": "INIA",
+"nombre": "Lomas",
+"comuna": "Pelluhue",
+"region": "Maule",
+"latitud": -35.835449,
+"longitud": -72.587489
+},
+{
+"id": 507,
+"institucion": "INIA",
+"nombre": "Puraligue",
+"comuna": "Treguaco",
+"region": "Biobío",
+"latitud": -36.431036,
+"longitud": -72.647783
+},
+{
+"id": 511,
+"institucion": "INIA",
+"nombre": "El Asiento",
+"comuna": "Alhué",
+"region": "Metropolitana",
+"latitud": -34.029282,
+"longitud": -70.995098
+},
+{
+"id": 519,
+"institucion": "INIA",
+"nombre": "San Rafael",
+"comuna": "Los Sauces",
+"region": "Araucanía",
+"latitud": -38.070667,
+"longitud": -72.724176
+},
+{
+"id": 523,
+"institucion": "INIA",
+"nombre": "La Paz",
+"comuna": "Loncoche",
+"region": "Araucanía",
+"latitud": -39.428135,
+"longitud": -72.718521
+},
+{
+"id": 527,
+"institucion": "INIA",
+"nombre": "Carelmapu",
+"comuna": "Maullín",
+"region": "Los Lagos",
+"latitud": -41.709733,
+"longitud": -73.672263
+},
+{
+"id": 531,
+"institucion": "INIA",
+"nombre": "Gaby-Ranquilco",
+"comuna": "Lumaco",
+"region": "Araucanía",
+"latitud": -38.116919,
+"longitud": -72.883497
+},
+{
+"id": 539,
+"institucion": "INIA",
+"nombre": "San Enrique",
+"comuna": "Pucón",
+"region": "Araucanía",
+"latitud": -39.261711,
+"longitud": -71.868097
+},
+{
+"id": 543,
+"institucion": "INIA",
+"nombre": "Cuya",
+"comuna": "Camarones",
+"region": "Arica y Parinacota",
+"latitud": -19.161922,
+"longitud": -70.180968
+},
+{
+"id": 547,
+"institucion": "INIA",
+"nombre": "Los Arrayanes",
+"comuna": "Toltén",
+"region": "Araucanía",
+"latitud": -39.165408,
+"longitud": -73.132936
+},
+{
+"id": 551,
+"institucion": "INIA",
+"nombre": "Pica",
+"comuna": "Pica",
+"region": "Tarapacá",
+"latitud": -20.501476,
+"longitud": -69.342572
+},
+{
+"id": 555,
+"institucion": "INIA",
+"nombre": "Huacamapu",
+"comuna": "San Juan de la Costa",
+"region": "Los Lagos",
+"latitud": -40.659175,
+"longitud": -73.491723
+},
+{
+"id": 559,
+"institucion": "INIA",
+"nombre": "Cuncumén",
+"comuna": "San Antonio",
+"region": "Valparaíso",
+"latitud": -33.736215,
+"longitud": -71.421579
+},
+{
+"id": 567,
+"institucion": "INIA",
+"nombre": "Huentelauquen",
+"comuna": "Canela",
+"region": "Coquimbo",
+"latitud": -31.5885,
+"longitud": -71.509833
+},
+{
+"id": 582,
+"institucion": "INIA",
+"nombre": "La Copa",
+"comuna": "Caldera",
+"region": "Atacama",
+"latitud": -27.345439,
+"longitud": -70.622009
+},
+{
+"id": 587,
+"institucion": "METEOVID",
+"nombre": "Siegel",
+"comuna": "San Fernando",
+"region": "O'Higgins",
+"latitud": -34.52545,
+"longitud": -70.88758
+},
+{
+"id": 592,
+"institucion": "METEOVID",
+"nombre": "Via Wines",
+"comuna": "Curicó",
+"region": "Maule",
+"latitud": -35.090467,
+"longitud": -71.177367
+},
+{
+"id": 597,
+"institucion": "METEOVID",
+"nombre": "Laberinto",
+"comuna": "Colbún",
+"region": "Maule",
+"latitud": -35.6993,
+"longitud": -71.2687
+},
+{
+"id": 602,
+"institucion": "METEOVID",
+"nombre": "Sierras de Bellavista",
+"comuna": "San Fernando",
+"region": "O'Higgins",
+"latitud": -34.815583,
+"longitud": -70.751067
+},
+{
+"id": 608,
+"institucion": "FDF",
+"nombre": "Iglesia Colorada",
+"comuna": "Tierra Amarilla",
+"region": "Atacama",
+"latitud": -28.148944,
+"longitud": -69.891833
+},
+{
+"id": 612,
+"institucion": "FDF",
+"nombre": "Freirina",
+"comuna": "Freirina",
+"region": "Atacama",
+"latitud": -28.506639,
+"longitud": -71.103722
+},
+{
+"id": 616,
+"institucion": "FDF",
+"nombre": "El Trapiche",
+"comuna": "La Higuera",
+"region": "Coquimbo",
+"latitud": -29.371861,
+"longitud": -71.116083
+},
+{
+"id": 617,
+"institucion": "INIA",
+"nombre": "Faja Maisan",
+"comuna": "Pitrufquén",
+"region": "Araucanía",
+"latitud": -39.071148,
+"longitud": -72.92198
+},
+{
+"id": 619,
+"institucion": "INIA",
+"nombre": "La Cachina",
+"comuna": "Taltal",
+"region": "Antofagasta",
+"latitud": -25.433987,
+"longitud": -70.453243
+},
+{
+"id": 621,
+"institucion": "INIA",
+"nombre": "Bajada Ibañez",
+"comuna": "Río Ibáñez",
+"region": "Aysén",
+"latitud": -46.180619,
+"longitud": -72.043261
+},
+{
+"id": 623,
+"institucion": "FDF",
+"nombre": "Los Espinos",
+"comuna": "Los Andes",
+"region": "Valparaíso",
+"latitud": -32.890167,
+"longitud": -70.382139
+},
+{
+"id": 625,
+"institucion": "METEOVID",
+"nombre": "Concha y Toro - Pencahue",
+"comuna": "Pencahue",
+"region": "Maule",
+"latitud": -35.44522,
+"longitud": -71.83436
+},
+{
+"id": 626,
+"institucion": "INIA",
+"nombre": "Arroyo el Gato",
+"comuna": "Coyhaique",
+"region": "Aysén",
+"latitud": -45.162902,
+"longitud": -71.943627
+},
+{
+"id": 628,
+"institucion": "INIA",
+"nombre": "Miraflores",
+"comuna": "Longaví",
+"region": "Maule",
+"latitud": -35.818051,
+"longitud": -71.775019
+},
+{
+"id": 630,
+"institucion": "INIA",
+"nombre": "Liceo Jean Buchanan",
+"comuna": "Peumo",
+"region": "O'Higgins",
+"latitud": -34.397289,
+"longitud": -71.164672
+},
+{
+"id": 632,
+"institucion": "INIA",
+"nombre": "Chaguaral",
+"comuna": "Monte Patria",
+"region": "Coquimbo",
+"latitud": -30.857084,
+"longitud": -70.730689
+},
+{
+"id": 634,
+"institucion": "INIA",
+"nombre": "Pid-Pid",
+"comuna": "Castro",
+"region": "Los Lagos",
+"latitud": -42.411747,
+"longitud": -73.783913
+},
+{
+"id": 636,
+"institucion": "INIA",
+"nombre": "Quilquico",
+"comuna": "Castro",
+"region": "Los Lagos",
+"latitud": -42.491512,
+"longitud": -73.708817
+},
+{
+"id": 638,
+"institucion": "INIA",
+"nombre": "Isla Chelin",
+"comuna": "Castro",
+"region": "Los Lagos",
+"latitud": -42.589153,
+"longitud": -73.532906
+},
+{
+"id": 640,
+"institucion": "INIA",
+"nombre": "Radal",
+"comuna": "Freire",
+"region": "Araucanía",
+"latitud": -38.98547,
+"longitud": -72.381617
+},
+{
+"id": 642,
+"institucion": "INIA",
+"nombre": "San Sebastián",
+"comuna": "Perquenco",
+"region": "Araucanía",
+"latitud": -38.435064,
+"longitud": -72.399024
+},
+{
+"id": 644,
+"institucion": "INIA",
+"nombre": "Taplon",
+"comuna": "Padre Las Casas",
+"region": "Araucanía",
+"latitud": -38.83295,
+"longitud": -72.506385
+},
+{
+"id": 646,
+"institucion": "INIA",
+"nombre": "El Vergel",
+"comuna": "Angol",
+"region": "Araucanía",
+"latitud": -37.82781,
+"longitud": -72.659665
+},
+{
+"id": 648,
+"institucion": "INIA",
+"nombre": "Pailahueque",
+"comuna": "Ercilla",
+"region": "Araucanía",
+"latitud": -38.145552,
+"longitud": -72.659665
+},
+{
+"id": 650,
+"institucion": "METEOVID",
+"nombre": "Viu Manent – Santa Cruz",
+"comuna": "Santa Cruz",
+"region": "O'Higgins",
+"latitud": -34.646111,
+"longitud": -71.313611
+},
+{
+"id": 651,
+"institucion": "METEOVID",
+"nombre": "Viu Manent – Peralillo",
+"comuna": "Peralillo",
+"region": "O'Higgins",
+"latitud": -34.495833,
+"longitud": -71.491667
+},
+{
+"id": 653,
+"institucion": "INIA",
+"nombre": "Licanchen",
+"comuna": "Navidad",
+"region": "O'Higgins",
+"latitud": -33.929749,
+"longitud": -71.801002
+},
+{
+"id": 655,
+"institucion": "INIA",
+"nombre": "Pampa Concordia",
+"comuna": "Arica",
+"region": "Arica y Parinacota",
+"latitud": -18.362922,
+"longitud": -70.302033
+},
+{
+"id": 658,
+"institucion": "INIA",
+"nombre": "Chapiquiña",
+"comuna": "Putre",
+"region": "Arica y Parinacota",
+"latitud": -18.389472,
+"longitud": -69.539417
+},
+{
+"id": 661,
+"institucion": "INIA",
+"nombre": "Ajial de Quiles",
+"comuna": "Punitaqui",
+"region": "Coquimbo",
+"latitud": -30.920303,
+"longitud": -71.3841
+},
+{
+"id": 664,
+"institucion": "INIA",
+"nombre": "La Polvareda",
+"comuna": "Punitaqui",
+"region": "Coquimbo",
+"latitud": -30.882719,
+"longitud": -71.239736
+},
+{
+"id": 667,
+"institucion": "INIA",
+"nombre": "Rayentué",
+"comuna": "Rengo",
+"region": "O'Higgins",
+"latitud": -34.321704,
+"longitud": -70.833901
+},
+{
+"id": 670,
+"institucion": "INIA",
+"nombre": "Las Puentes",
+"comuna": "Arauco",
+"region": "Biobío",
+"latitud": -37.305126,
+"longitud": -73.436712
+},
+{
+"id": 673,
+"institucion": "INIA",
+"nombre": "Santa Lucía",
+"comuna": "Florida",
+"region": "Biobío",
+"latitud": -36.69746,
+"longitud": -72.704216
+},
+{
+"id": 676,
+"institucion": "INIA",
+"nombre": "Collimallin",
+"comuna": "Temuco",
+"region": "Araucanía",
+"latitud": -38.606698,
+"longitud": -72.701057
+},
+{
+"id": 679,
+"institucion": "INIA",
+"nombre": "Tenaún",
+"comuna": "Dalcahue",
+"region": "Los Lagos",
+"latitud": -42.312675,
+"longitud": -73.399902
+},
+{
+"id": 682,
+"institucion": "INIA",
+"nombre": "Ñirehuao",
+"comuna": "Coyhaique",
+"region": "Aysén",
+"latitud": -45.249744,
+"longitud": -71.69425
+},
+{
+"id": 685,
+"institucion": "INIA",
+"nombre": "Puerto Ibañez",
+"comuna": "Río Ibáñez",
+"region": "Aysén",
+"latitud": -46.278309,
+"longitud": -71.941433
+},
+{
+"id": 688,
+"institucion": "INIA",
+"nombre": "El Oasis",
+"comuna": "Lampa",
+"region": "Metropolitana",
+"latitud": -33.286268,
+"longitud": -70.83606
+},
+{
+"id": 691,
+"institucion": "METEOVID",
+"nombre": "Luis Felipe Edwards-Pumanque",
+"comuna": "Pumanque",
+"region": "O'Higgins",
+"latitud": -34.640893,
+"longitud": -71.776318
+},
+{
+"id": 694,
+"institucion": "METEOVID",
+"nombre": "Luis Felipe Edwards-Las Rosas",
+"comuna": "Retiro",
+"region": "Maule",
+"latitud": -35.889749,
+"longitud": -71.856565
+},
+{
+"id": 696,
+"institucion": "FDF",
+"nombre": "Curicó",
+"comuna": "Curicó",
+"region": "Maule",
+"latitud": -34.940973,
+"longitud": -71.222752
+}
+]

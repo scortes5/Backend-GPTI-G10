@@ -1,4 +1,4 @@
-NUEVO = {"nombre": "Pedro Lienlaf", "email": "pedro@coop.cl", "clave": "clave-segura", "rol": "productor"}
+NUEVO = {"nombre": "Pedro Lienlaf", "email": "pedro@coop.cl", "rut": "12.345.678-5", "clave": "clave-segura", "rol": "productor"}
 
 
 def test_admin_crea_productor_que_puede_iniciar_sesion(client, anonimo):

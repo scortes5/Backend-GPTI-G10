@@ -34,19 +34,35 @@ def test_venta_en_lote_inexistente(client):
     assert client.post("/lotes/noexiste/ventas", json=VENTA).status_code == 404
 
 
-def test_no_se_puede_reducir_lote_bajo_lo_vendido(client):
+def test_no_se_anula_una_entrega_si_quedan_menos_kilos_que_lo_vendido(client):
+    codigo = crear_lote(client)
+    entrega = client.post(f"/lotes/{codigo}/entregas", json={"fecha": "2026-10-02", "kilos": 20}).json()
+    client.post(f"/lotes/{codigo}/ventas", json={**VENTA, "kilos": 110})
+
+    respuesta = client.post(f"/lotes/{codigo}/entregas/{entrega['id']}/anular", json={"motivo": "Mal pesada"})
+
+    assert respuesta.status_code == 409
+    assert client.get(f"/lotes/{codigo}").json()["kilos"] == 120
+
+
+def test_anular_venta_devuelve_los_kilos(client):
+    codigo = crear_lote(client)
+    venta = client.post(f"/lotes/{codigo}/ventas", json=VENTA).json()
+
+    anulada = client.post(f"/lotes/{codigo}/ventas/{venta['id']}/anular", json={"motivo": "Comprador desistió"})
+
+    assert anulada.json()["estado"] == "anulado"
+    traza = client.get(f"/lotes/{codigo}/trazabilidad").json()
+    assert traza["kilos_disponibles"] == 100
+    assert traza["ingresos"] == 0
+    assert len(traza["ventas"]) == 1  # sigue en el historial
+
+
+def test_lote_con_ventas_vigentes_no_se_anula(client):
     codigo = crear_lote(client)
     client.post(f"/lotes/{codigo}/ventas", json=VENTA)
 
-    assert client.patch(f"/lotes/{codigo}", json={"kilos": 30}).status_code == 409
-    assert client.get(f"/lotes/{codigo}").json()["kilos"] == 100
-
-
-def test_eliminar_lote_elimina_sus_ventas(client):
-    codigo = crear_lote(client)
-    client.post(f"/lotes/{codigo}/ventas", json=VENTA)
-
-    assert client.delete(f"/lotes/{codigo}").status_code == 204
+    assert client.post(f"/lotes/{codigo}/anular", json={"motivo": "Error"}).status_code == 409
 
 
 def test_trazabilidad_resume_ventas_del_lote(client):
